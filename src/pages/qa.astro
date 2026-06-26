@@ -1,0 +1,153 @@
+---
+// qa.astro - Popular Q&A page
+import BaseLayout from '../layouts/BaseLayout.astro';
+import qaData from '../data/seed-qa.json';
+
+const allQa = qaData;
+const latest = allQa.slice(0, 10);
+const thisMonth = allQa.slice(10, 20);
+const allTime = allQa.slice(20, 30);
+
+// Category display names
+const catNames = {
+  air: 'Air-side',
+  hydronic: 'Hydronic',
+  actuators: 'Actuators',
+  controls: 'Controls',
+  standards: 'Standards',
+  water: 'Water-side',
+  products: 'Products',
+  sensors: 'Sensors',
+  valves: 'Valves',
+  dampers: 'Dampers',
+  bms: 'BMS',
+};
+---
+
+<BaseLayout 
+  title="Popular Questions"
+  description="Browse popular HVAC controls engineering questions and answers. Top questions about damper sizing, valve selection, actuator torque, and more."
+>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-10">
+      <h1 class="section-title">Popular <span class="gradient-text">Questions</span></h1>
+      <p class="section-subtitle">
+        Top HVAC controls engineering questions asked by our community
+      </p>
+    </div>
+
+    <!-- Search/Filter -->
+    <div class="card mb-10 flex items-center gap-3">
+      <svg class="w-5 h-5 text-gray-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <input 
+        type="text" 
+        id="qa-filter"
+        placeholder="Filter questions..."
+        class="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none text-base"
+      />
+    </div>
+
+    <!-- Top 10 Latest -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-6">🆕 <span class="gradient-text">Top 10 Latest</span></h2>
+      <div class="qa-section space-y-4" data-section="latest">
+        {latest.map(q => (
+          <div class="qa-card card" data-category={q.category}>
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <h3 class="text-white font-semibold">{q.question}</h3>
+              <span class="text-xs px-2 py-1 rounded-full bg-xinca-cyan/10 text-xinca-cyan border border-xinca-cyan/20 whitespace-nowrap shrink-0">
+                {catNames[q.category] || q.category}
+              </span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">{q.answer}</p>
+            {q.tags && q.tags.length > 0 && (
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                {q.tags.map(t => (
+                  <span class="text-xs px-2 py-0.5 rounded bg-[#0a0a0a] text-gray-500">#{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Top 10 This Month -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-6">📅 <span class="gradient-text">Top 10 This Month</span></h2>
+      <div class="qa-section space-y-4" data-section="month">
+        {thisMonth.map(q => (
+          <div class="qa-card card" data-category={q.category}>
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <h3 class="text-white font-semibold">{q.question}</h3>
+              <span class="text-xs px-2 py-1 rounded-full bg-xinca-cyan/10 text-xinca-cyan border border-xinca-cyan/20 whitespace-nowrap shrink-0">
+                {catNames[q.category] || q.category}
+              </span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">{q.answer}</p>
+            {q.tags && q.tags.length > 0 && (
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                {q.tags.map(t => (
+                  <span class="text-xs px-2 py-0.5 rounded bg-[#0a0a0a] text-gray-500">#{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Top 10 All Time -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-6">🏆 <span class="gradient-text">Top 10 All Time</span></h2>
+      <div class="qa-section space-y-4" data-section="alltime">
+        {allTime.map(q => (
+          <div class="qa-card card" data-category={q.category}>
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <h3 class="text-white font-semibold">{q.question}</h3>
+              <span class="text-xs px-2 py-1 rounded-full bg-xinca-cyan/10 text-xinca-cyan border border-xinca-cyan/20 whitespace-nowrap shrink-0">
+                {catNames[q.category] || q.category}
+              </span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">{q.answer}</p>
+            {q.tags && q.tags.length > 0 && (
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                {q.tags.map(t => (
+                  <span class="text-xs px-2 py-0.5 rounded bg-[#0a0a0a] text-gray-500">#{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<script>
+  const filterInput = document.getElementById('qa-filter');
+  
+  filterInput?.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    
+    document.querySelectorAll('.qa-card').forEach(card => {
+      const text = card.textContent?.toLowerCase() || '';
+      if (!query || text.includes(query)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    // Hide empty sections
+    document.querySelectorAll('.qa-section').forEach(section => {
+      const hasVisible = section.querySelectorAll('.qa-card:not(.hidden)').length > 0;
+      const heading = section.previousElementSibling;
+      if (heading) heading.classList.toggle('hidden', !hasVisible);
+      section.classList.toggle('hidden', !hasVisible);
+    });
+  });
+</script>

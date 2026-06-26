@@ -1,0 +1,32 @@
+{
+  "description": "XINCA HVAC FAQ Categories",
+  "source": "xincashop.com Shopify Knowledge Base",
+  "total_faqs": 137,
+  "categories": {
+    "air": {
+      "name": "Air-side HVAC",
+      "description": "Air-side HVAC (dampers, VAV, air distribution)",
+      "count": 13
+    },
+    "water": {
+      "name": "Water-side HVAC",
+      "description": "Water-side HVAC (valves, coils, hydronics)",
+      "count": 37
+    },
+    "fluid": {
+      "name": "Fluid Handling",
+      "description": "Fluid handling (flow sensors, pressure)",
+      "count": 0
+    },
+    "controls": {
+      "name": "Building Controls",
+      "description": "Building controls (actuators, sensors, BMS)",
+      "count": 55
+    },
+    "products": {
+      "name": "Product-specific",
+      "description": "Product-specific (installation, compatibility)",
+      "count": 32
+    }
+  }
+}

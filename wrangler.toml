@@ -1,0 +1,15 @@
+# wrangler.toml - Cloudflare Pages deployment configuration
+name = "ai-xinca"
+compatibility_date = "2025-01-01"
+
+# Cloudflare Pages configuration
+pages_build_output_dir = "dist"
+
+# Routes (optional, for custom domain)
+# routes = [
+#   { pattern = "ai.xinca.com", custom_domain = true }
+# ]
+
+# Environment variables (if needed)
+# [vars]
+# NODE_VERSION = "22"

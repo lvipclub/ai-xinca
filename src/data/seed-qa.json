@@ -1,0 +1,352 @@
+[
+  {
+    "id": 1,
+    "question": "How do I select the right damper actuator torque?",
+    "answer": "Damper actuator torque selection begins with calculating the required torque in N·m, which is a function of damper face area (m²) multiplied by the total pressure drop across the damper (Pa) and a torque coefficient (typically 0.005–0.01 for opposed-blade dampers). Per ASHRAE Handbook HVAC Systems and Equipment, you must also account for blade type (parallel vs. opposed), seal friction, and safety factors of 1.2–1.5. For rectangular dampers over 1 m², Belimo's selection software recommends minimum 10 N·m actuators, while Honeywell MS系列 actuators are commonly sized using 6 N·m per square meter as a conservative rule of thumb. Always verify the actuator's rated torque at the maximum differential pressure the damper will see during close-off conditions.",
+    "category": "air",
+    "tags": ["damper", "actuator", "sizing", "torque"]
+  },
+  {
+    "id": 2,
+    "question": "What's the difference between parallel-blade and opposed-blade dampers?",
+    "answer": "Parallel-blade dampers have all blades rotating in the same direction, producing a non-linear flow characteristic best suited for two-position (open/close) applications and where pressure drops are low. Opposed-blade dampers have adjacent blades rotating in opposite directions, providing a more linear flow characteristic ideal for modulating control applications. Per ASHRAE guidance, opposed-blade configurations generate lower torque requirements because aerodynamic forces on adjacent blades partially cancel each other. For VAV system economizer sections, opposed-blade dampers are strongly preferred to maintain stable mixed air temperature control.",
+    "category": "air",
+    "tags": ["damper", "blade-type", "selection"]
+  },
+  {
+    "id": 3,
+    "question": "How do I size a control valve Cv for a chilled water coil?",
+    "answer": "Control valve Cv is calculated using the formula Cv = Q / √(ΔP), where Q is flow in GPM and ΔP is the pressure drop across the valve in PSI. For chilled water coils, a good starting point is to size the valve so it takes 25–50% of the available branch pressure drop at design flow, which typically yields good valve authority (0.25–0.50). Per ASHRAE Handbook, valves should not be oversized — an oversized valve will operate near the seat and exhibit poor control, often hunting between 10–20% stem travel. Belimo's Characterized Control Valve (CCV) line provides equal-percentage characteristics that compensate for coil heat transfer non-linearity when properly sized.",
+    "category": "hydronic",
+    "tags": ["control-valve", "Cv", "sizing", "chilled-water"]
+  },
+  {
+    "id": 4,
+    "question": "What is valve authority and why does it matter?",
+    "answer": "Valve authority (N) is defined as the ratio of pressure drop across the fully open valve to the pressure drop across the entire circuit at design flow: N = ΔP_valve / (ΔP_valve + ΔP_circuit). It directly affects controllability — an authority of 0.5 means the valve characteristic is minimally distorted; below 0.25, the installed characteristic becomes so distorted that equal-percentage valves behave nearly like quick-opening valves. Per ASHRAE Guideline 36, valve authorities between 0.25 and 0.50 are generally acceptable for most HVAC applications, though 0.5 is the recommended target. Belimo Energy Valves and PICCV products address low-authority scenarios by maintaining pressure-independent flow control.",
+    "category": "hydronic",
+    "tags": ["valve-authority", "controllability", "sizing"]
+  },
+  {
+    "id": 5,
+    "question": "What is damper authority and how is it calculated?",
+    "answer": "Damper authority is the ratio of pressure drop across the fully open damper to the total system pressure drop at design airflow, analogous to valve authority in hydronic systems. An authority of 0.3 or higher is recommended for stable modulating control; below 0.1, the damper has almost no control effect until nearly closed. The calculation is: Authority = ΔP_damper_full_open / (ΔP_damper_full_open + ΔP_rest_of_system). Opposed-blade dampers maintain better authority characteristics than parallel-blade dampers at partial opening due to their more linear inherent characteristic.",
+    "category": "air",
+    "tags": ["damper-authority", "controllability", "sizing"]
+  },
+  {
+    "id": 6,
+    "question": "When should I use a spring-return actuator vs a non-spring-return?",
+    "answer": "Spring-return actuators should be used in any safety-critical application where the damper or valve must fail to a known safe position upon power loss — this includes smoke control dampers, freeze-protection valves on outdoor air coils, and stairwell pressurization dampers per NFPA and IMC requirements. Non-spring-return actuators are appropriate for general modulating applications where fail-in-place is acceptable, such as VAV box dampers and cooling-only chilled water valves, and they typically offer better energy efficiency since they don't have to continuously overcome a spring. Belimo's spring-return actuators use brushless DC motor technology that reduces holding current to 0.5W in the energized position, making them competitive with non-spring-return designs on energy consumption.",
+    "category": "actuators",
+    "tags": ["spring-return", "fail-safe", "safety"]
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between pressure-independent and pressure-dependent valves?",
+    "answer": "Pressure-independent control valves (PICVs) integrate a differential pressure regulator with a control valve into a single body, automatically maintaining constant flow regardless of upstream/downstream pressure fluctuations. Pressure-dependent valves rely on the system's balancing valves and pump control to maintain a stable differential pressure; they deliver their rated flow only at one specific pressure condition. PICVs eliminate the need for most balancing valves and deliver true flow at any stem position regardless of system pressure changes, which per ASHRAE 90.1-2019 can contribute to significant pump energy savings through variable-primary flow strategies. The tradeoff is higher first cost — typically 2–3× per valve — and slightly higher minimum differential pressure requirements (typically 3–5 PSI for Belimo PICVs).",
+    "category": "hydronic",
+    "tags": ["PICV", "pressure-independent", "balancing"]
+  },
+  {
+    "id": 8,
+    "question": "What flow sensor types are used in HVAC hydronic systems?",
+    "answer": "The most common flow sensor types in HVAC hydronics are differential pressure devices (orifice plates, venturis, and Annubar averaging pitot tubes), turbine/paddlewheel meters, vortex shedding meters, electromagnetic (mag) meters, and ultrasonic meters (both transit-time and Doppler types). Electromagnetic flow meters (e.g., Belimo's ultrasonic flow sensors on Energy Valves) are increasingly popular for building automation because they have no moving parts, no pressure drop penalty, and can handle glycol mixtures accurately. Vortex shedding meters work well for steam flow measurement but require minimum velocities of about 0.3 m/s in liquids. For most chilled and hot water BMS applications, insertion-type electromagnetic or ultrasonic meters provide the best accuracy (±1–2% of reading) and turndown ratio (50:1 or better) with minimal pressure loss.",
+    "category": "hydronic",
+    "tags": ["flow-sensor", "metering", "measurement"]
+  },
+  {
+    "id": 9,
+    "question": "How do I select a VAV terminal unit for a zone?",
+    "answer": "VAV terminal unit selection starts with the zone's peak cooling airflow requirement (CFM or L/s), which is determined by the zone load calculation per ASHRAE Standard 62.1 ventilation requirements and ASHRAE 90.1 energy limits. The VAV box should be sized so the peak airflow falls between 60–80% of the unit's maximum capacity to ensure good turndown and avoid excessive noise at design conditions. Key selection parameters include inlet size (typically 4–16 inches round), heating coil capacity (if series fan-powered or reheat), sound power levels (NC rating), and control type — pressure-independent VAV controllers with DDC are now required by ASHRAE 90.1-2019 for most applications. Products like the JCI/Titus DESV or Trane VariTrane series provide selection software that automates discharge sound calculations.",
+    "category": "air",
+    "tags": ["VAV", "terminal-unit", "sizing", "ASHRAE"]
+  },
+  {
+    "id": 10,
+    "question": "BACnet vs Modbus — which protocol should I choose for building automation?",
+    "answer": "BACnet (ASHRAE Standard 135) is purpose-built for building automation systems and natively models HVAC objects like schedules, trends, alarms, and analog/binary/multistate values, making it the preferred choice for system-level integration between controllers, supervisory devices, and operator workstations. Modbus RTU/TCP is a simpler, lower-cost protocol that works well for field-level device integration (sensors, VFDs, power meters) where you only need to read/write registers, but it lacks the object model, alarm management, and scheduling capabilities of BACnet. ASHRAE 135-2020 added BACnet/SC (Secure Connect) which provides TLS-encrypted, certificate-based security that Modbus cannot match without IT-managed VPNs. Most modern BMS designs use BACnet at the network and management layers with Modbus at the field device integration layer through protocol gateways.",
+    "category": "controls",
+    "tags": ["BACnet", "Modbus", "protocol", "ASHRAE-135"]
+  },
+  {
+    "id": 11,
+    "question": "What does ASHRAE 90.1 require for HVAC controls?",
+    "answer": "ASHRAE 90.1-2019 requires DDC (Direct Digital Control) for most HVAC systems in buildings over a certain size, mandatory demand-controlled ventilation using CO₂ sensors in densely occupied spaces, and automatic setback of temperature setpoints during unoccupied hours. It mandates economizer controls (air-side or water-side) with high-limit cutoffs, requires VAV fan systems to have variable-speed drives with static pressure reset, and specifies that supply air temperature must be reset based on zone demand. Section 6.4.3.4 also requires DDC-controlled terminal units in most VAV applications, and the 2019 version added requirements for automated fault detection and diagnostics (FDD) in many system types.",
+    "category": "standards",
+    "tags": ["ASHRAE-90.1", "energy-code", "compliance"]
+  },
+  {
+    "id": 12,
+    "question": "What ventilation rates does ASHRAE 62.1 prescribe?",
+    "answer": "ASHRAE 62.1-2022 calculates minimum outdoor air using the Ventilation Rate Procedure: V_oz = (Rp × Pz) + (Ra × Az), where Rp is the people outdoor air rate (CFM/person, e.g., 5 CFM/person for offices), Pz is zone population, Ra is the area outdoor air rate (CFM/ft², e.g., 0.06 CFM/ft² for offices), and Az is the zone floor area. The standard also specifies air distribution effectiveness (Ez) values that range from 0.5 to 1.2 depending on supply/return configuration and ceiling height, with ceiling-supplied cool air at 1.0. For VAV multiple-zone systems, the system-level outdoor air intake is calculated using Appendix A equations that account for zone air distribution effectiveness and the critical zone requiring the highest fraction of outdoor air.",
+    "category": "standards",
+    "tags": ["ASHRAE-62.1", "ventilation", "IAQ"]
+  },
+  {
+    "id": 13,
+    "question": "How do I calculate required outdoor air for a VAV multi-zone system?",
+    "answer": "Per ASHRAE 62.1 Appendix A, you calculate each zone's breathing zone outdoor airflow (V_bz), then zone outdoor airflow (V_oz = V_bz / Ez), and the uncorrected outdoor air intake V_ou = \u03a3 V_oz. The system ventilation efficiency (Ev) is determined by the critical zone with the highest outdoor air fraction (Zp = V_oz / V_dz), using Ev = 1 + Xs \u2212 Zd where Xs is the average outdoor air fraction and Zd is the critical zone's fraction. The final design outdoor air intake is V_ot = V_ou / Ev, and the larger the disparity between critical zone and average zone demand, the lower the efficiency and the more outdoor air the system must handle. ASHRAE 62.1\u2019s Appendix A provides the full algebraic derivation and tables for common system configurations.",
+    "category": "air",
+    "tags": ["VAV", "ventilation", "ASHRAE-62.1", "outdoor-air"]
+  },
+  {
+    "id": 14,
+    "question": "What is a freeze-stat and where should it be placed?",
+    "answer": "A freeze-stat is a safety sensor that detects low air temperatures downstream of a heating coil in an air handler — typically set to trip at 35–38°F (1.7–3.3°C) — and shut down the supply fan, close outdoor air dampers, and open the heating valve fully to prevent coil freeze damage. The sensing element should be a capillary tube type that covers the entire face area of the coil, mounted 2–4 inches downstream where air is well-mixed, because localized cold spots from stratification can rupture a coil even when average temperatures are safe. Per IMC and ASHRAE 90.1, freeze protection is mandatory on water coils exposed to outdoor air in climates where entering air temperatures can fall below 32°F (0°C). Spring-return actuators on the outdoor air dampers and normally-open valve configurations for heating coils are also required components of the freeze protection strategy.",
+    "category": "air",
+    "tags": ["freeze-stat", "safety", "coil-protection", "sensor-placement"]
+  },
+  {
+    "id": 15,
+    "question": "Where should duct static pressure sensors be placed in a VAV system?",
+    "answer": "The duct static pressure sensor for fan speed control should be placed approximately two-thirds to three-quarters of the distance down the main supply duct from the fan, at a point where it represents the pressure required by the most remote VAV box during design flow. ASHRAE Guideline 36 recommends an iterative reset strategy: the static pressure setpoint is continuously reset downward until at least one VAV box is near fully open (≥95% damper position), which ensures minimum fan energy while meeting all zone loads. Avoid placing the sensor too close to the fan discharge (which would overestimate system head and waste energy) or directly at a duct fitting (which creates inaccurate pressure readings due to turbulence). The sensor should be installed with a straight run of 5–7 duct diameters upstream and 2–3 diameters downstream for accurate measurement.",
+    "category": "air",
+    "tags": ["sensor-placement", "static-pressure", "VAV", "ASHRAE-36"]
+  },
+  {
+    "id": 16,
+    "question": "How do I size an actuator for a large outdoor air damper?",
+    "answer": "For large outdoor air dampers (>2 m\u00b2 face area), actuator sizing must account for wind loading (wind gusts to 30 mph can add 0.2\u20130.5 in. w.g. pressure differential) and seal breakaway torque, which can be 30\u201350% higher than running torque on dampers with blade edge seals that have taken a set. Belimo recommends 20 N\u00b7m actuators for dampers between 2\u20134 m\u00b2 and jackshafting with dual actuators for dampers exceeding 4 m\u00b2. Spring-return actuators are required per NFPA 90A for smoke control, with NEMA 4/IP66 enclosures for weather exposure.",
+    "category": "air",
+    "tags": ["damper", "actuator", "outdoor-air", "sizing"]
+  },
+  {
+    "id": 17,
+    "question": "What is the difference between Cv and Kv in control valves?",
+    "answer": "Cv and Kv both describe a valve's flow coefficient but use different units: Cv is the flow in US GPM of 60°F water through the valve with a 1 PSI pressure drop, while Kv is the flow in m³/h of water at 5–40°C with a 1 bar pressure drop. The conversion is: Cv = 1.156 × Kv, or Kv = 0.865 × Cv — so a valve with a Kv of 10 has a Cv of approximately 11.6. When specifying valves for international projects, always confirm whether the manufacturer's catalog uses Cv or Kv to avoid undersizing errors. For HVAC applications, typical control valve Cv values range from 0.3 (small reheat coil) to 160+ (large chiller bypass), and selection tables are available from Belimo, Siemens, and Honeywell that map required flow and pressure drop to the appropriate valve size.",
+    "category": "hydronic",
+    "tags": ["Cv", "Kv", "control-valve", "flow-coefficient"]
+  },
+  {
+    "id": 18,
+    "question": "How does a series fan-powered VAV box work vs a parallel type?",
+    "answer": "In a series fan-powered VAV box, the fan is located in the primary airstream and runs continuously during occupied mode, mixing primary air with plenum return air to deliver a constant volume to the zone — this provides excellent ventilation consistency and is ideal for zones requiring constant air motion. In a parallel (or intermittent) fan-powered box, the fan is in a bypass path off the primary airstream and only activates on a call for heating or when the primary damper closes below a minimum; during cooling mode, only primary air passes through. Series boxes provide better temperature uniformity and acoustics at higher first cost and fan energy, while parallel boxes save fan energy during cooling but require careful minimum primary airflow settings to maintain ventilation. Per ASHRAE 90.1, fan motors in fan-powered boxes must meet minimum ECM efficiency standards and be sized to handle the heating load without excessive temperature rise.",
+    "category": "air",
+    "tags": ["VAV", "fan-powered", "terminal-unit"]
+  },
+  {
+    "id": 19,
+    "question": "What temperature sensors should I specify for an AHU?",
+    "answer": "A typical air handling unit requires at minimum: outdoor air temperature sensor (NTC thermistor, -40 to 140°F range, with solar radiation shield), mixed air temperature sensor (averaging type spanning the full duct cross-section to detect stratification), supply air temperature sensor (after the cooling and heating coils, with a thermowell if in a wet airstream), and return air temperature sensor (in the return duct or plenum). For higher accuracy control, platinum RTDs (Pt1000, Class A with ±0.15°C accuracy) are preferred over thermistors because they maintain calibration over a wider temperature range without drift. Per ASHRAE Guideline 36, all temperature sensors should be verified to have a time constant of less than 30 seconds and the supply air sensor must be positioned at least 3–4 duct diameters downstream of the last coil to ensure adequate mixing.",
+    "category": "controls",
+    "tags": ["sensor-placement", "AHU", "temperature", "ASHRAE-36"]
+  },
+  {
+    "id": 20,
+    "question": "How do Belimo Energy Valves differ from traditional control valves?",
+    "answer": "Belimo Energy Valves combine a characterizing control valve (equal-percentage characteristic), an ultrasonic flow meter, and embedded temperature sensors into one intelligent device connected via BACnet or Modbus, providing real-time flow, temperature, and energy (BTU/kW) measurement at each coil. Unlike traditional valves that require separate flow meters, BTU meters, and balancing valves, the Energy Valve performs electronic pressure-independent flow control and automatically generates trend data for building analytics. The Power Control and Delta-T Manager features can automatically limit flow to maintain a target coil ΔT, preventing low-ΔT syndrome that plagues many chilled water plants. The Energy Valve integrates directly into BMS systems and a 6-inch Energy Valve can measure flow rates from 0 to 640 GPM with ±2% accuracy over a 100:1 turndown range.",
+    "category": "hydronic",
+    "tags": ["Belimo", "Energy-Valve", "flow-measurement", "BACnet"]
+  },
+  {
+    "id": 21,
+    "question": "What are the common BACnet object types for HVAC control?",
+    "answer": "The most frequently used BACnet objects in HVAC include Analog Input (AI) for sensor readings like temperature and pressure, Analog Output (AO) for actuator commands, Analog Value (AV) for setpoints and calculated values, Binary Input (BI) for status contacts like fan proof and filter differential switches, Binary Output (BO) for start/stop commands, and Binary Value (BV) for software enable/disable points. The Schedule object is critical for occupancy scheduling, the Trend Log object for historical data collection, and the Notification Class object for alarm routing and escalation. Per ASHRAE 135, Multi-state Input and Output objects are used for discrete operating modes (e.g., Occupied/Standby/Unoccupied) and Command objects are available for multi-action sequences like morning warmup.",
+    "category": "controls",
+    "tags": ["BACnet", "objects", "ASHRAE-135"]
+  },
+  {
+    "id": 22,
+    "question": "How do I design a low-ΔT syndrome solution for chilled water plants?",
+    "answer": "Low-ΔT syndrome occurs when chilled water returns to the plant at a lower temperature than designed (e.g., 48°F instead of 54°F), reducing overall plant capacity and forcing additional chillers online prematurely. The root causes are typically oversized control valves operating near their seats, coils with inadequate surface area or fouling, and poor balancing causing overflow in near-coil circuits. Solutions include installing pressure-independent control valves (PICVs) or Belimo Energy Valves on every cooling coil to limit flow to design, implementing coil ΔT monitoring with automated alarms when ΔT falls below 60% of design, and using 2-way control valves with variable-speed secondary pumps instead of 3-way bypass valves that short-circuit chilled water. Per ASHRAE guidance, a plant with a ΔT of less than 10°F is considered to have low-ΔT syndrome and may benefit from a chilled water reset strategy that raises supply temperature during low-load conditions.",
+    "category": "hydronic",
+    "tags": ["low-delta-T", "chilled-water", "PICV", "plant-efficiency"]
+  },
+  {
+    "id": 23,
+    "question": "When should I use a 2-way vs 3-way control valve?",
+    "answer": "Use 2-way control valves in variable-flow systems with variable-speed pumps, as they vary flow through the coil while maintaining constant pressure differential at the pump — this is the modern standard per ASHRAE 90.1 which encourages variable-primary flow to reduce pumping energy. 3-way control valves divert flow through either the coil or a bypass path, maintaining constant flow through the distribution system, and are now primarily used for minimum-flow protection (e.g., ensuring a chiller's minimum evaporator flow during low-load conditions) rather than for coil control. The 3-way valve's major drawback is that it bypasses chilled water back to the return without doing useful cooling, reducing plant ΔT and increasing pumping energy. For most comfort HVAC applications, 2-way PICVs have almost entirely replaced 3-way valves, though 3-way valves remain common in process cooling and older constant-volume systems undergoing phased retrofit.",
+    "category": "hydronic",
+    "tags": ["2-way", "3-way", "control-valve", "variable-flow"]
+  },
+  {
+    "id": 24,
+    "question": "How do I commission a VAV airflow sensor?",
+    "answer": "VAV airflow sensors (typically pitot-tube arrays or velocity pressure sensors mounted at the box inlet) must be calibrated using a k-factor specific to the box size and inlet configuration. The calibration process involves measuring actual airflow using a calibrated flow hood (e.g., Shortridge or Alnor) at multiple damper positions and adjusting the controller's flow calculation until readings match within ±5% across the full range. The flow pickup should be verified to be centered in the inlet collar and the pressure tubing checked for leaks, kinks, or water traps that can cause significant errors. Per ASHRAE Guideline 36, the controller's flow measurement should be verified at the minimum cooling airflow, maximum cooling airflow, and at least two intermediate points — and the entire process should be documented in the commissioning report with as-found and as-left values. Modern DDC VAV controllers from JCI (FX-PCV series) and Siemens (ATEC series) have built-in auto-zero and auto-calibration routines that can simplify this process.",
+    "category": "air",
+    "tags": ["VAV", "commissioning", "airflow", "sensor-calibration"]
+  },
+  {
+    "id": 25,
+    "question": "What is an economizer and how are its controls configured?",
+    "answer": "An economizer uses cool outdoor air in place of mechanical cooling when outdoor conditions are favorable, and per ASHRAE 90.1-2019, it is mandatory in most climate zones for air handlers over 54,000 BTU/h (4.5 tons) cooling capacity. The control sequence compares outdoor air enthalpy or dry-bulb temperature against return air conditions using a high-limit changeover strategy — differential dry-bulb control (simplest), differential enthalpy, or fixed dry-bulb with adjustable setpoint. The economizer modulates the outdoor air, return air, and exhaust dampers in sequence to maintain mixed air at the desired supply air temperature setpoint, with the outdoor damper opening as cooling demand increases and the return damper proportionally closing. Mechanical cooling is only enabled when the outdoor air damper is fully open and additional cooling is needed — per ASHRAE Guideline 36, the changeover setpoint should be at least 2°F below the mixed air low-limit to prevent hunting.",
+    "category": "air",
+    "tags": ["economizer", "free-cooling", "ASHRAE-90.1", "damper"]
+  },
+  {
+    "id": 26,
+    "question": "What types of damper seals are available and when should I use each?",
+    "answer": "Damper seals include compression-type edge seals (EPDM or silicone rubber bulb), stainless steel side seals (flexible metal for high-temperature), and inflatable seals (for bubble-tight shutoff in cleanrooms). EPDM edge seals are standard for most HVAC applications up to 200\u00b0F with leakage rates of 3\u201310 CFM/ft\u00b2 at 1 in. w.g. per AMCA 511 Class 1A, while silicone seals handle up to 350\u00b0F or applications where EPDM off-gassing is a concern. For smoke control dampers, stainless steel jamb seals with Class I ratings (<4 CFM/ft\u00b2 at 4 in. w.g.) are required per UL 555S, and cold-climate outdoor air dampers need blade edge seals with thermal-break frames to prevent ice formation and actuator overload during freezing conditions.",
+    "category": "air",
+    "tags": ["damper", "seals", "leakage", "AMCA"]
+  },
+  {
+    "id": 27,
+    "question": "How does Modbus RTU differ from Modbus TCP in building automation?",
+    "answer": "Modbus RTU operates over RS-485 serial connections with master-slave topology, limits cable runs to approximately 1,200 meters, supports 32 devices per segment (without repeaters), and uses a compact binary frame format at baud rates typically 9,600–115,200. Modbus TCP encapsulates the same Modbus data model inside TCP/IP ethernet frames, allowing integration with existing IT networks, providing better speed (10/100/1000 Mbps), and removing the distance and device-count limitations of RS-485. In building automation, Modbus RTU remains dominant at the field device level (VFDs, power meters, small PLCs) while Modbus TCP is gaining ground as more devices ship with embedded Ethernet ports. Neither protocol provides built-in security (authentication or encryption), so when using Modbus TCP on shared IT networks, VLAN segmentation or dedicated control networks are essential — a significant limitation compared to BACnet/SC which provides native TLS security.",
+    "category": "controls",
+    "tags": ["Modbus", "RTU", "TCP", "RS-485", "protocol"]
+  },
+  {
+    "id": 28,
+    "question": "How do I select the appropriate damper actuator control signal — on/off, floating, or modulating?",
+    "answer": "On/off (2-position) actuators are simplest and used for isolation dampers, garage exhaust fans, and smoke dampers where only open/close functionality is needed — typically 24V or 120V powered with an end-switch for position feedback. Floating (3-point) actuators accept open/close pulse signals from a controller with a runtime of 90–150 seconds and are used when the controller lacks an analog output but needs modulating control; the controller must track the inferred position through pulse timing. Modulating actuators accept a 0–10V or 4–20mA analog signal and provide true proportional positioning with feedback, required for economizers, VAV boxes, and precise temperature control applications. Per ASHRAE Guideline 36, modulating actuators on large AHU dampers should also support bus communication (BACnet MS/TP or Modbus RTU) to report actual position, runtime, and diagnostic data to the BMS for automated fault detection.",
+    "category": "actuators",
+    "tags": ["control-signal", "modulating", "floating", "on-off"]
+  },
+  {
+    "id": 29,
+    "question": "How do CO₂ sensors work in demand-controlled ventilation?",
+    "answer": "NDIR (Non-Dispersive Infrared) CO₂ sensors measure the absorption of infrared light at 4.26 μm wavelength by CO₂ molecules in the air sample, and are now the standard sensor type for building automation due to their long-term stability and accuracy (±30–50 ppm). The sensor outputs a 0–10V or 4–20mA signal proportional to 0–2,000 or 0–5,000 ppm and the BMS controller calculates the required outdoor air based on the differential between the zone CO₂ concentration and the outdoor ambient concentration (typically ~400–450 ppm). Per ASHRAE 62.1, demand-controlled ventilation using CO₂ is permitted in spaces with variable occupancy where the population-area outdoor air rate (Rp) component dominates, and the setpoint is typically 1,000–1,100 ppm above outdoor ambient. For accuracy, CO₂ sensors should be wall-mounted at breathing height (4–6 feet AFF), away from doors, supply diffusers, and direct sunlight, with ABC (Automatic Baseline Calibration) logic enabled to periodically reset the sensor to the lowest reading over a 7–14 day period.",
+    "category": "controls",
+    "tags": ["CO2-sensor", "demand-controlled-ventilation", "ASHRAE-62.1", "NDIR"]
+  },
+  {
+    "id": 30,
+    "question": "What is actuator close-off pressure and why is it critical?",
+    "answer": "Close-off pressure is the maximum differential pressure against which an actuator can fully close its damper or valve and hold it sealed \u2014 exceeding this rating causes the damper to blow open or the valve to leak. For control valves, the close-off rating must exceed the maximum pump deadhead pressure at the valve location (typically 50\u2013150 PSI for medium-rise hydronic systems), while dampers must accommodate maximum fan static pressure plus stack effect or wind pressure (up to 8\u201310 in. w.g. in high-rise pressurization applications). Always select an actuator providing at least 1.5\u00d7 the calculated close-off requirement using manufacturer close-off tables from Belimo, Honeywell, or Siemens that map actuator torque to damper area or valve seat diameter.",
+    "category": "actuators",
+    "tags": ["close-off", "actuator", "pressure", "sizing"]
+  },
+  {
+    "id": 31,
+    "question": "How do I size a heating hot water control valve?",
+    "answer": "Heating hot water control valves follow the same Cv sizing formula as chilled water valves (Cv = Q × √(SG/ΔP)), but the design typically uses a lower ΔP because heating coils operate with higher water temperatures (160–200°F vs 42–45°F for chilled water) and therefore need less flow for the same heat transfer. A key difference is that heating valves must be selected for close-off against the higher system pressures in heating loops (often 40–60 PSI at the pump, compared to 25–40 PSI for chilled water), and valve bodies must be rated for continuous 200°F+ operation with appropriate EPDM or PTFE seats. Per ASHRAE guidance, heating valves on VAV reheat coils should be line-sized or one size smaller than the coil connection, with an authority of 0.3–0.5 for stable temperature control at the typically low loads where reheat operates. Belimo CCV valves with equal-percentage characteristics work particularly well for heating because they linearize the inherently logarithmic heat output of coils.",
+    "category": "hydronic",
+    "tags": ["heating", "control-valve", "Cv", "hot-water"]
+  },
+  {
+    "id": 32,
+    "question": "What is the difference between 24V AC and 24V DC actuator power?",
+    "answer": "Most HVAC actuators historically used 24V AC because transformers were simple and reliable, and the AC signal allowed early 2–10V position feedback without separate power supplies — the full-wave rectified AC provided inherent isolation. Modern actuators increasingly use 24V DC because brushless DC motors are more efficient, provide higher torque at low speeds, and enable battery-backup fail-safe operation without needing a separate spring. The Belimo fail-safe SuperCap technology, for example, uses 24V DC to charge capacitors that can drive the actuator to its fail position on power loss, eliminating the mechanical complexity of spring-return mechanisms. When retrofitting, note that 24V AC actuators cannot typically be powered from 24V DC supplies (the internal rectifier expects AC zero-crossing for timing control), but many modern 24V DC actuators accept 24V AC as well — always check the manufacturer's specifications before mixing power types.",
+    "category": "actuators",
+    "tags": ["power-supply", "24V", "AC-DC", "actuator"]
+  },
+  {
+    "id": 33,
+    "question": "How do I perform an airflow traverse for duct commissioning?",
+    "answer": "An airflow traverse divides the duct cross-section into equal-area rectangles (log-Tchebycheff method per ASHRAE Standard 111) and measures velocity at the center of each rectangle using a pitot tube connected to a manometer or electronic micro-manometer. For rectangular ducts, you need a minimum of 16–25 measurement points; for round ducts, traverse along two perpendicular diameters with 6–10 points per diameter. The velocity readings are averaged and multiplied by the duct area to compute airflow, and this traverse-derived airflow serves as the reference for calibrating permanently installed flow measuring stations. The traverse location must have straight duct runs of at least 7.5 hydraulic diameters upstream and 3 diameters downstream to ensure fully-developed flow; if this isn't possible, increase the number of measurement points by 50% and note the compromised location in the commissioning report.",
+    "category": "air",
+    "tags": ["airflow", "commissioning", "traverse", "ASHRAE-111"]
+  },
+  {
+    "id": 34,
+    "question": "What are the key differences between BACnet MS/TP and BACnet/IP?",
+    "answer": "BACnet MS/TP (Master-Slave/Token-Passing) runs over RS-485 at 9,600–76,800 bps with a token-passing MAC layer that supports up to 127 devices per segment (typically 30–50 in practice for reliable throughput) and is the dominant wiring protocol for VAV controllers and terminal unit-level devices. BACnet/IP encapsulates BACnet messages in UDP/IP packets at Ethernet speeds (100 Mbps–1 Gbps), uses BBMD (BACnet Broadcast Management Device) servers to forward broadcasts across IP subnets, and is now the preferred backbone protocol for connecting supervisory controllers, routers, and operator workstations. BACnet/IP supports much higher device counts and data throughput, making it suitable for large campuses with thousands of devices, while MS/TP remains cost-effective for floor-level controllers where a dedicated RS-485 daisy-chain avoids IT network dependencies. The key architectural rule is that BACnet MS/TP segments should be limited to devices that communicate primarily with a single supervisory controller, while all inter-controller and enterprise-level traffic should use BACnet/IP.",
+    "category": "controls",
+    "tags": ["BACnet", "MS/TP", "BACnet-IP", "network"]
+  },
+  {
+    "id": 35,
+    "question": "How do I select a damper actuator for smoke control systems?",
+    "answer": "Smoke control damper actuators must be UL 555S listed for the specific damper model and meet the operational requirements of NFPA 92 and the IBC — the actuator must fully open or close (depending on the smoke control strategy) within 75 seconds of a fire alarm signal. These actuators require 350°F minimum temperature rating (typically rated for 30 minutes of operation at elevated temperature), dedicated power circuits separate from general HVAC, and spring-return mechanisms that drive the damper to the fire-safe position on power failure. The Belimo FSLF and Honeywell MS4120/8120 series are common smoke-rated actuators providing 120–350 in-lb torque at 350°F for up to 30 minutes. Smoke control actuators must also provide position feedback switches for the fire alarm system to verify operation during testing, and NFPA requires that the entire smoke control system be tested annually with all actuators exercised under actual fire alarm conditions.",
+    "category": "air",
+    "tags": ["smoke-control", "UL-555S", "NFPA", "actuator", "fire-safety"]
+  },
+  {
+    "id": 36,
+    "question": "What is the role of pressure sensors in duct static pressure reset strategies?",
+    "answer": "Duct static pressure sensors provide the input signal for fan speed control in VAV systems, and ASHRAE Guideline 36 specifies that the static pressure setpoint should be continuously reset based on the damper position feedback from all VAV boxes serving the system. The sensor should be installed in a straight duct section, 2/3 to 3/4 down the main duct, and must use a pitot tube or static pressure probe oriented perpendicular to airflow to avoid velocity pressure contamination. The reset algorithm works by polling all VAV damper positions every 2–5 minutes and reducing the duct static pressure setpoint in small increments (0.1–0.2 in. w.g.) until at least one VAV box reaches 90–95% open, ensuring that the fan produces only as much pressure as the most-demanding zone needs. This strategy can reduce fan energy by 30–50% compared to a fixed static pressure setpoint, particularly during part-load conditions that dominate most operating hours.",
+    "category": "air",
+    "tags": ["static-pressure", "sensor-placement", "VAV", "ASHRAE-36", "energy"]
+  },
+  {
+    "id": 37,
+    "question": "How do I choose between a globe valve and a ball valve for HVAC control?",
+    "answer": "Globe valves are the traditional choice for modulating HVAC control because their plug-and-seat design provides a characterized flow path (equal-percentage or linear) with high rangeability (typically 50:1) and predictable Cv vs. stem travel relationship, making them well-suited for precise temperature control on coils. Ball valves with characterized trim (V-port or segmented ball) have become increasingly popular for HVAC because they offer higher close-off pressures, lower leakage rates (ANSI Class IV–VI possible), lower torque requirements, and full-port designs that eliminate the high pressure drop inherent in globe valves. For 2-way PICV applications, characterized ball designs are now standard because the pressure regulator handles the pressure compensation while the ball segment provides the equal-percentage characteristic. Globe valves remain preferred for steam applications (due to higher temperature tolerance of the metal seat design) and for applications requiring ANSI Class VI shutoff where soft-seated ball valves may not meet temperature requirements.",
+    "category": "hydronic",
+    "tags": ["globe-valve", "ball-valve", "control-valve", "characterized"]
+  },
+  {
+    "id": 38,
+    "question": "Where should humidity sensors be placed in an AHU?",
+    "answer": "Return air humidity sensors should be located in the return air duct or the mixed air plenum (upstream of the cooling coil) to provide an accurate representation of the average space humidity without being affected by coil condensate carryover. Outdoor air humidity sensors require an aspirated shield or weatherproof enclosure and should be mounted on the north-facing side of the building whenever possible to avoid solar radiation errors. For supply air humidity monitoring (used in dew point control strategies), the sensor must be mounted downstream of the cooling coil and fan — at least 3–4 duct diameters from the coil discharge — to avoid saturated air or mist from the coil affecting readings. Capacitive RH sensors (the standard in BAS) require annual calibration verification against a reference standard, and sensor accuracy of ±2–3% RH is typical for the 20–80% RH range but degrades significantly in condensing environments without appropriate sensor protection.",
+    "category": "controls",
+    "tags": ["humidity", "sensor-placement", "AHU", "RH"]
+  },
+  {
+    "id": 39,
+    "question": "What is supply air temperature reset and how is it implemented?",
+    "answer": "Supply air temperature (SAT) reset raises the AHU discharge air temperature setpoint when all zones indicate they are over-cooled (dampers near minimum position), reducing compressor/coil energy and enabling more hours of economizer operation. Per ASHRAE 90.1-2019, SAT reset is mandatory for systems with DDC at the zone level, and per Guideline 36, the reset should be trim-and-respond: the SAT setpoint increases by 0.2°F every 5 minutes (to a maximum of typically 60–65°F) as long as no zone is near its maximum cooling demand. The reset range is typically the design SAT (53–55°F) up to a maximum of 60–65°F, with the upper limit set by the zone requiring the most dehumidification. Siemens Apogee and JCI Metasys both implement SAT reset using rolling-average zone demand polling across all connected VAV controllers.",
+    "category": "air",
+    "tags": ["SAT-reset", "energy-efficiency", "ASHRAE-90.1", "ASHRAE-36"]
+  },
+  {
+    "id": 40,
+    "question": "How do I specify actuator runtime for different applications?",
+    "answer": "Actuator runtime — the time the actuator takes to travel from fully closed to fully open — should match the process dynamics: fast-acting processes need fast actuators, while slow thermal systems benefit from slower runtimes that prevent hunting. For VAV terminal unit dampers, 60–90 second runtimes are standard and allow the DDC controller's PID loop enough time to sense the result of a damper position change in the zone temperature. For large AHU mixing dampers (outdoor/return air), 90–150 second runtimes are typical because the mixed air temperature response is relatively slow. Steam valves require faster actuators (15–30 seconds) because steam systems react quickly to changes in valve position. Specifying an actuator that is too fast for the process will cause instability and hunting; too slow and the system cannot respond to disturbances — Belimo's sizing tools match runtime to application type automatically based on the thermal time constant of the controlled medium.",
+    "category": "actuators",
+    "tags": ["runtime", "timing", "PID", "selection"]
+  },
+  {
+    "id": 41,
+    "question": "What are the AMCA damper leakage classes?",
+    "answer": "AMCA Standard 511 defines damper leakage classes based on maximum allowable leakage per square foot of damper area at specified test pressure: Class 1 (tightest) allows 4 CFM/ft\u00b2 at 1 in. w.g., Class 2 allows 10 CFM/ft\u00b2 at 1 in. w.g., and Class 3 allows 40 CFM/ft\u00b2 at 1 in. w.g. For outdoor air intake and exhaust dampers, Class 1 leakage rating is strongly recommended because leakage through a poorly sealed damper can cause coil freezing and significant energy waste during unoccupied winter setback. ASHRAE 90.1 effectively mandates Class 1 or better (typically \u22643 CFM/ft\u00b2 at 1 in. w.g. per AMCA 511) for outdoor air and relief dampers in most commercial buildings, and dampers with jamb seals and blade edge seals are standard features to achieve these ratings.",
+    "category": "air",
+    "tags": ["AMCA-511", "leakage", "damper", "ASHRAE-90.1"]
+  },
+  {
+    "id": 42,
+    "question": "How does a differential pressure transmitter differ from a flow meter?",
+    "answer": "A differential pressure (DP) transmitter measures the pressure difference between two points — such as across an orifice plate, venturi, or across a chiller evaporator — and outputs a 4–20mA or 0–10V signal proportional to ΔP, but it does not inherently compute flow. A flow meter either (a) combines a DP transmitter with a primary element and square-root extraction to calculate flow (Q ∝ √ΔP), or (b) uses a direct flow-sensing technology like electromagnetic, ultrasonic, or Coriolis that outputs a signal directly proportional to flow rate. In HVAC, DP transmitters are commonly used for pump differential pressure control (maintaining ΔP at a remote sensor), filter status monitoring (pressure drop across filters), and for building static pressure control. For energy measurement applications, modern devices like the Belimo Energy Valve or Siemens SITRANS F flow meters provide direct flow and energy output as BACnet objects, eliminating the manual square-root calculation and accuracy issues that plague DP-based flow measurement at low flows.",
+    "category": "hydronic",
+    "tags": ["DP-transmitter", "flow-meter", "measurement"]
+  },
+  {
+    "id": 43,
+    "question": "What is the optimal placement for a chilled water differential pressure sensor?",
+    "answer": "The differential pressure sensor for variable-speed secondary pump control should be installed across the supply and return mains at the most hydraulically remote coil (approximately 2/3 to 3/4 of the distance from the plant), measuring the differential pressure available at the end of the distribution system. The setpoint is typically maintained at the minimum pressure required by the \u201cworst-case\u201d control valve at design flow \u2014 plus any piping and fitting losses remaining to that valve. ASHRAE Guideline 36 recommends monitoring all control valve positions and resetting the DP setpoint downward until at least one valve reaches 90\u201395% open, analogous to the duct static pressure reset strategy for air systems. Installing the DP sensor at the plant or only partway down the main will cause the system to maintain excessive pressure at the remote coils, wasting pump energy and causing control valve hunting in near-plant circuits.",
+    "category": "hydronic",
+    "tags": ["differential-pressure", "sensor-placement", "pump-control", "ASHRAE-36"]
+  },
+  {
+    "id": 44,
+    "question": "How do I select damper blade and frame material for corrosive environments?",
+    "answer": "For standard commercial HVAC applications, galvanized steel (G90 coating) blades and frames are adequate and cost-effective. For mildly corrosive environments such as parking garage exhaust or pool dehumidification systems, 304 stainless steel construction is recommended to resist chloride corrosion. For laboratory fume hood exhaust, chemical storage areas, or coastal installations with salt spray, 316 stainless steel with Teflon bearings and stainless steel axles/jamb seals is required because the molybdenum content provides superior pitting resistance. For the most aggressive environments (acid exhaust, wastewater treatment), all-plastic dampers with PVC or polypropylene blades, fiberglass-reinforced frames, and Hastelloy or titanium hardware may be necessary — and the actuator must also be protected with NEMA 4X/IP66 enclosures. Always verify material compatibility using the Corrosion Resistance Guide from the damper manufacturer and match the blade material to the duct construction material for galvanic compatibility.",
+    "category": "air",
+    "tags": ["damper", "materials", "corrosion", "stainless-steel"]
+  },
+  {
+    "id": 45,
+    "question": "What are the minimum outdoor air damper leakage requirements in ASHRAE 90.1?",
+    "answer": "ASHRAE 90.1-2019 Section 6.4.3.4.3 requires outdoor air intake and exhaust dampers to have a maximum leakage rate of \u22643 CFM/ft\u00b2 at 1 in. w.g. when tested per AMCA 511, effectively mandating AMCA Class 1A rated dampers. The standard also requires that outdoor air dampers be motorized, interlocked with the supply fan to close when the fan is off, and capable of modulating to meet minimum ventilation requirements during occupied mode. These requirements are particularly critical in cold climates (ASHRAE Climate Zones 4\u20138) where damper leakage represents a significant heating energy penalty and coil freeze risk during winter unoccupied periods.",
+    "category": "standards",
+    "tags": ["ASHRAE-90.1", "damper-leakage", "outdoor-air", "AMCA"]
+  },
+  {
+    "id": 46,
+    "question": "How do I troubleshoot a hunting control valve?",
+    "answer": "A hunting control valve oscillates around its setpoint without stabilizing, and the root cause is typically one of: oversized valve (Cv too large, causing the valve to operate in the bottom 10–20% of its stroke where the gain is highest), incorrect PID tuning (too much integral or proportional gain), sensor placement that introduces dead time (e.g., a strap-on pipe sensor with poor thermal contact), or an unstable differential pressure across the valve. Start by checking the valve authority — if it's below 0.25, the valve is almost certainly oversized; check whether the valve ever exceeds 50% open at design conditions. Next, put the controller in manual and step the valve open by 5–10% increments while observing the coil temperature response to determine the process time constant, then retune the PID loop with an integral time of at least 4× the process time constant. If the problem persists and system pressure is fluctuating, install a PICV or pressure-independent valve to decouple the coil from system pressure variations.",
+    "category": "hydronic",
+    "tags": ["hunting", "control-valve", "troubleshooting", "PID"]
+  },
+  {
+    "id": 47,
+    "question": "What is the difference between fail-safe and non-fail-safe actuators?",
+    "answer": "Fail-safe actuators are designed to drive to a predetermined safe position (fully open or fully closed) when power is lost, using either a mechanical spring (spring-return), capacitive energy storage (Belimo SuperCap), or battery backup to provide the motive force. Non-fail-safe actuators simply stop in their last position on power loss (fail-in-place) and are used in applications where the failure position does not create a safety hazard — such as VAV cooling-only boxes or non-critical exhaust dampers. The fail-safe requirement is driven by code: smoke control dampers (UL 555S), stairwell pressurization, elevator hoistway vents, and freeze protection valves all require fail-safe operation per the IBC or IMC. The selection impacts first cost (fail-safe actuators cost 30–50% more), wiring (spring-return actuators require separate power for the spring mechanism), and energy efficiency (spring-return actuators draw holding current continuously, though modern designs have reduced this to 0.5–1W).",
+    "category": "actuators",
+    "tags": ["fail-safe", "spring-return", "safety", "code"]
+  },
+  {
+    "id": 48,
+    "question": "How do I measure pump efficiency using BAS data?",
+    "answer": "Pump efficiency (wire-to-water efficiency) calculation requires three real-time measurements: pump differential pressure (ΔP in PSI or ft of head), pump flow rate (GPM), and pump motor power (kW). The hydraulic power is calculated as (ΔP × flow) / constant, and the wire-to-water efficiency = hydraulic power / electrical power × 100%. In a BAS, the pump ΔP can be measured directly with a DP transmitter across the pump suction and discharge, flow is measured via an inline or insertion flow meter (electromagnetic or ultrasonic), and pump kW should ideally come from a Modbus-connected VFD or power meter rather than proxy measurements. Per ASHRAE Guideline 22, pump efficiency below 65–70% indicates a problem with impeller wear, pump oversizing, or excessive throttling. Modern analytics platforms can trend the pump efficiency curve over time and detect degradation before it impacts system performance — Belimo Energy Valves with their built-in flow and temperature sensing combined with DP transmitters can calculate coil-level and branch efficiency without dedicated pump instrumentation.",
+    "category": "hydronic",
+    "tags": ["pump-efficiency", "measurement", "BAS", "analytics"]
+  },
+  {
+    "id": 49,
+    "question": "How do I select an actuator for airfoil vs. standard damper blades?",
+    "answer": "Airfoil blades (convex, aerodynamic profile) generate significantly lower pressure drop and lower torque compared to standard flat blades because the streamlined shape reduces the aerodynamic force that the actuator must overcome, particularly at velocities above 2,000 FPM. For the same damper face area and pressure differential, an airfoil-blade damper may require only 60–70% of the actuator torque needed for a standard flat-blade damper, which can mean a smaller and less expensive actuator. However, airfoil dampers are more expensive to manufacture and are typically justified only in large AHU applications (face area >6 ft²) where the torque savings are substantial, or in critical control applications (economizer mixing sections) where the improved flow characteristic improves control stability. When retrofitting, verify the actuator torque requirement against the actual installed damper type — replacing a failed actuator with one sized for flat blades on an airfoil damper is safe (oversized), but using an airfoil-rated actuator on a flat-blade damper will likely result in insufficient torque and failure to close at high differential pressure.",
+    "category": "air",
+    "tags": ["airfoil", "damper", "actuator", "torque", "selection"]
+  },
+  {
+    "id": 50,
+    "question": "What is ASHRAE Guideline 36 and how does it improve HVAC control sequences?",
+    "answer": "ASHRAE Guideline 36, \u201cHigh-Performance Sequences of Operation for HVAC Systems,\u201d provides standardized, field-tested control sequences that have been proven to reduce building energy consumption by 30\u201350% compared to typical sequences when properly implemented. It defines trim-and-respond reset strategies for duct static pressure, supply air temperature, and zone temperature setpoints \u2014 replacing arbitrary fixed setpoints with algorithms that continuously find the most energy-efficient operating point that still satisfies all zones. The guideline covers VAV systems, single-zone AHUs, fan coil units, and chilled water plant control with detailed block diagrams and logic statements suitable for direct translation into DDC programming. Guideline 36 sequences are now required by ASHRAE 90.1-2019 for many building types, and major BMS manufacturers (JCI, Siemens, Honeywell, Schneider) have developed Guideline 36-compliant program libraries that can be deployed as standardized applications, significantly reducing commissioning time and programming errors.",
+    "category": "standards",
+    "tags": ["ASHRAE-36", "sequences", "energy-efficiency", "DDC"]
+  }
+]

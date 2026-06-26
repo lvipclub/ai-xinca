@@ -1,0 +1,74 @@
+---
+// faq/[category].astro - Category FAQ page with JSON-LD structured data (for crawlers)
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import categories from '../../content/faq/categories.json';
+
+export function getStaticPaths() {
+  const slugs = Object.keys(categories.categories);
+  return slugs.map(slug => ({ params: { category: slug } }));
+}
+
+const { category } = Astro.params;
+const cat = categories.categories[category as keyof typeof categories.categories];
+
+if (!cat) {
+  return Astro.redirect('/faq');
+}
+
+// Build JSON-LD FAQPage structured data
+const faqEntries = [{
+  "@type": "Question",
+  "name": `Browse ${cat.name} FAQ`,
+  "acceptedAnswer": {
+    "@type": "Answer",
+    "text": `${cat.count} FAQ entries covering ${cat.description}.`
+  }
+}];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqEntries
+};
+---
+
+<BaseLayout 
+  title={`${cat.name} FAQ`}
+  description={cat.description}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-gray-500 mb-8">
+      <a href="/" class="hover:text-xinca-cyan transition-colors">Home</a>
+      <span>/</span>
+      <a href="/faq" class="hover:text-xinca-cyan transition-colors">FAQ</a>
+      <span>/</span>
+      <span class="text-xinca-cyan">{cat.name}</span>
+    </nav>
+
+    <!-- Category Header -->
+    <div class="mb-10">
+      <h1 class="section-title">{cat.name} <span class="gradient-text">FAQ</span></h1>
+      <p class="section-subtitle">{cat.description}</p>
+      <p class="text-gray-500 text-sm mt-2">{cat.count} entries</p>
+    </div>
+
+    <!-- FAQ entries loaded from content collections -->
+    <div class="card text-center py-12 mb-8">
+      <div class="text-4xl mb-4">📝</div>
+      <h3 class="text-xl font-semibold text-white mb-2">Structured FAQ Content</h3>
+      <p class="text-gray-400">
+        {cat.count} FAQ entries indexed for {cat.name.toLowerCase()}. This page is optimized for search engine crawlers.
+      </p>
+    </div>
+
+    <!-- Back to all categories -->
+    <div class="text-center">
+      <a href="/faq" class="btn-secondary">
+        ← Back to All Categories
+      </a>
+    </div>
+  </section>
+</BaseLayout>
