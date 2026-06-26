@@ -1,0 +1,149 @@
+---
+// ChatWidget.astro - Client-side fuzzy search chatbot using Fuse.js
+import qaData from '../data/seed-qa.json';
+
+export interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div id="chat-widget" class="w-full" data-compact={compact ? 'true' : 'false'}>
+  <!-- Data island for QA entries -->
+  <script type="application/json" id="chat-qa-data" set:html={JSON.stringify(qaData)}></script>
+
+  <!-- Input area -->
+  <div class="relative">
+    <div class="flex gap-2">
+      <input
+        id="chat-input"
+        type="text"
+        placeholder="e.g., How do I select the right damper actuator torque?"
+        class="w-full bg-[#1a1a2e] border border-[#2a2a3e] rounded-lg px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-xinca-cyan/50 focus:ring-1 focus:ring-xinca-cyan/30 transition-all text-base"
+        autocomplete="off"
+      />
+      <button
+        id="chat-send"
+        class="px-5 py-3.5 bg-xinca-cyan/15 border border-xinca-cyan/30 text-xinca-cyan rounded-lg hover:bg-xinca-cyan/25 transition-all flex items-center gap-1.5 font-medium shrink-0"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+        <span class="hidden sm:inline">Ask</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Results area -->
+  <div id="chat-results" class="mt-4 space-y-3"></div>
+
+  <!-- Suggestions (shown when empty) -->
+  <div id="chat-suggestions" class="mt-4">
+    {!compact && (
+      <p class="text-gray-500 text-xs mb-3">Try asking about:</p>
+    )}
+    <div class="flex flex-wrap gap-2">
+      {[
+        'Damper actuator torque',
+        'Valve Cv calculation',
+        'BACnet vs Modbus',
+        'VAV terminal sizing',
+        'Spring-return actuators',
+        'PICV valve selection',
+      ].map(s => (
+        <button
+          class="chat-suggestion text-xs px-3 py-1.5 rounded-full bg-[#1a1a2e] border border-[#2a2a3e] text-gray-400 hover:border-xinca-cyan/40 hover:text-xinca-cyan transition-all"
+          data-query={s}
+        >
+          {s}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.basic.min.js"></script>
+<script>
+  // Fuse.js loaded via CDN above — available as global Fuse
+
+  var qaEntries = JSON.parse(document.getElementById('chat-qa-data').textContent);
+
+  var categoryNames = {
+    air: 'Air-side',
+    hydronic: 'Hydronic',
+    actuators: 'Actuators',
+    controls: 'Controls',
+    standards: 'Standards',
+    water: 'Water-side',
+    products: 'Products',
+    sensors: 'Sensors',
+    valves: 'Valves',
+    dampers: 'Dampers',
+    bms: 'BMS',
+  };
+
+  var fuse = new Fuse(qaEntries, {
+    keys: ['question', 'answer', 'tags'],
+    threshold: 0.4,
+    includeScore: true,
+    minMatchCharLength: 2,
+  });
+
+  var input = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send');
+  var resultsDiv = document.getElementById('chat-results');
+  var suggestionsDiv = document.getElementById('chat-suggestions');
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function doSearch(query) {
+    var q = query.trim();
+    if (!q) {
+      resultsDiv.innerHTML = '';
+      if (suggestionsDiv) suggestionsDiv.classList.remove('hidden');
+      return;
+    }
+
+    var results = fuse.search(q, { limit: 3 });
+
+    if (results.length === 0) {
+      resultsDiv.innerHTML = '<div class="bg-[#1a1a2e] border border-[#2a2a3e] rounded-lg p-6 text-center"><p class="text-gray-400">No matches found for "<span class=\'text-white\'>' + escapeHtml(q) + '</span>".</p><p class="text-gray-500 text-sm mt-1">Try rephrasing your question or check the <a href="/qa" class="text-xinca-cyan hover:underline">Popular Q&A</a> page.</p></div>';
+      return;
+    }
+
+    if (suggestionsDiv) suggestionsDiv.classList.add('hidden');
+
+    resultsDiv.innerHTML = results.map(function(r) {
+      var item = r.item;
+      var catLabel = categoryNames[item.category] || item.category;
+      var tagsHtml = '';
+      if (item.tags && item.tags.length > 0) {
+        tagsHtml = '<div class="flex flex-wrap gap-1.5 mt-3">' + item.tags.map(function(t) { return '<span class="text-xs px-2 py-0.5 rounded bg-[#0a0a0a] text-gray-500">#' + escapeHtml(t) + '</span>'; }).join('') + '</div>';
+      }
+      return '<div class="bg-[#1a1a2e] border border-[#2a2a3e] rounded-lg p-5 hover:border-xinca-cyan/20 transition-all"><div class="flex items-start justify-between gap-3 mb-3"><h3 class="text-white font-semibold text-base leading-snug">' + escapeHtml(item.question) + '</h3><span class="text-xs px-2 py-1 rounded-full bg-xinca-cyan/10 text-xinca-cyan border border-xinca-cyan/20 whitespace-nowrap shrink-0">' + escapeHtml(catLabel) + '</span></div><p class="text-gray-400 text-sm leading-relaxed line-clamp-4">' + escapeHtml(item.answer) + '</p>' + tagsHtml + '</div>';
+    }).join('');
+  }
+
+  sendBtn.addEventListener('click', function() { doSearch(input.value); });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doSearch(input.value);
+  });
+
+  document.querySelectorAll('.chat-suggestion').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      input.value = btn.getAttribute('data-query') || '';
+      doSearch(input.value);
+    });
+  });
+
+  var debounceTimer;
+  input.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() { doSearch(input.value); }, 300);
+  });
+</script>

@@ -1,11 +1,136 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// index.astro - Chatbot-first landing page for ai.xinca.com
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ChatWidget from '../components/ChatWidget.astro';
+import qaData from '../data/seed-qa.json';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Pick 8 demo Q&As for the "Popular Questions" section
+const demoQuestions = qaData.slice(0, 8);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout 
+  title="XINCA HVAC Controls Engineering"
+  description="HVAC controls engineering, answered. Ask anything about damper sizing, valve Cv, VAV setup, actuator torque — get answers backed by engineering knowledge."
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-xinca-cyan/5 to-transparent pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <div class="text-center mb-10">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+          HVAC controls engineering, <span class="gradient-text">answered.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          Ask anything about damper sizing, valve Cv, VAV setup, actuator torque — get answers backed by engineering knowledge.
+        </p>
+      </div>
+
+      <!-- Chatbot Input - FRONT AND CENTER -->
+      <div class="max-w-2xl mx-auto">
+        <ChatWidget compact={false} />
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Value Cards (2x2 grid) -->
+  <section class="border-t border-xinca-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- FAQ (machines only) -->
+        <div class="card text-left">
+          <div class="text-2xl mb-3">🔍</div>
+          <h3 class="text-lg font-semibold text-white mb-2">FAQ</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            137 entries, JSON-LD structured for search engines
+          </p>
+        </div>
+
+        <!-- Tools -->
+        <div class="card text-left opacity-70">
+          <div class="text-2xl mb-3">🔧</div>
+          <h3 class="text-lg font-semibold text-white mb-2">Tools</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Cross-brand pairing matrix (coming soon)
+          </p>
+        </div>
+
+        <!-- AI Chatbot -->
+        <div class="card text-left border-xinca-cyan/30">
+          <div class="text-2xl mb-3">🤖</div>
+          <h3 class="text-lg font-semibold text-xinca-cyan mb-2">AI Chatbot</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Ask HVAC101 questions, get citations
+          </p>
+        </div>
+
+        <!-- Knowledge -->
+        <div class="card text-left">
+          <div class="text-2xl mb-3">📚</div>
+          <h3 class="text-lg font-semibold text-white mb-2">Knowledge</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Listicles published to LinkedIn &amp; X
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Questions Section -->
+  <section class="border-t border-xinca-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="section-title text-center">Popular <span class="gradient-text">Questions</span></h2>
+      <p class="section-subtitle text-center mx-auto mb-10">
+        See what visitors are asking the chatbot
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="popular-questions">
+        {demoQuestions.map(q => (
+          <div class="popular-q-card card cursor-pointer group" 
+               data-qa-id={q.id}
+               data-qa-answer={JSON.stringify(q.answer)}>
+            <h3 class="text-white font-medium text-sm leading-snug mb-2 group-hover:text-xinca-cyan transition-colors">
+              {q.question}
+            </h3>
+            <p class="text-gray-500 text-xs leading-relaxed line-clamp-2">
+              {q.answer.substring(0, 150)}...
+            </p>
+            <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full bg-xinca-cyan/10 text-xinca-cyan border border-xinca-cyan/20">
+              {q.category}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/qa" class="btn-primary">
+          View All Q&A
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Expand/collapse popular question cards
+  document.querySelectorAll('.popular-q-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var answerP = card.querySelector('p');
+      var fullAnswer = card.getAttribute('data-qa-answer');
+      
+      if (card.classList.contains('expanded')) {
+        // Collapse
+        card.classList.remove('expanded');
+        answerP.textContent = fullAnswer.substring(0, 150) + '...';
+        answerP.classList.add('line-clamp-2');
+      } else {
+        // Expand
+        card.classList.add('expanded');
+        answerP.textContent = fullAnswer;
+        answerP.classList.remove('line-clamp-2');
+      }
+    });
+  });
+</script>
