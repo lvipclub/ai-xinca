@@ -1,5 +1,5 @@
 ---
-// index.astro - Chatbot-first landing page for ai.xinca.com
+// index.astro - Chatbot-first landing page for ai.xinca.com (light theme)
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ChatWidget from '../components/ChatWidget.astro';
 import qaData from '../data/seed-qa.json';
@@ -13,14 +13,13 @@ const demoQuestions = qaData.slice(0, 8);
   description="HVAC controls engineering, answered. Ask anything about damper sizing, valve Cv, VAV setup, actuator torque — get answers backed by engineering knowledge."
 >
   <!-- Hero Section -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-xinca-cyan/5 to-transparent pointer-events-none"></div>
+  <section class="relative overflow-hidden bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
       <div class="text-center mb-10">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-[#333]" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
           HVAC controls engineering, <span class="gradient-text">answered.</span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        <p class="text-lg md:text-xl text-[#666] max-w-2xl mx-auto leading-relaxed">
           Ask anything about damper sizing, valve Cv, VAV setup, actuator torque — get answers backed by engineering knowledge.
         </p>
       </div>
@@ -33,14 +32,14 @@ const demoQuestions = qaData.slice(0, 8);
   </section>
 
   <!-- 4 Value Cards (2x2 grid) -->
-  <section class="border-t border-xinca-border">
+  <section class="border-t border-[#e5e5e5] bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- FAQ (machines only) -->
         <div class="card text-left">
           <div class="text-2xl mb-3">🔍</div>
-          <h3 class="text-lg font-semibold text-white mb-2">FAQ</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
+          <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">FAQ</h3>
+          <p class="text-[#666] text-sm leading-relaxed">
             137 entries, JSON-LD structured for search engines
           </p>
         </div>
@@ -48,17 +47,17 @@ const demoQuestions = qaData.slice(0, 8);
         <!-- Tools -->
         <div class="card text-left opacity-70">
           <div class="text-2xl mb-3">🔧</div>
-          <h3 class="text-lg font-semibold text-white mb-2">Tools</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
+          <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Tools</h3>
+          <p class="text-[#666] text-sm leading-relaxed">
             Cross-brand pairing matrix (coming soon)
           </p>
         </div>
 
         <!-- AI Chatbot -->
-        <div class="card text-left border-xinca-cyan/30">
+        <div class="card text-left border-[#7EBEC5]">
           <div class="text-2xl mb-3">🤖</div>
-          <h3 class="text-lg font-semibold text-xinca-cyan mb-2">AI Chatbot</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
+          <h3 class="text-lg font-semibold text-[#7EBEC5] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">AI Chatbot</h3>
+          <p class="text-[#666] text-sm leading-relaxed">
             Ask HVAC101 questions, get citations
           </p>
         </div>
@@ -66,8 +65,8 @@ const demoQuestions = qaData.slice(0, 8);
         <!-- Knowledge -->
         <div class="card text-left">
           <div class="text-2xl mb-3">📚</div>
-          <h3 class="text-lg font-semibold text-white mb-2">Knowledge</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
+          <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Knowledge</h3>
+          <p class="text-[#666] text-sm leading-relaxed">
             Listicles published to LinkedIn &amp; X
           </p>
         </div>
@@ -76,28 +75,28 @@ const demoQuestions = qaData.slice(0, 8);
   </section>
 
   <!-- Popular Questions Section -->
-  <section class="border-t border-xinca-border">
+  <section class="border-t border-[#e5e5e5] bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="section-title text-center">Popular <span class="gradient-text">Questions</span></h2>
-      <p class="section-subtitle text-center mx-auto mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-[#333] mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        Popular <span class="gradient-text">Questions</span>
+      </h2>
+      <p class="text-lg text-[#666] text-center max-w-2xl mx-auto mb-10">
         See what visitors are asking the chatbot
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="popular-questions">
         {demoQuestions.map(q => (
-          <div class="popular-q-card card cursor-pointer group" 
-               data-qa-id={q.id}
-               data-qa-answer={JSON.stringify(q.answer)}>
-            <h3 class="text-white font-medium text-sm leading-snug mb-2 group-hover:text-xinca-cyan transition-colors">
+          <a href={`/qa/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
+            <h3 class="text-[#333] font-medium text-sm leading-snug mb-2 group-hover:text-[#2ea3f2] transition-colors">
               {q.question}
             </h3>
-            <p class="text-gray-500 text-xs leading-relaxed line-clamp-2">
+            <p class="text-[#666] text-xs leading-relaxed line-clamp-2">
               {q.answer.substring(0, 150)}...
             </p>
-            <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full bg-xinca-cyan/10 text-xinca-cyan border border-xinca-cyan/20">
+            <span class="badge-category mt-2">
               {q.category}
             </span>
-          </div>
+          </a>
         ))}
       </div>
 
@@ -112,25 +111,3 @@ const demoQuestions = qaData.slice(0, 8);
     </div>
   </section>
 </BaseLayout>
-
-<script>
-  // Expand/collapse popular question cards
-  document.querySelectorAll('.popular-q-card').forEach(function(card) {
-    card.addEventListener('click', function() {
-      var answerP = card.querySelector('p');
-      var fullAnswer = card.getAttribute('data-qa-answer');
-      
-      if (card.classList.contains('expanded')) {
-        // Collapse
-        card.classList.remove('expanded');
-        answerP.textContent = fullAnswer.substring(0, 150) + '...';
-        answerP.classList.add('line-clamp-2');
-      } else {
-        // Expand
-        card.classList.add('expanded');
-        answerP.textContent = fullAnswer;
-        answerP.classList.remove('line-clamp-2');
-      }
-    });
-  });
-</script>
