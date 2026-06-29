@@ -7,5 +7,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://ai.xinca.com',
   output: 'static',
+  build: {
+    assets: 'assets'
+  },
   integrations: [tailwind(), sitemap()],
 });
