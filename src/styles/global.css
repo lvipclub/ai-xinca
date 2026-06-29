@@ -4,55 +4,107 @@
 
 @layer base {
   body {
-    @apply bg-xinca-dark text-[#e0e0e0] antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-white text-[#666] antialiased;
+    font-family: 'Verdana', Helvetica, Arial, Lucida, sans-serif;
+    font-size: 14px;
+    line-height: 1.7em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Trebuchet MS', Trebuchet, Helvetica, Arial, Lucida, sans-serif;
+    @apply text-xinca-heading;
+    letter-spacing: 1px;
+    line-height: 1.3em;
+  }
+
+  a {
+    @apply text-xinca-blue transition-opacity duration-200;
+  }
+
+  a:hover {
+    opacity: 0.7;
   }
 
   ::selection {
-    @apply bg-xinca-cyan/30 text-white;
+    @apply bg-xinca-blue/20 text-xinca-heading;
   }
 
   ::-webkit-scrollbar {
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-xinca-darker;
+    @apply bg-gray-100;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-xinca-border rounded;
+    @apply bg-gray-300 rounded;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-xinca-cyan/30;
+    @apply bg-xinca-teal/40;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-xinca-cyan/10 border border-xinca-cyan/30 
-           text-xinca-cyan rounded-lg font-medium transition-all duration-200
-           hover:bg-xinca-cyan/20 hover:border-xinca-cyan/50 hover:shadow-lg hover:shadow-xinca-cyan/10;
+  .container {
+    @apply max-w-[1080px] w-[80%] mx-auto;
   }
 
-  .btn-secondary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-xinca-card border border-xinca-border
-           text-gray-300 rounded-lg font-medium transition-all duration-200
-           hover:border-gray-500 hover:text-white;
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-[#32373c] text-white rounded font-medium
+           transition-all duration-200 hover:opacity-90;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-xinca-blue text-white rounded font-medium
+           transition-all duration-200 hover:opacity-90;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-xinca-blue text-xinca-blue
+           rounded font-medium transition-all duration-200 hover:bg-xinca-blue hover:text-white;
   }
 
   .card {
-    @apply bg-[#1a1a2e] border border-[#2a2a3e] rounded-xl p-6 transition-all duration-200
-           hover:border-xinca-cyan/20 hover:shadow-lg hover:shadow-xinca-cyan/5;
+    @apply bg-[#f8f9fa] border border-[#e5e5e5] rounded p-6 transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply card hover:border-xinca-teal hover:shadow-md;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-white mb-4;
+    @apply text-3xl md:text-4xl font-bold text-xinca-heading mb-4;
+    font-family: 'Trebuchet MS', Trebuchet, Helvetica, Arial, Lucida, sans-serif;
   }
 
   .section-subtitle {
-    @apply text-lg text-gray-400 max-w-2xl;
+    @apply text-lg text-xinca-body max-w-2xl;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-xinca-cyan to-xinca-teal bg-clip-text text-transparent;
+    background: linear-gradient(135deg, #2ea3f2, #7EBEC5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .badge {
+    @apply inline-block text-xs px-3 py-1 rounded-full font-medium;
+    background: rgba(126, 190, 197, 0.1);
+    color: #7EBEC5;
+    border: 1px solid rgba(126, 190, 197, 0.3);
+  }
+
+  .badge-category {
+    @apply inline-block text-xs px-3 py-1 rounded-full font-medium;
+    background: rgba(46, 163, 242, 0.08);
+    color: #2ea3f2;
+    border: 1px solid rgba(46, 163, 242, 0.2);
+  }
+
+  .tag-pill {
+    @apply inline-block text-xs px-2.5 py-0.5 rounded-full font-medium;
+    color: #2ea3f2;
+    background: rgba(46, 163, 242, 0.06);
+    border: 1px solid rgba(46, 163, 242, 0.15);
   }
 }

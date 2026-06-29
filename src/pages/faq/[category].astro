@@ -1,5 +1,5 @@
 ---
-// faq/[category].astro - Category FAQ page with JSON-LD structured data (for crawlers)
+// faq/[category].astro - Category FAQ page with JSON-LD structured data (light theme)
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import categories from '../../content/faq/categories.json';
 
@@ -38,35 +38,37 @@ const jsonLd = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 
-  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <section class="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-sm text-gray-500 mb-8">
-      <a href="/" class="hover:text-xinca-cyan transition-colors">Home</a>
+    <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8">
+      <a href="/" class="hover:text-[#2ea3f2] transition-colors">Home</a>
       <span>/</span>
-      <a href="/faq" class="hover:text-xinca-cyan transition-colors">FAQ</a>
+      <a href="/faq" class="hover:text-[#2ea3f2] transition-colors">FAQ</a>
       <span>/</span>
-      <span class="text-xinca-cyan">{cat.name}</span>
+      <span class="text-[#2ea3f2]">{cat.name}</span>
     </nav>
 
     <!-- Category Header -->
     <div class="mb-10">
-      <h1 class="section-title">{cat.name} <span class="gradient-text">FAQ</span></h1>
-      <p class="section-subtitle">{cat.description}</p>
-      <p class="text-gray-500 text-sm mt-2">{cat.count} entries</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-[#333] mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        {cat.name} <span class="gradient-text">FAQ</span>
+      </h1>
+      <p class="text-lg text-[#666] max-w-2xl">{cat.description}</p>
+      <p class="text-sm text-gray-400 mt-2">{cat.count} entries</p>
     </div>
 
     <!-- FAQ entries loaded from content collections -->
     <div class="card text-center py-12 mb-8">
       <div class="text-4xl mb-4">📝</div>
-      <h3 class="text-xl font-semibold text-white mb-2">Structured FAQ Content</h3>
-      <p class="text-gray-400">
+      <h3 class="text-xl font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Structured FAQ Content</h3>
+      <p class="text-[#666]">
         {cat.count} FAQ entries indexed for {cat.name.toLowerCase()}. This page is optimized for search engine crawlers.
       </p>
     </div>
 
     <!-- Back to all categories -->
     <div class="text-center">
-      <a href="/faq" class="btn-secondary">
+      <a href="/faq" class="btn-outline">
         ← Back to All Categories
       </a>
     </div>

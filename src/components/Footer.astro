@@ -1,56 +1,61 @@
 ---
-// Footer.astro - XINCA branding footer matching xinca.com
+// Footer.astro - XINCA branding footer matching xinca.com light theme
 ---
-<footer class="bg-[#050505] border-t border-xinca-cyan/20 mt-auto">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<footer class="bg-[#f8f9fa] border-t border-gray-200 mt-auto">
+  <div class="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       <!-- Categories -->
       <div>
-        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Categories</h3>
+        <h3 class="text-[#333] font-semibold mb-4 text-sm uppercase tracking-wider" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Categories</h3>
         <ul class="space-y-2">
-          <li><a href="/faq/air" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">Air-side HVAC</a></li>
-          <li><a href="/faq/water" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">Water-side HVAC</a></li>
-          <li><a href="/faq/controls" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">Building Controls</a></li>
-          <li><a href="/faq/products" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">Products</a></li>
+          <li><a href="/faq/air" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">Air-side HVAC</a></li>
+          <li><a href="/faq/water" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">Water-side HVAC</a></li>
+          <li><a href="/faq/controls" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">Building Controls</a></li>
+          <li><a href="/faq/products" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">Products</a></li>
         </ul>
       </div>
 
       <!-- Resources -->
       <div>
-        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Resources</h3>
+        <h3 class="text-[#333] font-semibold mb-4 text-sm uppercase tracking-wider" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Resources</h3>
         <ul class="space-y-2">
-          <li><a href="/qa" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">Q&A</a></li>
-          <li><a href="#" class="text-gray-500 text-sm" title="Coming soon">Tools</a></li>
-          <li><a href="/faq" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">FAQ</a></li>
+          <li><a href="/qa" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">Q&A</a></li>
+          <li><a href="#" class="text-gray-400 text-sm" title="Coming soon">Tools</a></li>
+          <li><a href="/faq" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">FAQ</a></li>
         </ul>
       </div>
 
       <!-- XINCA -->
       <div>
-        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">XINCA</h3>
+        <h3 class="text-[#333] font-semibold mb-4 text-sm uppercase tracking-wider" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">XINCA</h3>
         <ul class="space-y-2">
-          <li><a href="https://shop.xinca.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">shop.xinca.com</a></li>
-          <li><a href="https://xinca.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">xinca.com</a></li>
-          <li><a href="https://linkedin.com/company/xinca-hvac" target="_blank" rel="noopener" class="text-gray-400 hover:text-xinca-cyan transition-colors text-sm">LinkedIn</a></li>
+          <li><a href="https://shop.xinca.com" target="_blank" rel="noopener" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">shop.xinca.com</a></li>
+          <li><a href="https://xinca.com" target="_blank" rel="noopener" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">xinca.com</a></li>
+          <li><a href="https://linkedin.com/company/xinca-hvac" target="_blank" rel="noopener" class="text-[#666] hover:text-[#2ea3f2] transition-colors text-sm">LinkedIn</a></li>
         </ul>
       </div>
 
       <!-- About -->
       <div>
-        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">About</h3>
-        <p class="text-gray-400 text-sm leading-relaxed">
+        <h3 class="text-[#333] font-semibold mb-4 text-sm uppercase tracking-wider" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">About</h3>
+        <p class="text-[#666] text-sm leading-relaxed mb-2">
           XINCA is a brand of XASER Green Technology Company Limited, Hong Kong.
         </p>
-        <p class="text-gray-600 text-xs mt-3">
+        <a href="/about" class="text-[#2ea3f2] hover:opacity-70 text-sm">Learn more →</a>
+        <p class="text-gray-400 text-xs mt-3">
           &copy; {new Date().getFullYear()} ai.xinca.com
         </p>
       </div>
     </div>
 
     <!-- Bottom bar -->
-    <div class="mt-10 pt-6 border-t border-xinca-border flex items-center justify-center">
-      <p class="text-gray-500 text-xs text-center">
-        XINCA is a brand of XASER Green Technology Company Limited, Hong Kong.
+    <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex gap-4">
+        <a href="https://www.xinca.com/about-us/terms-of-use/" target="_blank" rel="noopener" class="text-gray-400 hover:text-[#2ea3f2] transition-colors text-xs">Terms of Use</a>
+        <a href="https://www.xinca.com/about-us/privacy-policy/" target="_blank" rel="noopener" class="text-gray-400 hover:text-[#2ea3f2] transition-colors text-xs">Privacy Policy</a>
+      </div>
+      <p class="text-gray-400 text-xs text-center">
+        &copy; {new Date().getFullYear()} XINCA. A brand of XASER Green Technology Company Limited, Hong Kong.
       </p>
     </div>
   </div>
