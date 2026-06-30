@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="hairGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2c3e50"/>
+      <stop offset="100%" stop-color="#1a252f"/>
+    </linearGradient>
+    <linearGradient id="tealStreak" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7EBEC5"/>
+      <stop offset="100%" stop-color="#5a9ea5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="58" fill="#f0f7f8" stroke="#7EBEC5" stroke-width="2.5"/>
+
+  <!-- Shoulders / body -->
+  <ellipse cx="64" cy="100" rx="38" ry="18" fill="#ffffff" stroke="#333" stroke-width="2"/>
+
+  <!-- Collar (XINCA teal) -->
+  <path d="M36 92 L64 76 L92 92" fill="none" stroke="#7EBEC5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Collar points -->
+  <path d="M36 92 L44 96 L52 88" fill="#7EBEC5" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M92 92 L84 96 L76 88" fill="#7EBEC5" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <!-- Neck -->
+  <rect x="56" y="70" width="16" height="14" rx="4" fill="#FDEBD0" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Head -->
+  <ellipse cx="64" cy="44" rx="28" ry="30" fill="#FDEBD0" stroke="#333" stroke-width="2.5"/>
+
+  <!-- Hair — back layer (dark, not covering forehead) -->
+  <path d="
+    M36 44 
+    Q36 10 64 10 
+    Q92 10 92 44
+    Q92 28 64 26
+    Q36 28 36 44
+  " fill="url(#hairGrad)"/>
+  <!-- Hair side tufts -->
+  <path d="M36 44 Q34 54 36 62 Q34 58 36 50" fill="#2c3e50" stroke="#333" stroke-width="1.5"/>
+  <path d="M92 44 Q94 54 92 62 Q94 58 92 50" fill="#2c3e50" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Teal streak in hair -->
+  <path d="M44 14 Q52 10 58 16 Q54 14 48 16" fill="url(#tealStreak)" stroke="none" opacity="0.9"/>
+
+  <!-- Bangs (not covering eyes!) -->
+  <path d="M38 30 Q42 22 52 28" fill="#2c3e50" stroke="#333" stroke-width="1.5"/>
+  <path d="M76 28 Q86 22 90 30" fill="#2c3e50" stroke="#333" stroke-width="1.5"/>
+  <path d="M52 28 Q64 20 76 28" fill="none" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Eyes — both open, friendly -->
+  <ellipse cx="52" cy="46" rx="5.5" ry="7" fill="#2c3e50"/>
+  <ellipse cx="76" cy="46" rx="5.5" ry="7" fill="#2c3e50"/>
+  <!-- Eye whites / sparkle -->
+  <circle cx="54" cy="42" r="2.5" fill="white"/>
+  <circle cx="50" cy="47" r="1.2" fill="white"/>
+  <circle cx="78" cy="42" r="2.5" fill="white"/>
+  <circle cx="74" cy="47" r="1.2" fill="white"/>
+
+  <!-- Eyebrows -->
+  <path d="M45 36 Q52 33 58 36" fill="none" stroke="#2c3e50" stroke-width="2" stroke-linecap="round"/>
+  <path d="M70 36 Q76 33 83 36" fill="none" stroke="#2c3e50" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Blush -->
+  <ellipse cx="42" cy="54" rx="6" ry="4" fill="#F5B7B1" opacity="0.5"/>
+  <ellipse cx="86" cy="54" rx="6" ry="4" fill="#F5B7B1" opacity="0.5"/>
+
+  <!-- Nose -->
+  <path d="M64 50 Q66 52 64 53" fill="none" stroke="#d4a574" stroke-width="1" stroke-linecap="round"/>
+
+  <!-- Mouth — warm smile -->
+  <path d="M56 58 Q64 68 72 58" fill="#e74c3c" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Teeth hint -->
+  <path d="M60 59 L64 60 L68 59" fill="white" stroke="none"/>
+
+  <!-- Headset (host accessory, XINCA blue) -->
+  <path d="M34 26 Q26 24 22 32 Q20 38 24 42" fill="none" stroke="#2ea3f2" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Headset band -->
+  <path d="M34 26 Q50 16 64 18" fill="none" stroke="#2ea3f2" stroke-width="2" stroke-linecap="round"/>
+  <!-- Mic boom -->
+  <rect x="22" y="36" width="6" height="8" rx="3" fill="#2ea3f2" stroke="#333" stroke-width="1.2"/>
+  <circle cx="25" cy="46" r="2" fill="#2ea3f2" stroke="#333" stroke-width="0.8"/>
+
+  <!-- Name badge on chest -->
+  <rect x="54" y="96" width="20" height="10" rx="3" fill="white" stroke="#7EBEC5" stroke-width="1.2"/>
+  <text x="64" y="104" text-anchor="middle" font-family="Verdana, sans-serif" font-size="6" font-weight="bold" fill="#2ea3f2">HAVI</text>
+</svg>
