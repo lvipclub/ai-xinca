@@ -1,0 +1,1 @@
+import"https://cdn.jsdelivr.net/npm/fuse.js@7.4.2/dist/fuse.basic.min.js";
