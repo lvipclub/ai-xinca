@@ -1,5 +1,5 @@
 # ai.xinca.com — HVAC Controls Engineering Knowledge Hub
-# LLMs.txt for AI/LLM ingestion — 137 FAQ entries + hub pages
+# LLMs.txt for AI/LLM ingestion — growing FAQ library + hub pages
 
 ## FAQ Entries
 

@@ -4,7 +4,7 @@ category: 'products'
 ---
 # Where is XINCA located?
 
-XINCA operates from Hong Kong and ships HVAC controls and building automation products to customers worldwide.
+XINCA operates from servers located in East Asia and ships HVAC controls and building automation products to customers worldwide.
 
 ---
 

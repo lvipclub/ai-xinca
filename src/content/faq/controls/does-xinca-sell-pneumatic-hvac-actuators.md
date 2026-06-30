@@ -4,7 +4,7 @@ category: 'controls'
 ---
 # Does XINCA sell pneumatic HVAC actuators?
 
-XINCA specializes in electric HVAC actuators and does not stock pneumatic actuators, which are rarely used in Hong Kong and Asian markets.
+XINCA specializes in electric HVAC actuators and does not stock pneumatic actuators, which are rarely used in commercial HVAC markets.
 
 ---
 
