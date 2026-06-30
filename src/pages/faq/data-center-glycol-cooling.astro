@@ -30,6 +30,8 @@ const jsonLd = {
 <BaseLayout 
   title={pageTitle}
   description={pageDescription}
+  ogImage="https://ai.xinca.com/articles/data-center-glycol-hero.jpg"
+  ogType="article"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 
@@ -275,22 +277,27 @@ const jsonLd = {
               Have a glycol loop question?
             </h3>
             <p class="text-[#666] mb-4 leading-relaxed">
-              Ask the HVAC controls chatbot about glycol concentration, pump sizing, heat exchanger derating, corrosion inhibitors, or closed-loop design. Get answers backed by engineering knowledge — free, no sign-up.
+              Search the HVAC controls knowledge base — glycol concentration, pump sizing, heat exchanger derating, corrosion inhibitors, closed-loop design. Ask Havi, the AI chatbot, for answers backed by engineering knowledge.
             </p>
             <a href="/" class="btn-accent text-sm">
-              Ask the Chatbot
+              Ask Havi
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
             </a>
           </div>
-          <div class="text-5xl md:text-6xl shrink-0">
-            🤖
+          <div class="shrink-0">
+            <svg class="w-16 h-16" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="12" width="48" height="36" rx="4" stroke="#7EBEC5" stroke-width="2.5" fill="none"/>
+              <path d="M8 20 L32 34 L56 20" stroke="#7EBEC5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="32" cy="8" r="6" fill="#2ea3f2" opacity="0.15" stroke="#2ea3f2" stroke-width="2"/>
+              <path d="M29 8 L31 10 L35 6" stroke="#2ea3f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
         </div>
       </div>
 
-      <h2>Related Questions the Chatbot Can Answer</h2>
+      <h2>Related Questions</h2>
 
       <ul>
         <li><a href="/qa/3">How do I size a control valve Cv for a chilled water coil?</a></li>
@@ -299,8 +306,18 @@ const jsonLd = {
         <li><a href="/qa/4">What is valve authority and why does it matter?</a></li>
       </ul>
 
+      <h2>Sources</h2>
+
+      <ul class="text-sm text-[#888]">
+        <li>NVIDIA. <em>NVIDIA DGX GB300 SuperPod Reference Architecture</em> — closed-loop liquid cooling with 150 kW/rack density. <a href="https://www.nvidia.com/en-us/data-center/dgx-superpod/" class="text-[#666] hover:text-[#2ea3f2]">nvidia.com</a></li>
+        <li>U.S. Department of Energy, Lawrence Berkeley National Laboratory. <em>United States Data Center Energy Usage Report</em> — cooling systems represent ~40% of total data center energy consumption. LBNL-1005775, 2016.</li>
+        <li>ASHRAE Technical Committee 9.9. <em>Thermal Guidelines for Data Processing Environments</em>, 5th Ed. — guidelines for liquid-cooled IT equipment and facility water supply temperatures.</li>
+        <li>The Green Grid. <em>Water Usage Effectiveness (WUE™): A Green Grid Data Center Sustainability Metric</em> — 2.6 million gallons/MW/year is the typical evaporation rate for cooling tower-based data centers in temperate climates.</li>
+        <li>U.S. EPA. <em>Ethylene Glycol Hazard Summary</em> — LD₅₀ 4,700 mg/kg (rat, oral), classified as hazardous. EPA 749-F-99-004.</li>
+      </ul>
+
       <p class="text-sm text-gray-400 mt-10">
-        Published June 2026. This article is part of the XINCA HVAC controls engineering knowledge base. For specific product compatibility or system design questions, consult the chatbot at <a href="/">ai.xinca.com</a>.
+        Published June 2026. This article is part of the XINCA HVAC controls engineering knowledge base. For specific product compatibility or system design questions, search the knowledge base at <a href="/">ai.xinca.com</a>.
       </p>
 
     </div>
