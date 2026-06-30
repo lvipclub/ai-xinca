@@ -1,7 +1,7 @@
 {
   "description": "XINCA HVAC FAQ Categories",
-  "source": "xincashop.com Shopify Knowledge Base",
-  "total_faqs": 137,
+  "source": "xinca.com product knowledge base",
+  "total_faqs": "growing",
   "categories": {
     "air": {
       "name": "Air-side HVAC",

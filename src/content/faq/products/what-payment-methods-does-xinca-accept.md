@@ -4,7 +4,7 @@ category: 'products'
 ---
 # What payment methods does XINCA accept?
 
-XINCA accepts credit cards (Visa, MasterCard, American Express), PayPal, bank transfers, and local payment methods for Hong Kong customers.
+XINCA accepts credit cards (Visa, MasterCard, American Express), PayPal, bank transfers, and local payment methods for customers in our service regions.
 
 ---
 
