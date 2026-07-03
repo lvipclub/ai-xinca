@@ -1,0 +1,164 @@
+---
+// FaqFilter.astro - Client-side fuzzy search filter for FAQ entries using Fuse.js
+// Same UX pattern as ChatWidget.astro — debounced search-as-you-type.
+import faqIndex from '../data/faq-index.json';
+---
+
+<div id="faq-filter" class="w-full mb-10">
+  <!-- Data island for FAQ index -->
+  <script type="application/json" id="faq-index-data" set:html={JSON.stringify(faqIndex).replace(/<\//g, '<\\/')}></script>
+
+  <!-- Search box -->
+  <div class="relative max-w-2xl mx-auto">
+    <div class="relative">
+      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <input
+        id="faq-search-input"
+        type="text"
+        placeholder="Search FAQ entries (e.g., damper, VAV, BACnet, valve sizing)..."
+        class="w-full bg-[#f8f9fa] border border-[#e5e5e5] rounded pl-12 pr-4 py-3.5 text-[#333] placeholder-gray-400 focus:outline-none focus:border-[#2ea3f2] focus:ring-1 focus:ring-[#2ea3f2]/30 transition-all text-base"
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- Results info (shown when searching) -->
+    <div id="faq-filter-info" class="mt-3 text-sm text-gray-400 text-center hidden">
+      <span id="faq-filter-count">0</span> results found
+      <button id="faq-filter-clear" class="ml-3 text-[#2ea3f2] hover:underline text-xs">Clear search</button>
+    </div>
+  </div>
+
+  <!-- Filtered results (shown during search) -->
+  <div id="faq-filter-results" class="mt-6 space-y-3 hidden"></div>
+
+  <!-- No results state -->
+  <div id="faq-filter-empty" class="mt-6 hidden">
+    <div class="bg-[#f8f9fa] border border-[#e5e5e5] rounded p-8 text-center">
+      <p class="text-[#666]">No FAQ entries match "<span id="faq-filter-empty-query" class="font-medium text-[#333]"></span>".</p>
+      <p class="text-gray-400 text-sm mt-2">Try a different search term or browse the categories below.</p>
+    </div>
+  </div>
+
+  <!-- Category grid (shown when not searching, hidden during search) -->
+  <div id="faq-category-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+
+    {Object.entries(faqIndex.categories).map(([slug, cat]) => (
+      <a href={`/faq/${slug}`} class="card card-hover group no-underline">
+        <div class="flex items-start justify-between mb-4">
+          <h3 class="text-lg font-semibold text-[#333] group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+            {cat.name}
+          </h3>
+          <span class="text-xs text-[#666] bg-[#f8f9fa] px-2 py-1 rounded border border-[#e5e5e5]">
+            {cat.count} entries
+          </span>
+        </div>
+        <p class="text-[#666] text-sm">{cat.description}</p>
+      </a>
+    ))}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.4.2/dist/fuse.basic.min.js"></script>
+<script>
+  var faqData = JSON.parse(document.getElementById('faq-index-data').textContent);
+  var entries = faqData.entries;
+  var categories = faqData.categories;
+
+  var categoryNames = {};
+  Object.keys(categories).forEach(function(k) {
+    categoryNames[k] = categories[k].name;
+  });
+
+  var fuse = new Fuse(entries, {
+    keys: ['title', 'description', { name: 'categoryName', getFn: function(e) { return categoryNames[e.category] || e.category; } }],
+    threshold: 0.4,
+    includeScore: true,
+    minMatchCharLength: 2,
+  });
+
+  var input = document.getElementById('faq-search-input');
+  var resultsDiv = document.getElementById('faq-filter-results');
+  var emptyDiv = document.getElementById('faq-filter-empty');
+  var emptyQuery = document.getElementById('faq-filter-empty-query');
+  var infoDiv = document.getElementById('faq-filter-info');
+  var countSpan = document.getElementById('faq-filter-count');
+  var clearBtn = document.getElementById('faq-filter-clear');
+  var categoryGrid = document.getElementById('faq-category-grid');
+
+  var debounceTimer;
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function showCategoryGrid() {
+    clearTimeout(debounceTimer);
+    if (categoryGrid) categoryGrid.classList.remove('hidden');
+    resultsDiv.classList.add('hidden');
+    emptyDiv.classList.add('hidden');
+    infoDiv.classList.add('hidden');
+  }
+
+  function doSearch(query) {
+    var q = query.trim();
+    if (!q) {
+      showCategoryGrid();
+      return;
+    }
+
+    var results = fuse.search(q, { limit: 20 });
+
+    if (categoryGrid) categoryGrid.classList.add('hidden');
+    infoDiv.classList.remove('hidden');
+
+    if (results.length === 0) {
+      resultsDiv.classList.add('hidden');
+      emptyDiv.classList.remove('hidden');
+      emptyQuery.textContent = q;
+      countSpan.textContent = '0';
+      return;
+    }
+
+    emptyDiv.classList.add('hidden');
+    resultsDiv.classList.remove('hidden');
+    countSpan.textContent = results.length;
+
+    resultsDiv.innerHTML = results.map(function(r) {
+      var item = r.item;
+      var catLabel = categoryNames[item.category] || item.category;
+      var desc = item.description ? '<p class="text-[#666] text-xs leading-relaxed line-clamp-2 mt-1">' + escapeHtml(item.description) + '</p>' : '';
+
+      return '<a href="/faq/' + escapeHtml(item.category) + '" class="card card-hover block no-underline group">'
+        + '<div class="flex items-start justify-between gap-3">'
+        + '<div class="flex-1 min-w-0">'
+        + '<h3 class="text-[#333] font-semibold text-sm leading-snug group-hover:text-[#2ea3f2] transition-colors" style="font-family:\'Trebuchet MS\',Trebuchet,Helvetica,Arial,Lucida,sans-serif">' + escapeHtml(item.title) + '</h3>'
+        + desc
+        + '</div>'
+        + '<span class="badge-category text-xs whitespace-nowrap shrink-0">' + escapeHtml(catLabel) + '</span>'
+        + '</div>'
+        + '</a>';
+    }).join('');
+  }
+
+  clearBtn.addEventListener('click', function() {
+    input.value = '';
+    showCategoryGrid();
+    input.focus();
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      input.value = '';
+      showCategoryGrid();
+    }
+  });
+
+  input.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() { doSearch(input.value); }, 300);
+  });
+</script>

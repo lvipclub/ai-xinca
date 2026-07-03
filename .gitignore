@@ -16,6 +16,10 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.shopify
+
+# generated data
+src/data/featured-products.json
 
 # macOS-specific files
 .DS_Store

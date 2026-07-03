@@ -2,6 +2,7 @@
 // index.astro - Chatbot-first landing page for ai.xinca.com (light theme)
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ChatWidget from '../components/ChatWidget.astro';
+import ProductCarousel from '../components/ProductCarousel.astro';
 import qaData from '../data/seed-qa.json';
 
 // Pick 8 demo Q&As for the "Popular Questions" section
@@ -30,6 +31,9 @@ const demoQuestions = qaData.slice(0, 8);
       </div>
     </div>
   </section>
+
+  <!-- Product Carousel -->
+  <ProductCarousel />
 
   <!-- 4 Value Cards (2x2 grid) -->
   <section class="border-t border-[#e5e5e5] bg-white">

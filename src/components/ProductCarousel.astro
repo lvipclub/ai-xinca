@@ -1,0 +1,152 @@
+---
+// ProductCarousel.astro — 4-column clickable product carousel
+// Cycles through 3 products per category on click
+// Data from src/data/featured-products.json (generated daily)
+import featuredData from '../data/featured-products.json';
+
+const categories = [
+  { key: 'iaq', label: 'IAQ', badgeColor: '#7EBEC5', icon: '🌬️' },
+  { key: 'air_side', label: 'Air-side', badgeColor: '#2ea3f2', icon: '🌀' },
+  { key: 'water_side', label: 'Water-side', badgeColor: '#329f5b', icon: '💧' },
+  { key: 'iot', label: 'IoT', badgeColor: '#32373c', icon: '📡' },
+];
+
+const hasProducts = categories.some(
+  c => featuredData?.categories?.[c.key]?.length > 0
+);
+---
+
+{hasProducts ? (
+  <section class="border-t border-[#e5e5e5] bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        Featured <span class="gradient-text">Products</span>
+      </h2>
+      <p class="text-[#666] text-center mb-8 text-sm">
+        From <a href="https://shop.xinca.com" class="text-[#2ea3f2] hover:underline" target="_blank" rel="noopener">shop.xinca.com</a>
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="product-carousel">
+        {categories.map((cat) => {
+          const products = featuredData?.categories?.[cat.key] || [];
+          const productCount = products.length;
+
+          if (productCount === 0) return null;
+
+          return (
+            <div class="carousel-column relative" data-category={cat.key}>
+              {/* Category badge */}
+              <div class="flex items-center gap-1.5 mb-3">
+                <span class="text-xs font-semibold uppercase tracking-wide px-2.5 py-0.5 rounded-full text-white text-[10px]" style={`background-color:${cat.badgeColor}`}>
+                  {cat.label}
+                </span>
+                {productCount > 1 && (
+                  <span class="text-[10px] text-[#999]">{productCount} items</span>
+                )}
+              </div>
+
+              {/* Product cards — one visible at a time */}
+              <div class="carousel-stack relative" style="min-height:280px">
+                {products.map((product, idx) => (
+                  <a
+                    href={product.url}
+                    target="_blank"
+                    rel="noopener"
+                    class={`carousel-card card card-hover cursor-pointer block no-underline absolute inset-0 transition-opacity duration-300 ${idx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                    data-index={idx}
+                    style="min-height:280px"
+                  >
+                    {/* Product image */}
+                    <div class="aspect-[4/3] overflow-hidden rounded-t-md bg-[#f8f9fa]">
+                      <img
+                        src={product.image_url}
+                        alt={product.alt || product.title}
+                        class="w-full h-full object-contain p-3"
+                        loading="lazy"
+                        width="300"
+                        height="225"
+                      />
+                    </div>
+
+                    {/* Details */}
+                    <div class="p-3">
+                      <h3 class="text-[#333] font-medium text-xs leading-snug line-clamp-2 mb-1.5 group-hover:text-[#2ea3f2] transition-colors">
+                        {product.title}
+                      </h3>
+                      <div class="flex items-center justify-between">
+                        <span class="text-[#2ea3f2] font-semibold text-sm">
+                          HK${parseFloat(product.price.split(' ')[0]).toLocaleString()}
+                        </span>
+                        {product.vendor && (
+                          <span class="text-[10px] text-[#999] truncate max-w-[80px]">{product.vendor}</span>
+                        )}
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+              {/* Click to cycle indicator */}
+              {productCount > 1 && (
+                <div class="flex justify-center gap-1.5 mt-3 carousel-dots">
+                  {products.map((_, idx) => (
+                    <button
+                      class={`w-1.5 h-1.5 rounded-full transition-all ${idx === 0 ? 'bg-[#2ea3f2] w-4' : 'bg-[#d5d5d5]'}`}
+                      data-dot={idx}
+                      aria-label={`Product ${idx + 1}`}
+                    ></button>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+) : null}
+
+<script>
+  // Vanilla JS: click-to-cycle product carousel
+  document.querySelectorAll('.carousel-column').forEach((column) => {
+    const cards = column.querySelectorAll('.carousel-card');
+    const dots = column.querySelectorAll('.carousel-dots button');
+    if (cards.length <= 1) return;
+
+    let currentIndex = 0;
+
+    function showCard(index) {
+      cards.forEach((card, i) => {
+        const isActive = i === index;
+        card.style.opacity = isActive ? '1' : '0';
+        card.style.zIndex = isActive ? '10' : '0';
+        card.style.pointerEvents = isActive ? 'auto' : 'none';
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-[#2ea3f2]', i === index);
+        dot.classList.toggle('w-4', i === index);
+        dot.classList.toggle('bg-[#d5d5d5]', i !== index);
+        dot.classList.toggle('w-1.5', i !== index);
+      });
+      currentIndex = index;
+    }
+
+    // Click card to cycle
+    cards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const nextIndex = (currentIndex + 1) % cards.length;
+        showCard(nextIndex);
+      });
+    });
+
+    // Click dot to jump
+    dots.forEach((dot) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(dot.dataset.dot);
+        showCard(idx);
+      });
+    });
+  });
+</script>
