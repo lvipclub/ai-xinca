@@ -1,23 +1,48 @@
 ---
-// index.astro - Chatbot-first landing page for ai.xinca.com (light theme)
+// index.astro — Landing page for ai.xinca.com
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCarousel from '../components/ProductCarousel.astro';
 import qaData from '../data/seed-qa.json';
 
 // Pick 8 demo Q&As for the "Popular Questions" section
 const demoQuestions = qaData.slice(0, 8);
+
+// Knowledge base references
+const kbTopics = [
+  'Damper actuator sizing & selection',
+  'Control valve Cv calculation',
+  'Valve authority & PICV design',
+  'VAV terminal unit sizing',
+  'BACnet & Modbus integration',
+  'ASHRAE 90.1 energy compliance',
+  'ASHRAE 62.1 ventilation rates',
+  'NFPA 90A smoke control',
+  'Freeze protection strategies',
+  'Duct static pressure reset',
+  'IAQ monitoring & CO₂ sensing',
+  'IoT sensor networks (LoRa/BACnet)',
+];
+
+const kbStandards = [
+  { code: 'ASHRAE 90.1', name: 'Energy Standard for Buildings' },
+  { code: 'ASHRAE 62.1', name: 'Ventilation for Acceptable IAQ' },
+  { code: 'ASHRAE Guideline 36', name: 'High-Performance Sequences' },
+  { code: 'NFPA 90A', name: 'Air-Conditioning & Ventilating' },
+  { code: 'IMC', name: 'International Mechanical Code' },
+  { code: 'BACnet 135', name: 'Building Automation Protocol' },
+];
 ---
 
 <BaseLayout 
-  title="XINCA HVAC Controls Engineering"
-  description="HVAC controls engineering, answered. Ask anything about damper sizing, valve Cv, VAV setup, actuator torque — get answers backed by engineering knowledge."
+  title="XINCA — HVAC Practices, Guidance & Compliances"
+  description="A technical knowledge base for specifiers, engineers, and building services professionals. Covering damper sizing, valve Cv, VAV setup, BACnet, ASHRAE standards, and more."
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
       <div class="text-center mb-10">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-[#333]" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
-          HVAC controls engineering, <span class="gradient-text">answered.</span>
+          HVAC Practices, Guidance <span class="gradient-text">&amp; Compliances</span>
         </h1>
         <p class="text-lg md:text-xl text-[#666] max-w-2xl mx-auto leading-relaxed mb-8">
           A technical knowledge base for specifiers, engineers, and building services professionals.
@@ -29,7 +54,7 @@ const demoQuestions = qaData.slice(0, 8);
         <a href="https://t.me/hai5bot" target="_blank" rel="noopener" class="block bg-gradient-to-r from-[#2ea3f2] to-[#7EBEC5] rounded-lg p-6 text-white hover:shadow-lg transition-shadow group">
           <div class="flex items-center gap-4">
             <div class="shrink-0">
-              <img src="/avatars/lady-havi.jpg" alt="Lady Havi" class="w-14 h-14 rounded-full object-cover border-2 border-white/30" />
+              <img src="/avatars/lady-havi.jpg" alt="Lady Havi" class="w-14 h-14 rounded-full object-cover object-top border-2 border-white/30" />
             </div>
             <div class="text-left">
               <p class="font-semibold text-lg" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Ask Havi AI on Telegram</p>
@@ -46,6 +71,23 @@ const demoQuestions = qaData.slice(0, 8);
           <a href="https://t.me/hai5bot" target="_blank" rel="noopener" class="hover:text-[#2ea3f2] transition-colors">t.me/hai5bot</a> &mdash; subscribe to receive engineering Q&amp;A, product updates, and trade insights
         </p>
       </div>
+
+      <!-- Knowledge Base Coverage -->
+      <div class="max-w-3xl mx-auto mt-12 pt-10 border-t border-[#e5e5e5]">
+        <p class="text-xs text-[#999] text-center mb-5 uppercase tracking-wider">Knowledge Base Coverage</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-2">
+          {kbTopics.map(topic => (
+            <p class="text-[#666] text-xs leading-relaxed">· {topic}</p>
+          ))}
+        </div>
+        <div class="flex flex-wrap justify-center gap-3 mt-6">
+          {kbStandards.map(std => (
+            <span class="text-xs text-[#888] bg-[#f8f9fa] border border-[#e5e5e5] px-2.5 py-1 rounded">
+              <strong class="text-[#333]">{std.code}</strong> <span class="hidden sm:inline">{std.name}</span>
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -60,7 +102,7 @@ const demoQuestions = qaData.slice(0, 8);
         <div class="card text-left border-l-4 border-l-[#2ea3f2]">
           <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">FAQ</h3>
           <p class="text-[#666] text-sm leading-relaxed">
-            Searchable HVAC controls knowledge base — air, water, controls, and products
+            Searchable HVAC knowledge base — practices, guidance, and compliance references
           </p>
         </div>
 
@@ -76,7 +118,7 @@ const demoQuestions = qaData.slice(0, 8);
         <div class="card text-left border-l-4 border-l-[#329f5b]">
           <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Havi AI</h3>
           <p class="text-[#666] text-sm leading-relaxed">
-            HVAC engineering knowledge base on Telegram — citation-backed answers for professionals
+            HVAC knowledge base on Telegram — citation-backed answers for professionals
           </p>
         </div>
 
@@ -98,7 +140,7 @@ const demoQuestions = qaData.slice(0, 8);
         Popular <span class="gradient-text">Questions</span>
       </h2>
       <p class="text-lg text-[#666] text-center max-w-2xl mx-auto mb-10">
-        See what visitors are asking the chatbot
+        Commonly referenced topics from the knowledge base
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="popular-questions">
