@@ -131,19 +131,12 @@ const hasProducts = categories.some(
       currentIndex = index;
     }
 
-    // Click card to cycle
-    cards.forEach((card) => {
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        const nextIndex = (currentIndex + 1) % cards.length;
-        showCard(nextIndex);
-      });
-    });
-
-    // Click dot to jump
+    // Click card → opens product page (natural <a href> behavior)
+    // Dot click → rotates to that product
     dots.forEach((dot) => {
       dot.addEventListener('click', (e) => {
         e.stopPropagation();
+        e.preventDefault();
         const idx = parseInt(dot.dataset.dot);
         showCard(idx);
       });
