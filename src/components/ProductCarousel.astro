@@ -52,12 +52,12 @@ const hasProducts = categories.some(
                     href={product.url}
                     target="_blank"
                     rel="noopener"
-                    class={`carousel-card card card-hover cursor-pointer block no-underline absolute inset-0 transition-opacity duration-300 ${idx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                    class={`carousel-card cursor-pointer block no-underline absolute inset-0 transition-opacity duration-300 border border-[#e5e5e5] rounded-md overflow-hidden bg-white hover:shadow-md ${idx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
                     data-index={idx}
                     style="min-height:280px"
                   >
                     {/* Product image — full width, fixed height, center-cropped */}
-                    <div class="h-44 overflow-hidden rounded-t-md bg-[#f8f9fa]">
+                    <div class="h-44 overflow-hidden bg-[#f8f9fa]">
                       <img
                         src={product.image_url}
                         alt={product.alt || product.title}
