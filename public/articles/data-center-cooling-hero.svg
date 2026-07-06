@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="50%" stop-color="#14213d"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <linearGradient id="coolant" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2ea3f2"/>
+      <stop offset="100%" stop-color="#7EBEC5"/>
+    </linearGradient>
+    <linearGradient id="coolant2" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#7EBEC5"/>
+      <stop offset="100%" stop-color="#2ea3f2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Server rack frame -->
+  <rect x="200" y="60" width="800" height="510" rx="8" fill="none" stroke="#1e3a5f" stroke-width="3"/>
+  <rect x="220" y="80" width="760" height="470" rx="4" fill="#0d1a30" stroke="#1e3a5f" stroke-width="2"/>
+  <!-- Server units -->
+  <rect x="240" y="100" width="720" height="60" rx="3" fill="#111d33" stroke="#1a3050" stroke-width="1"/>
+  <rect x="240" y="175" width="720" height="60" rx="3" fill="#111d33" stroke="#1a3050" stroke-width="1"/>
+  <rect x="240" y="250" width="720" height="60" rx="3" fill="#111d33" stroke="#1a3050" stroke-width="1"/>
+  <rect x="240" y="325" width="720" height="60" rx="3" fill="#111d33" stroke="#1a3050" stroke-width="1"/>
+  <rect x="240" y="400" width="720" height="60" rx="3" fill="#111d33" stroke="#1a3050" stroke-width="1"/>
+  <rect x="240" y="475" width="720" height="55" rx="3" fill="#111d33" stroke="#1a3050" stroke-width="1"/>
+  <!-- LEDs on server fronts -->
+  <circle cx="270" cy="130" r="3" fill="#00ff88" opacity="0.9"/><circle cx="290" cy="130" r="3" fill="#00ff88" opacity="0.7"/>
+  <circle cx="270" cy="205" r="3" fill="#00ff88" opacity="0.9"/><circle cx="290" cy="205" r="3" fill="#00ff88" opacity="0.7"/>
+  <circle cx="270" cy="280" r="3" fill="#00ff88" opacity="0.9"/><circle cx="290" cy="280" r="3" fill="#00ff88" opacity="0.6"/>
+  <circle cx="270" cy="355" r="3" fill="#2ea3f2" opacity="0.9"/><circle cx="290" cy="355" r="3" fill="#2ea3f2" opacity="0.7"/>
+  <circle cx="270" cy="430" r="3" fill="#2ea3f2" opacity="0.9"/><circle cx="290" cy="430" r="3" fill="#2ea3f2" opacity="0.6"/>
+  <circle cx="270" cy="502" r="3" fill="#00ff88" opacity="0.8"/><circle cx="290" cy="502" r="3" fill="#00ff88" opacity="0.6"/>
+  <!-- Direct-to-chip liquid cooling lines -->
+  <rect x="500" y="106" width="8" height="48" rx="4" fill="url(#coolant)" opacity="0.85"/>
+  <rect x="550" y="106" width="8" height="48" rx="4" fill="url(#coolant2)" opacity="0.85"/>
+  <rect x="500" y="181" width="8" height="48" rx="4" fill="url(#coolant)" opacity="0.85"/>
+  <rect x="550" y="181" width="8" height="48" rx="4" fill="url(#coolant2)" opacity="0.85"/>
+  <rect x="500" y="256" width="8" height="48" rx="4" fill="url(#coolant)" opacity="0.85"/>
+  <rect x="550" y="256" width="8" height="48" rx="4" fill="url(#coolant2)" opacity="0.85"/>
+  <rect x="500" y="331" width="8" height="48" rx="4" fill="url(#coolant)" opacity="0.85"/>
+  <rect x="550" y="331" width="8" height="48" rx="4" fill="url(#coolant2)" opacity="0.85"/>
+  <!-- Coolant distributor manifold vertical lines -->
+  <line x1="504" y1="80" x2="504" y2="540" stroke="url(#coolant)" stroke-width="4" opacity="0.6"/>
+  <line x1="554" y1="80" x2="554" y2="540" stroke="url(#coolant2)" stroke-width="4" opacity="0.6"/>
+  <!-- Subtle grid lines -->
+  <line x1="0" y1="200" x2="1200" y2="200" stroke="#1e3a5f" stroke-width="0.5" opacity="0.3"/>
+  <line x1="0" y1="400" x2="1200" y2="400" stroke="#1e3a5f" stroke-width="0.5" opacity="0.3"/>
+  <line x1="400" y1="0" x2="400" y2="630" stroke="#1e3a5f" stroke-width="0.5" opacity="0.3"/>
+  <line x1="800" y1="0" x2="800" y2="630" stroke="#1e3a5f" stroke-width="0.5" opacity="0.3"/>
+</svg>
