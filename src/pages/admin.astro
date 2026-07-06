@@ -1,0 +1,141 @@
+---
+// admin.astro — Content Pipeline Admin Dashboard
+// Deployed to ai.xinca.com/admin/ — Read-only snapshot of pipeline state
+// For interactive approve/reject, use local version at http://localhost:8420
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Content Pipeline Admin — XINCA ai"
+  description="Content pipeline administration — article approval, scheduling, and publishing dashboard for XINCA HVAC knowledge base."
+  ogImage="https://ai.xinca.com/articles/data-center-cooling-hero.svg"
+  ogType="website"
+>
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div class="mb-10">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-[#333]" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        Content Pipeline Admin
+      </h1>
+      <p class="text-[#666] mt-2 text-lg">Article approval, scheduling, and publishing dashboard</p>
+    </div>
+
+    <!-- Health Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="card text-center p-5">
+        <div class="text-xs uppercase text-[#999] tracking-wider mb-1">Pending Drafts</div>
+        <div class="text-3xl font-bold text-[#f59e0b]">2</div>
+      </div>
+      <div class="card text-center p-5">
+        <div class="text-xs uppercase text-[#999] tracking-wider mb-1">Approved</div>
+        <div class="text-3xl font-bold text-[#22c55e]">2</div>
+      </div>
+      <div class="card text-center p-5">
+        <div class="text-xs uppercase text-[#999] tracking-wider mb-1">Published</div>
+        <div class="text-3xl font-bold text-[#333]">1</div>
+      </div>
+      <div class="card text-center p-5">
+        <div class="text-xs uppercase text-[#999] tracking-wider mb-1">Rejected</div>
+        <div class="text-3xl font-bold text-[#ef4444]">0</div>
+      </div>
+    </div>
+
+    <!-- Pending Articles -->
+    <div class="card mb-8">
+      <div class="border-b border-[#e5e5e5] px-5 py-3 flex justify-between items-center">
+        <h2 class="text-lg font-bold text-[#333]" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Draft Queue</h2>
+        <span class="badge-category text-xs">2 pending</span>
+      </div>
+
+      <div class="p-5 border-b border-[#e5e5e5]">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <span class="font-bold text-[#333]">data-center-energy-efficiency</span>
+          <span class="text-xs px-2 py-0.5 rounded-full font-medium bg-[#fef3c7] text-[#92400e]">pending_review</span>
+          <span class="text-xs text-[#999]">2026-07-06</span>
+          <span class="text-xs bg-[#e8f4fd] text-[#2ea3f2] px-2 py-0.5 rounded">x</span>
+          <span class="text-xs bg-[#e8f4fd] text-[#2ea3f2] px-2 py-0.5 rounded">telegram</span>
+          <span class="text-xs bg-[#e8f4fd] text-[#2ea3f2] px-2 py-0.5 rounded">linkedin_specsheet</span>
+        </div>
+        <p class="text-sm text-[#666]">
+          <strong>Data Center Energy Efficiency: From Rack Cooling to Liquid Cooling</strong> — 
+          A practical guide for facilities engineers and data center operators on improving cooling efficiency, 
+          backed by ASHRAE TC09.09 research.
+        </p>
+      </div>
+
+      <div class="p-5">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <span class="font-bold text-[#333]">ai-building-energy-management</span>
+          <span class="text-xs px-2 py-0.5 rounded-full font-medium bg-[#fef3c7] text-[#92400e]">pending_review</span>
+          <span class="text-xs text-[#999]">2026-07-06</span>
+          <span class="text-xs bg-[#e8f4fd] text-[#2ea3f2] px-2 py-0.5 rounded">x</span>
+          <span class="text-xs bg-[#e8f4fd] text-[#2ea3f2] px-2 py-0.5 rounded">telegram</span>
+          <span class="text-xs bg-[#e8f4fd] text-[#2ea3f2] px-2 py-0.5 rounded">linkedin_specsheet</span>
+        </div>
+        <p class="text-sm text-[#666]">
+          <strong>How AI Is Reshaping Building Energy Management</strong> — 
+          Machine learning and deep learning are transforming building energy systems, from predictive 
+          maintenance to occupancy-driven HVAC control.
+        </p>
+      </div>
+    </div>
+
+    <!-- Published Articles -->
+    <div class="card mb-8">
+      <div class="border-b border-[#e5e5e5] px-5 py-3">
+        <h2 class="text-lg font-bold text-[#333]" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Published Articles</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-[#f8f9fa]">
+              <th class="text-left p-3 text-[#999] text-xs uppercase border-b border-[#e5e5e5]">Article</th>
+              <th class="text-left p-3 text-[#999] text-xs uppercase border-b border-[#e5e5e5]">X</th>
+              <th class="text-left p-3 text-[#999] text-xs uppercase border-b border-[#e5e5e5]">Telegram</th>
+              <th class="text-left p-3 text-[#999] text-xs uppercase border-b border-[#e5e5e5]">LinkedIn</th>
+              <th class="text-left p-3 text-[#999] text-xs uppercase border-b border-[#e5e5e5]">Published</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 border-b border-[#e5e5e5] font-medium text-[#333]">data-center-glycol-cooling</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#22c55e]">✅ Success</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#22c55e]">✅ Success</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#999]">—</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#999]">2026-07-06</td>
+            </tr>
+            <tr>
+              <td class="p-3 border-b border-[#e5e5e5] font-medium text-[#333]">data-center-energy-efficiency</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#f59e0b]">⏳ Pending</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#f59e0b]">⏳ Pending</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#999]">—</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#999]">—</td>
+            </tr>
+            <tr>
+              <td class="p-3 border-b border-[#e5e5e5] font-medium text-[#333]">ai-building-energy-management</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#f59e0b]">⏳ Pending</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#f59e0b]">⏳ Pending</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#999]">—</td>
+              <td class="p-3 border-b border-[#e5e5e5] text-[#999]">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- API Info -->
+    <div class="p-5 rounded-lg border-2 border-[#7EBEC5] bg-gradient-to-r from-[#f8f9fa] to-white">
+      <h3 class="text-lg font-bold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        Interactive Administration
+      </h3>
+      <p class="text-[#666] text-sm mb-3">
+        This is a read-only snapshot. For interactive approve/reject, access the local admin dashboard:
+      </p>
+      <div class="bg-[#0a1628] text-[#7EBEC5] p-4 rounded-lg font-mono text-sm">
+        cd ~/workspace/content-pipeline && python src/admin_api.py
+      </div>
+      <p class="text-xs text-[#999] mt-2">
+        Then open <code class="bg-[#f0f2f5] px-1 rounded">http://localhost:8420/admin</code> in your browser for full interactive control.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
