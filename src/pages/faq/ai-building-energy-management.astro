@@ -5,14 +5,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const pageTitle = "How AI Is Reshaping Building Energy Management";
 const pageDescription = "Machine learning and deep learning are transforming building energy systems — from predictive maintenance and anomaly detection to demand response optimisation and occupancy-driven HVAC control. Here is what facility engineers need to know.";
 const canonicalUrl = "https://ai.xinca.com/faq/ai-building-energy-management/";
-const heroImage = "/articles/ai-energy-hero.svg";
+const heroImage = "/articles/ai-energy-logbook-hero.png";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": pageTitle,
   "description": pageDescription,
-  "image": "https://ai.xinca.com/articles/ai-energy-hero.svg",
+  "image": "https://ai.xinca.com/articles/ai-energy-logbook-hero.png",
   "author": { "@type": "Organization", "name": "XINCA" },
   "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://ai.xinca.com" },
   "datePublished": "2026-07-06",
@@ -23,7 +23,7 @@ const jsonLd = {
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  ogImage="https://ai.xinca.com/articles/ai-energy-hero.svg"
+  ogImage="https://ai.xinca.com/articles/ai-energy-logbook-hero.png"
   ogType="article"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>

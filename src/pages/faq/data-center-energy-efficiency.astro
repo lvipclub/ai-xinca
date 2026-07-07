@@ -5,14 +5,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const pageTitle = "Data Center Energy Efficiency: From Rack Cooling to Liquid Cooling";
 const pageDescription = "A practical guide for facilities engineers and data center operators on improving cooling efficiency — from PUE fundamentals and rack airflow optimization to liquid cooling adoption, backed by ASHRAE TC09.09 research.";
 const canonicalUrl = "https://ai.xinca.com/faq/data-center-energy-efficiency/";
-const heroImage = "/articles/data-center-cooling-hero.svg";
+const heroImage = "/articles/dc-cooling-logbook-hero.png";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": pageTitle,
   "description": pageDescription,
-  "image": "https://ai.xinca.com/articles/data-center-cooling-hero.svg",
+  "image": "https://ai.xinca.com/articles/dc-cooling-logbook-hero.png",
   "author": { "@type": "Organization", "name": "XINCA" },
   "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://ai.xinca.com" },
   "datePublished": "2026-07-06",
@@ -23,7 +23,7 @@ const jsonLd = {
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  ogImage="https://ai.xinca.com/articles/data-center-cooling-hero.svg"
+  ogImage="https://ai.xinca.com/articles/dc-cooling-logbook-hero.png"
   ogType="article"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
@@ -33,7 +33,7 @@ const jsonLd = {
     <div class="absolute inset-0 opacity-20">
       <img
         src={heroImage}
-        alt="Server rack with direct-to-chip liquid cooling tubes and blue coolant flow"
+        alt="Engineering logbook spread: Data Centre Cooling field reference with PUE formula, block diagrams, and comparison tables"
         class="w-full h-full object-cover"
         loading="eager"
       />
