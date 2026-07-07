@@ -28,18 +28,18 @@ const jsonLd = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 
-  <!-- Hero Section -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-[#0a1628] to-[#1a2942] text-white">
-    <div class="absolute inset-0 opacity-20">
+  <!-- Hero Section — Text-overlay on logbook image -->
+  <section class="relative overflow-hidden text-white">
+    <div class="absolute inset-0">
       <img
         src={heroImage}
-        alt="Building energy management dashboard with sensor nodes and data flow visualization"
+        alt="Engineering logbook spread: AI in Building Energy Management field reference with block diagrams and ML architecture notes"
         class="w-full h-full object-cover"
         loading="eager"
       />
     </div>
-    <div class="absolute inset-0 bg-gradient-to-t from-[#0a1628]/80 to-transparent"></div>
-    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0a1628]/90 via-[#0a1628]/60 to-[#0a1628]/40"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
       <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6">
         <a href="/" class="hover:text-white transition-colors">Home</a>
         <span>/</span>
