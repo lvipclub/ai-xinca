@@ -3,9 +3,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCarousel from '../components/ProductCarousel.astro';
 import qaData from '../data/seed-qa.json';
+import articles from '../data/articles.json';
 
-// Pick 8 demo Q&As for the "Popular Questions" section
-const demoQuestions = qaData.slice(0, 8);
+// Leaderboard: Latest Articles (by date), Editor's Picks, Most Read
+const latestArticles = [...articles].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+const editorPicks = articles.filter(a => a.editorPick).slice(0, 3);
+const mostRead = [...articles].sort((a, b) => b.readCount - a.readCount).slice(0, 3);
+
+// Pick 6 demo Q&As for the "Popular Questions" section
+const demoQuestions = qaData.slice(0, 6);
 
 // Knowledge base references
 const kbTopics = [
@@ -31,6 +37,12 @@ const kbStandards = [
   { code: 'IMC', name: 'International Mechanical Code' },
   { code: 'BACnet 135', name: 'Building Automation Protocol' },
 ];
+
+// Category names
+const catNames: Record<string,string> = {
+  air: 'Air-side', water: 'Water-side', fluid: 'Fluid Handling',
+  controls: 'Building Controls', iot: 'IoT for FM', products: 'Products',
+};
 ---
 
 <BaseLayout 
@@ -39,14 +51,76 @@ const kbStandards = [
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-      <div class="text-center mb-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+      <div class="text-center mb-8">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-[#333]" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
           HVAC Practices, Guidance <span class="gradient-text">&amp; Compliances</span>
         </h1>
-        <p class="text-lg md:text-xl text-[#666] max-w-2xl mx-auto leading-relaxed mb-8">
+        <p class="text-lg md:text-xl text-[#666] max-w-2xl mx-auto leading-relaxed mb-6">
           A technical knowledge base for specifiers, engineers, and building services professionals.
         </p>
+      </div>
+
+      <!-- 3-Column Article Leaderboard -->
+      <div class="max-w-5xl mx-auto mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Latest Articles -->
+          <div class="card p-0 overflow-hidden">
+            <div class="bg-gradient-to-r from-[#2ea3f2] to-[#7EBEC5] px-5 py-2.5">
+              <h3 class="text-white font-semibold text-sm uppercase tracking-wider" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Latest Articles</h3>
+            </div>
+            <div class="p-4 space-y-3">
+              {latestArticles.map((a, i) => (
+                <a href={`/a/${a.slug}`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="latest" data-ga-position={String(i+1)} data-ga-article={a.slug}>
+                  <p class="text-[#333] text-xs font-medium leading-snug group-hover:text-[#2ea3f2] transition-colors">{a.title}</p>
+                  <div class="flex flex-wrap gap-1 mt-1">
+                    {a.categories.map((c: string) => (
+                      <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#f8f9fa] text-[#888] border border-[#e5e5e5]">{catNames[c] || c}</span>
+                    ))}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Editor's Picks -->
+          <div class="card p-0 overflow-hidden">
+            <div class="bg-gradient-to-r from-[#7EBEC5] to-[#2ea3f2] px-5 py-2.5">
+              <h3 class="text-white font-semibold text-sm uppercase tracking-wider" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Editor's Picks</h3>
+            </div>
+            <div class="p-4 space-y-3">
+              {editorPicks.map((a, i) => (
+                <a href={`/a/${a.slug}`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="editors_picks" data-ga-position={String(i+1)} data-ga-article={a.slug}>
+                  <p class="text-[#333] text-xs font-medium leading-snug group-hover:text-[#2ea3f2] transition-colors">{a.title}</p>
+                  <div class="flex flex-wrap gap-1 mt-1">
+                    {a.categories.map((c: string) => (
+                      <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#f8f9fa] text-[#888] border border-[#e5e5e5]">{catNames[c] || c}</span>
+                    ))}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Most Read -->
+          <div class="card p-0 overflow-hidden">
+            <div class="bg-gradient-to-r from-[#32373c] to-[#555] px-5 py-2.5">
+              <h3 class="text-white font-semibold text-sm uppercase tracking-wider" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Most Read</h3>
+            </div>
+            <div class="p-4 space-y-3">
+              {mostRead.map((a, i) => (
+                <a href={`/a/${a.slug}`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="most_read" data-ga-position={String(i+1)} data-ga-article={a.slug}>
+                  <p class="text-[#333] text-xs font-medium leading-snug group-hover:text-[#2ea3f2] transition-colors">{a.title}</p>
+                  <div class="flex flex-wrap gap-1 mt-1">
+                    {a.categories.map((c: string) => (
+                      <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#f8f9fa] text-[#888] border border-[#e5e5e5]">{catNames[c] || c}</span>
+                    ))}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Havi AI Telegram Bot CTA -->
@@ -68,7 +142,7 @@ const kbStandards = [
           </div>
         </a>
         <p class="text-center mt-3 text-xs text-[#999]">
-          <a href="https://t.me/hai5bot" target="_blank" rel="noopener" class="hover:text-[#2ea3f2] transition-colors">t.me/hai5bot</a> &mdash; subscribe to receive engineering Q&amp;A, product updates, and trade insights
+          <a href="https://t.me/hai5bot" target="_blank" rel="noopener" class="hover:text-[#2ea3f2] transition-colors">t.me/hai5bot</a> — subscribe to receive engineering Q&amp;A, product updates, and trade insights
         </p>
       </div>
 
@@ -94,19 +168,17 @@ const kbStandards = [
   <!-- Product Carousel -->
   <ProductCarousel />
 
-  <!-- 4 Value Cards (2x2 grid) -->
+  <!-- 4 Value Cards -->
   <section class="border-t border-[#e5e5e5] bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- FAQ -->
-        <div class="card text-left border-l-4 border-l-[#2ea3f2]">
-          <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">FAQ</h3>
+        <a href="/faq" class="card text-left border-l-4 border-l-[#2ea3f2] no-underline group block">
+          <h3 class="text-lg font-semibold text-[#333] mb-2 group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">FAQ</h3>
           <p class="text-[#666] text-sm leading-relaxed">
-            Searchable HVAC knowledge base — practices, guidance, and compliance references
+            Searchable HVAC knowledge base — practices, guidance, compliance references, and engineering articles
           </p>
-        </div>
+        </a>
 
-        <!-- Tools -->
         <div class="card text-left border-l-4 border-l-[#7EBEC5] opacity-70">
           <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Tools</h3>
           <p class="text-[#666] text-sm leading-relaxed">
@@ -114,7 +186,6 @@ const kbStandards = [
           </p>
         </div>
 
-        <!-- AI Chatbot -->
         <div class="card text-left border-l-4 border-l-[#329f5b]">
           <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Havi AI</h3>
           <p class="text-[#666] text-sm leading-relaxed">
@@ -122,13 +193,12 @@ const kbStandards = [
           </p>
         </div>
 
-        <!-- Knowledge -->
-        <div class="card text-left border-l-4 border-l-[#32373c]">
-          <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Knowledge</h3>
+        <a href="/faq" class="card text-left border-l-4 border-l-[#32373c] no-underline group block">
+          <h3 class="text-lg font-semibold text-[#333] mb-2 group-hover:text-[#32373c] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Knowledge</h3>
           <p class="text-[#666] text-sm leading-relaxed">
-            Engineering articles and practical guides for professionals
+            Engineering articles and practical guides for HVAC professionals
           </p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -145,7 +215,7 @@ const kbStandards = [
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="popular-questions">
         {demoQuestions.map(q => (
-          <a href={`/qa/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
+          <a href={`/faq/q/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
             <h3 class="text-[#333] font-medium text-sm leading-snug mb-2 group-hover:text-[#2ea3f2] transition-colors">
               {q.question}
             </h3>
@@ -160,8 +230,8 @@ const kbStandards = [
       </div>
 
       <div class="text-center mt-8">
-        <a href="/qa" class="btn-primary">
-          View All Q&A
+        <a href="/faq" class="btn-primary">
+          Explore Knowledge Base
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
           </svg>
@@ -169,4 +239,18 @@ const kbStandards = [
       </div>
     </div>
   </section>
+
+  <!-- GA4 Leaderboard Click Tracking -->
+  <script>
+    document.querySelectorAll('[data-ga-event="leaderboard_click"]').forEach(el => {
+      el.addEventListener('click', function() {
+        gtag('event', 'leaderboard_click', {
+          column: this.dataset.gaColumn,
+          position: this.dataset.gaPosition,
+          article_slug: this.dataset.gaArticle,
+          page_location: window.location.pathname
+        });
+      });
+    });
+  </script>
 </BaseLayout>

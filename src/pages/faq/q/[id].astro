@@ -1,0 +1,90 @@
+---
+// faq/q/[id].astro — Individual Q&A entry (SEO/LLM only, no human-facing listing)
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import qaData from '../../../data/seed-qa.json';
+
+export function getStaticPaths() {
+  return qaData.map(q => ({ params: { id: String(q.id) } }));
+}
+
+const { id } = Astro.params;
+const qa = qaData.find(q => String(q.id) === id);
+
+if (!qa) {
+  return Astro.redirect('/faq');
+}
+
+// Category display names
+const catNames: Record<string,string> = {
+  air: 'Air-side', hydronic: 'Hydronic', actuators: 'Actuators',
+  controls: 'Controls', standards: 'Standards', water: 'Water-side',
+  products: 'Products', sensors: 'Sensors', valves: 'Valves',
+  dampers: 'Dampers', bms: 'BMS', iot: 'IoT',
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": qa.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": qa.answer.substring(0, 5000)
+    }
+  }
+};
+
+const pageTitle = qa.question.length > 60 ? qa.question.substring(0, 60) + '...' : qa.question;
+const canonicalUrl = `https://ai.xinca.com/faq/q/${qa.id}/`;
+---
+
+<BaseLayout 
+  title={pageTitle}
+  description={qa.answer.substring(0, 160).replace(/\n/g, ' ')}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8">
+      <a href="/" class="hover:text-[#2ea3f2] transition-colors">Home</a>
+      <span class="text-gray-300">/</span>
+      <a href="/faq" class="hover:text-[#2ea3f2] transition-colors">FAQ</a>
+      <span class="text-gray-300">/</span>
+      <span class="text-[#2ea3f2] truncate max-w-[300px]">{qa.question.substring(0, 50)}...</span>
+    </nav>
+
+    <h1 class="text-2xl md:text-3xl font-bold text-[#333] mb-6 leading-tight" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+      {qa.question}
+    </h1>
+
+    <div class="flex flex-wrap items-center gap-3 mb-8">
+      <span class="badge-category">{catNames[qa.category] || qa.category}</span>
+      {qa.tags && qa.tags.map(t => (
+        <span class="tag-pill">#{t}</span>
+      ))}
+    </div>
+
+    <div class="card mb-8">
+      <p class="text-[#666] leading-relaxed whitespace-pre-line text-[15px]">
+        {qa.answer}
+      </p>
+    </div>
+
+    <!-- Related Questions -->
+    {qa.related && qa.related.length > 0 && (
+      <div class="mb-8 pt-6 border-t border-[#e5e5e5]">
+        <h3 class="text-lg font-semibold text-[#333] mb-3" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Related Questions</h3>
+        <ul class="space-y-1">
+          {qa.related.map((r: number) => {
+            const rel = qaData.find((q: any) => q.id === r);
+            return rel ? (
+              <li><a href={`/faq/q/${rel.id}`} class="text-[#2ea3f2] hover:underline text-sm">{rel.question}</a></li>
+            ) : null;
+          })}
+        </ul>
+      </div>
+    )}
+  </section>
+</BaseLayout>

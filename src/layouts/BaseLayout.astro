@@ -30,6 +30,79 @@ const { title, description, ogImage, ogType = 'website' } = Astro.props;
     {ogImage && <meta name="twitter:image" content={ogImage} />}
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>{title} | ai.xinca.com</title>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MLH9M91H5W"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MLH9M91H5W');
+
+      // Track article page views
+      if (window.location.pathname.startsWith('/a/') && window.location.pathname !== '/a/') {
+        gtag('event', 'article_view', {
+          article_slug: window.location.pathname.replace('/a/', '').replace(/\/$/, ''),
+          page_title: document.title,
+          page_location: window.location.pathname
+        });
+      }
+
+      // Track category page views
+      if (window.location.pathname.match(/^\/faq\/[a-z]+\/$/) && !window.location.pathname.match(/\/faq\/q\//)) {
+        gtag('event', 'category_view', {
+          category: window.location.pathname.replace('/faq/', '').replace(/\/$/, ''),
+          page_location: window.location.pathname
+        });
+      }
+
+      // Track Q&A page views
+      if (window.location.pathname.startsWith('/faq/q/')) {
+        gtag('event', 'qa_view', {
+          qa_id: window.location.pathname.replace('/faq/q/', '').replace(/\/$/, ''),
+          page_location: window.location.pathname
+        });
+      }
+
+      // Track leaderboard clicks (generic handler)
+      document.addEventListener('click', function(e) {
+        var el = e.target.closest('[data-ga-event]');
+        if (!el) return;
+        var eventData = { page_location: window.location.pathname };
+        for (var i = 0; i < el.attributes.length; i++) {
+          var attr = el.attributes[i];
+          if (attr.name.startsWith('data-ga-')) {
+            eventData[attr.name.replace('data-ga-', '')] = attr.value;
+          }
+        }
+        gtag('event', el.dataset.gaEvent, eventData);
+      });
+
+      // Track outbound Telegram clicks
+      document.addEventListener('click', function(e) {
+        var el = e.target.closest('a[href*="t.me/hai5bot"]');
+        if (el) {
+          gtag('event', 'telegram_click', { page_location: window.location.pathname });
+        }
+      });
+
+      // Track FAQ search usage
+      var chatInput = document.getElementById('chat-input');
+      if (chatInput) {
+        chatInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && chatInput.value.trim()) {
+            gtag('event', 'search_query', { search_term: chatInput.value.trim().substring(0, 100), page_location: window.location.pathname });
+          }
+        });
+        var chatSend = document.getElementById('chat-send');
+        if (chatSend) {
+          chatSend.addEventListener('click', function() {
+            if (chatInput.value.trim()) {
+              gtag('event', 'search_query', { search_term: chatInput.value.trim().substring(0, 100), page_location: window.location.pathname });
+            }
+          });
+        }
+      }
+    </script>
   </head>
   <body class="min-h-screen flex flex-col bg-white text-[#666]">
     <Header />

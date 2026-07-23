@@ -1,0 +1,264 @@
+---
+// faq/data-center-energy-efficiency.astro — Reading note: Data center cooling from rack to liquid
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pageTitle = "Data Center Energy Efficiency: From Rack Cooling to Liquid Cooling";
+const pageDescription = "A practical guide for facilities engineers and data center operators on improving cooling efficiency — from PUE fundamentals and rack airflow optimization to liquid cooling adoption, backed by ASHRAE TC09.09 research.";
+const canonicalUrl = "https://ai.xinca.com/a/data-center-energy-efficiency/";
+const heroImage = "/articles/dc-cooling-logbook-hero.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": pageTitle,
+  "description": pageDescription,
+  "image": "https://ai.xinca.com/articles/dc-cooling-logbook-hero.png",
+  "author": { "@type": "Organization", "name": "XINCA" },
+  "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://ai.xinca.com" },
+  "datePublished": "2026-07-06",
+  "mainEntityOfPage": canonicalUrl
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage="https://ai.xinca.com/articles/dc-cooling-logbook-hero.png"
+  ogType="article"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
+  <!-- Hero Section — Text-overlay on logbook image -->
+  <section class="relative overflow-hidden text-white">
+    <div class="absolute inset-0">
+      <img
+        src={heroImage}
+        alt="Engineering logbook spread: Data Centre Cooling field reference with PUE formula, block diagrams, and comparison tables"
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0a1628]/90 via-[#0a1628]/60 to-[#0a1628]/40"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <a href="/faq" class="hover:text-white transition-colors">FAQ</a>
+        <span>/</span>
+        <a href="/a" class="hover:text-white transition-colors">Articles</a>
+        <span>/</span>
+        <span class="text-[#7EBEC5]">Data Centre Cooling</span>
+      </nav>
+
+      <div class="flex flex-wrap gap-3 mb-6">
+        <span class="badge-category">Infrastructure</span>
+        <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30">Data Centre</span>
+        <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30">Cooling</span>
+        <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30">Energy Efficiency</span>
+      </div>
+
+      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-6 text-white" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        {pageTitle}
+      </h1>
+
+      <p class="text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed mb-8">
+        {pageDescription}
+      </p>
+      <!-- Social Share -->
+      <div class="flex items-center gap-4">
+        <span class="text-sm text-gray-400">Share:</span>
+        <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(pageTitle)}&url=${encodeURIComponent(canonicalUrl)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href={`https://t.me/share/url?url=${encodeURIComponent(canonicalUrl)}&text=${encodeURIComponent(pageTitle)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.46-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.441-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.139.121.098.154.228.17.32.016.092.036.303.02.466z"/></svg>
+          Telegram
+        </a>
+        <a href={`https://wa.me/?text=${encodeURIComponent(pageTitle + ' ' + canonicalUrl)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div class="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-[#333] prose-p:text-[#666] prose-a:text-[#2ea3f2] prose-strong:text-[#333] prose-table:border prose-table:border-[#e5e5e5] prose-th:bg-[#f8f9fa] prose-th:text-[#333] prose-td:text-[#666]">
+
+      <p class="text-lg leading-relaxed">
+        Every kilowatt that enters a data center follows a simple rule: what is not consumed by computing equipment must be paid for in cooling. As of 2026, the cost of ignoring that rule has never been higher. Data centers consumed an estimated 2-3% of global electricity in 2025, and AI training workloads are pushing individual rack power densities well past 25 kilowatts — territory where conventional air cooling reaches its practical ceiling.
+      </p>
+
+      <h2>The 2026 Imperative</h2>
+
+      <p>Three forces have converged to make data center energy efficiency a first-order concern:</p>
+
+      <ul>
+        <li><strong>AI GPU density.</strong> Where a traditional enterprise rack might draw 5 kW, a GPU-equipped rack for HPC or AI inference routinely draws 15 kW, 25 kW, or more.</li>
+        <li><strong>Grid constraints.</strong> Energy costs and connection moratoriums in major data center markets (Northern Virginia, Dublin, Singapore) are forcing operators to do more with less.</li>
+        <li><strong>Regulatory pressure.</strong> EU and North American frameworks are mandating energy performance disclosure and setting carbon targets.</li>
+      </ul>
+
+      <p>The result: cooling has become a competitive differentiator. Operators who reduce cooling overhead gain lower opex, higher rack density, and compliance readiness — simultaneously.</p>
+
+      <h2>PUE Explained</h2>
+
+      <p>Power Usage Effectiveness (PUE) is the standard industry metric, defined by The Green Grid:</p>
+
+      <p class="text-center text-lg font-mono text-[#333]">PUE = P<sub>total</sub> / P<sub>IT</sub></p>
+
+      <p>Where P<sub>total</sub> is total facility power and P<sub>IT</sub> is power delivered to computing equipment. A PUE of 1.0 means zero overhead; 2.0 means every watt of computing costs another watt in facility overhead.</p>
+
+      <div class="not-prose my-8 overflow-x-auto">
+        <table class="w-full border-collapse border border-[#e5e5e5] text-sm">
+          <thead>
+            <tr class="bg-[#f8f9fa]">
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">PUE</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">What It Means</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Typical Context</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-mono">1.03–1.15</td><td class="border border-[#e5e5e5] px-4 py-3">Near-perfect; almost all power reaches IT</td><td class="border border-[#e5e5e5] px-4 py-3">Liquid-cooled hyperscale</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-mono">1.4–1.6</td><td class="border border-[#e5e5e5] px-4 py-3">Good efficiency with airflow optimisation</td><td class="border border-[#e5e5e5] px-4 py-3">Well-managed enterprise</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-mono">1.6–2.0</td><td class="border border-[#e5e5e5] px-4 py-3">Industry average; significant cooling overhead</td><td class="border border-[#e5e5e5] px-4 py-3">Legacy colocation</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-mono">&gt;2.0</td><td class="border border-[#e5e5e5] px-4 py-3">Inefficient; urgent optimisation needed</td><td class="border border-[#e5e5e5] px-4 py-3">Older facilities, poor airflow</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The critical insight: PUE is not a static design parameter. It fluctuates with IT load, outdoor temperature, and cooling configuration. Real-time measurement via IPMI, PMBus, and rack PDU monitoring — integrated with DCIM software — allows continuous tracking and adjustment.</p>
+
+      <h2>Rack Placement and Airflow</h2>
+
+      <p>Before investing in liquid cooling, the most cost-effective gains come from rethinking airflow:</p>
+
+      <ul>
+        <li><strong>Hot aisle / cold aisle.</strong> Alternating rack rows so intakes face intakes and exhausts face exhausts prevents supply/return air mixing. This alone can enable rack densities from ~5 kW to 25 kW or more.</li>
+        <li><strong>Containment.</strong> Physical barriers (doors, chimney returns, end caps) eliminate bypass and recirculation. ASHRAE TC09.09 research confirms containment is the most reliable method for raising allowable supply air temperatures.</li>
+        <li><strong>Under-floor pressure management.</strong> DCIM-integrated pressure transducers and variable-speed fans enable active balancing across raised-floor facilities.</li>
+      </ul>
+
+      <blockquote class="border-l-4 border-[#7EBEC5] pl-4 italic text-[#555] my-6">
+        <p class="text-lg"><strong>These airflow measures are not a substitute for liquid cooling — they are prerequisites.</strong> A poorly managed air path defeats any cooling technology downstream.</p>
+      </blockquote>
+
+      <h2>Liquid Cooling vs. Air Cooling</h2>
+
+      <p>Liquid cooling encompasses direct-to-chip cold plates, rear-door heat exchangers, and immersion — all sharing a common advantage: the heat transfer coefficient of liquid is orders of magnitude higher than air. Water-cooled solutions can reduce PUE from above 1.6 to below 1.1.</p>
+
+      <div class="not-prose my-8 overflow-x-auto">
+        <table class="w-full border-collapse border border-[#e5e5e5] text-sm">
+          <thead>
+            <tr class="bg-[#f8f9fa]">
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Factor</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Air Cooling</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Liquid Cooling</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Max rack density</td><td class="border border-[#e5e5e5] px-4 py-3">~15-25 kW (with containment)</td><td class="border border-[#e5e5e5] px-4 py-3">50-100+ kW per rack</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Typical PUE</td><td class="border border-[#e5e5e5] px-4 py-3">1.4-2.0</td><td class="border border-[#e5e5e5] px-4 py-3">1.03-1.15</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Free cooling potential</td><td class="border border-[#e5e5e5] px-4 py-3">Climate-dependent</td><td class="border border-[#e5e5e5] px-4 py-3">Year-round with warm-water loops</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Retrofit complexity</td><td class="border border-[#e5e5e5] px-4 py-3">Low to moderate</td><td class="border border-[#e5e5e5] px-4 py-3">Moderate to high (plumbing, CDU)</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Capex</td><td class="border border-[#e5e5e5] px-4 py-3">Low (panels, blanking)</td><td class="border border-[#e5e5e5] px-4 py-3">High (cold plates, CDUs, piping)</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Opex (cooling energy)</td><td class="border border-[#e5e5e5] px-4 py-3">~30-50% of facility total</td><td class="border border-[#e5e5e5] px-4 py-3">~3-15% of facility total</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Water consumption</td><td class="border border-[#e5e5e5] px-4 py-3">High (evaporative)</td><td class="border border-[#e5e5e5] px-4 py-3">Lower (closed-loop option)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What the Numbers Say</h2>
+
+      <p>ASHRAE Technical Committee 09.09 — responsible for mission-critical facilities — has published widely cited guidance with key findings:</p>
+
+      <ul>
+        <li><strong>Rack density trajectory:</strong> Densities increase from 5 kW baseline to 10, 15, and 25+ kW. Beyond ~15-20 kW, air alone becomes uneconomical within standard 42U racks.</li>
+        <li><strong>Real-time measurement necessity:</strong> At 25 kW/rack, the thermal runaway window collapses to seconds — PMBus, rack PDU metering, and DCIM integration are no longer elective.</li>
+        <li><strong>Liquid PUE advantage:</strong> Facilities using liquid cooling consistently achieve PUE below 1.1, with optimised installations approaching 1.03.</li>
+        <li><strong>Firmware strategies:</strong> DCIM-driven fan-speed adjustment, pump modulation, and predictive cooling load management yield an additional 5-15% reduction beyond hardware gains.</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+
+      <ol>
+        <li><strong>PUE is the starting metric, not the destination.</strong> Measure it continuously at the rack level using IPMI/PMBus and DCIM.</li>
+        <li><strong>Airflow optimisation is cheap and mandatory.</strong> Hot/cold aisle and containment should precede any capital-intensive cooling upgrade.</li>
+        <li><strong>The air ceiling is real.</strong> Beyond ~20-25 kW/rack, liquid cooling becomes the practical default.</li>
+        <li><strong>Liquid cooling drives the lowest PUE.</strong> Industry data shows liquid-cooled facilities at PUE below 1.1 vs. 1.6+ for conventional designs.</li>
+        <li><strong>Monitoring unlocks firmware-level savings.</strong> Rack PDU data feeds DCIM-driven optimisation strategies that reduce energy without hardware changes.</li>
+      </ol>
+
+      <h2>Sources</h2>
+      <ul class="text-sm text-[#888]">
+        <li>Held, Gilbert. <em>Making Your Data Center Energy Efficient</em>. CRC Press, 2011. — Practical framework for rack-level power management, PUE measurement, and airflow optimisation.</li>
+        <li>ASHRAE Technical Committee 09.09. White papers and technical guidance on real-time energy consumption measurements, liquid cooling architectures, and PUE optimisation.</li>
+        <li>The Green Grid. <em>PUE: A Comprehensive Examination of the Metric</em>. — Original industry consortium definition of Power Usage Effectiveness.</li>
+      </ul>
+
+      <!-- CTA Section -->
+      <div class="not-prose my-10 p-8 rounded-lg border-2 border-[#7EBEC5] bg-gradient-to-r from-[#f8f9fa] to-white">
+        <div class="flex flex-col md:flex-row items-start gap-6">
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-[#333] mb-3" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              Have a data center cooling question?
+            </h3>
+            <p class="text-[#666] mb-4 leading-relaxed">
+              Search the HVAC controls knowledge base — PUE measurement, rack airflow optimisation, liquid cooling design, glycol loop engineering. Ask Havi, the AI chatbot, for answers backed by engineering knowledge.
+            </p>
+            <a href="/" class="btn-accent text-sm">
+              Ask Havi
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+          </div>
+          <div class="shrink-0">
+            <svg class="w-16 h-16" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="12" width="48" height="36" rx="4" stroke="#7EBEC5" stroke-width="2.5" fill="none"/>
+              <path d="M8 20 L32 34 L56 20" stroke="#7EBEC5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="32" cy="8" r="6" fill="#2ea3f2" opacity="0.15" stroke="#2ea3f2" stroke-width="2"/>
+              <path d="M29 8 L31 10 L35 6" stroke="#2ea3f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <h2>Related Questions</h2>
+      <ul>
+        <li><a href="/faq/q/7">What is the difference between pressure-independent and pressure-dependent valves?</a></li>
+        <li><a href="/faq/q/3">How do I size a control valve Cv for a chilled water coil?</a></li>
+        <li><a href="/a/data-center-glycol-cooling/">The Coolant Trade-Off That Transforms Data Centre Economics</a></li>
+      </ul>
+
+      <p class="text-sm text-gray-400 mt-10">
+        Published July 2026. This article is part of the XINCA HVAC controls engineering knowledge base. For facility managers, HVAC engineers, and data center operators evaluating cooling strategy for high-density deployments. Search the knowledge base at <a href="/">ai.xinca.com</a>.
+      </p>
+      <p class="text-xs text-gray-500 mt-2">
+        <a href="https://twitter.com/hashtag/DataCenter" class="hover:text-[#2ea3f2]">#DataCenter</a>
+        &nbsp;<a href="https://twitter.com/hashtag/HVAC" class="hover:text-[#2ea3f2]">#HVAC</a>
+        &nbsp;<a href="https://twitter.com/hashtag/Cooling" class="hover:text-[#2ea3f2]">#Cooling</a>
+        &nbsp;<a href="https://twitter.com/hashtag/PUE" class="hover:text-[#2ea3f2]">#PUE</a>
+        &nbsp;<a href="https://twitter.com/hashtag/LiquidCooling" class="hover:text-[#2ea3f2]">#LiquidCooling</a>
+        &nbsp;<a href="https://twitter.com/hashtag/FacilityManagement" class="hover:text-[#2ea3f2]">#FacilityManagement</a>
+        &nbsp;<a href="https://twitter.com/hashtag/EnergyEfficiency" class="hover:text-[#2ea3f2]">#EnergyEfficiency</a>
+        &nbsp;<a href="https://twitter.com/hashtag/ASHRAE" class="hover:text-[#2ea3f2]">#ASHRAE</a>
+      </p>
+
+    </div>
+  </article>
+</BaseLayout>
