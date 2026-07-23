@@ -1,5 +1,5 @@
 ---
-// qa/[id].astro — 301 redirect old Q&A URLs to new /faq/q/ location
+// qa/[id].astro — 301 redirect old Q&A URLs to new /kb/q/ location
 import qaData from '../../data/seed-qa.json';
 
 export function getStaticPaths() {
@@ -7,5 +7,5 @@ export function getStaticPaths() {
 }
 
 const { id } = Astro.params;
-return Astro.redirect(`/faq/q/${id}/`, 301);
+return Astro.redirect(`/kb/q/${id}/`, 301);
 ---

@@ -45,7 +45,7 @@ import faqIndex from '../data/faq-index.json';
   <div id="faq-category-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
 
     {Object.entries(faqIndex.categories).map(([slug, cat]) => (
-      <a href={`/faq/${slug}`} class="card card-hover group no-underline">
+      <a href={`/kb/${slug}`} class="card card-hover group no-underline">
         <div class="flex items-start justify-between mb-4">
           <h3 class="text-lg font-semibold text-[#333] group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
             {cat.name}
@@ -132,7 +132,7 @@ import faqIndex from '../data/faq-index.json';
       var catLabel = categoryNames[item.category] || item.category;
       var desc = item.description ? '<p class="text-[#666] text-xs leading-relaxed line-clamp-2 mt-1">' + escapeHtml(item.description) + '</p>' : '';
 
-      return '<a href="/faq/' + escapeHtml(item.category) + '" class="card card-hover block no-underline group">'
+      return '<a href="/kb/' + escapeHtml(item.category) + '" class="card card-hover block no-underline group">'
         + '<div class="flex items-start justify-between gap-3">'
         + '<div class="flex-1 min-w-0">'
         + '<h3 class="text-[#333] font-semibold text-sm leading-snug group-hover:text-[#2ea3f2] transition-colors" style="font-family:\'Trebuchet MS\',Trebuchet,Helvetica,Arial,Lucida,sans-serif">' + escapeHtml(item.title) + '</h3>'

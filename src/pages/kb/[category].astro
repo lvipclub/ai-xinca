@@ -12,7 +12,7 @@ const { category } = Astro.params;
 const cat = categories.categories[category as keyof typeof categories.categories];
 
 if (!cat) {
-  return Astro.redirect('/faq');
+  return Astro.redirect('/kb');
 }
 
 // Build JSON-LD FAQPage structured data
@@ -43,7 +43,7 @@ const jsonLd = {
     <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8">
       <a href="/" class="hover:text-[#2ea3f2] transition-colors">Home</a>
       <span>/</span>
-      <a href="/faq" class="hover:text-[#2ea3f2] transition-colors">FAQ</a>
+      <a href="/kb" class="hover:text-[#2ea3f2] transition-colors">Knowledge Base</a>
       <span>/</span>
       <span class="text-[#2ea3f2]">{cat.name}</span>
     </nav>
@@ -68,7 +68,7 @@ const jsonLd = {
 
     <!-- Back to all categories -->
     <div class="text-center">
-      <a href="/faq" class="btn-outline">
+      <a href="/kb" class="btn-outline">
         ← Back to All Categories
       </a>
     </div>

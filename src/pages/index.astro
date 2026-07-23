@@ -172,8 +172,8 @@ const catNames: Record<string,string> = {
   <section class="border-t border-[#e5e5e5] bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <a href="/faq" class="card text-left border-l-4 border-l-[#2ea3f2] no-underline group block">
-          <h3 class="text-lg font-semibold text-[#333] mb-2 group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">FAQ</h3>
+        <a href="/kb" class="card text-left border-l-4 border-l-[#2ea3f2] no-underline group block">
+          <h3 class="text-lg font-semibold text-[#333] mb-2 group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Knowledge Base</h3>
           <p class="text-[#666] text-sm leading-relaxed">
             Searchable HVAC knowledge base — practices, guidance, compliance references, and engineering articles
           </p>
@@ -193,7 +193,7 @@ const catNames: Record<string,string> = {
           </p>
         </div>
 
-        <a href="/faq" class="card text-left border-l-4 border-l-[#32373c] no-underline group block">
+        <a href="/kb" class="card text-left border-l-4 border-l-[#32373c] no-underline group block">
           <h3 class="text-lg font-semibold text-[#333] mb-2 group-hover:text-[#32373c] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Knowledge</h3>
           <p class="text-[#666] text-sm leading-relaxed">
             Engineering articles and practical guides for HVAC professionals
@@ -215,7 +215,7 @@ const catNames: Record<string,string> = {
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="popular-questions">
         {demoQuestions.map(q => (
-          <a href={`/faq/q/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
+          <a href={`/kb/q/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
             <h3 class="text-[#333] font-medium text-sm leading-snug mb-2 group-hover:text-[#2ea3f2] transition-colors">
               {q.question}
             </h3>
@@ -230,7 +230,7 @@ const catNames: Record<string,string> = {
       </div>
 
       <div class="text-center mt-8">
-        <a href="/faq" class="btn-primary">
+        <a href="/kb" class="btn-primary">
           Explore Knowledge Base
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
