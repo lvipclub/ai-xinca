@@ -48,17 +48,17 @@ const { title, description, ogImage, ogType = 'website' } = Astro.props;
       }
 
       // Track category page views
-      if (window.location.pathname.match(/^\/faq\/[a-z]+\/$/) && !window.location.pathname.match(/\/faq\/q\//)) {
+      if (window.location.pathname.match(/^\/kb\/[a-z]+\/$/) && !window.location.pathname.match(/\/kb\/q\//)) {
         gtag('event', 'category_view', {
-          category: window.location.pathname.replace('/faq/', '').replace(/\/$/, ''),
+          category: window.location.pathname.replace('/kb/', '').replace(/\/$/, ''),
           page_location: window.location.pathname
         });
       }
 
       // Track Q&A page views
-      if (window.location.pathname.startsWith('/faq/q/')) {
+      if (window.location.pathname.startsWith('/kb/q/')) {
         gtag('event', 'qa_view', {
-          qa_id: window.location.pathname.replace('/faq/q/', '').replace(/\/$/, ''),
+          qa_id: window.location.pathname.replace('/kb/q/', '').replace(/\/$/, ''),
           page_location: window.location.pathname
         });
       }

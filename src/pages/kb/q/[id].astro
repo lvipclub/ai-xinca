@@ -11,7 +11,7 @@ const { id } = Astro.params;
 const qa = qaData.find(q => String(q.id) === id);
 
 if (!qa) {
-  return Astro.redirect('/faq');
+  return Astro.redirect('/kb');
 }
 
 // Category display names
@@ -36,7 +36,7 @@ const jsonLd = {
 };
 
 const pageTitle = qa.question.length > 60 ? qa.question.substring(0, 60) + '...' : qa.question;
-const canonicalUrl = `https://ai.xinca.com/faq/q/${qa.id}/`;
+const canonicalUrl = `https://ai.xinca.com/kb/q/${qa.id}/`;
 ---
 
 <BaseLayout 
@@ -50,7 +50,7 @@ const canonicalUrl = `https://ai.xinca.com/faq/q/${qa.id}/`;
     <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8">
       <a href="/" class="hover:text-[#2ea3f2] transition-colors">Home</a>
       <span class="text-gray-300">/</span>
-      <a href="/faq" class="hover:text-[#2ea3f2] transition-colors">FAQ</a>
+      <a href="/kb" class="hover:text-[#2ea3f2] transition-colors">Knowledge Base</a>
       <span class="text-gray-300">/</span>
       <span class="text-[#2ea3f2] truncate max-w-[300px]">{qa.question.substring(0, 50)}...</span>
     </nav>
@@ -80,7 +80,7 @@ const canonicalUrl = `https://ai.xinca.com/faq/q/${qa.id}/`;
           {qa.related.map((r: number) => {
             const rel = qaData.find((q: any) => q.id === r);
             return rel ? (
-              <li><a href={`/faq/q/${rel.id}`} class="text-[#2ea3f2] hover:underline text-sm">{rel.question}</a></li>
+              <li><a href={`/kb/q/${rel.id}`} class="text-[#2ea3f2] hover:underline text-sm">{rel.question}</a></li>
             ) : null;
           })}
         </ul>

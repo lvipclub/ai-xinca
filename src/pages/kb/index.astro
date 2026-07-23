@@ -16,7 +16,7 @@ const catNames: Record<string,string> = {
 ---
 
 <BaseLayout 
-  title="FAQ — HVAC Controls Engineering Knowledge Base"
+  title="Knowledge Base — HVAC Controls Engineering"
   description="Explore HVAC controls engineering topics: air-side, water-side, building controls, IoT for facility management, and product-specific guides. Browse engineering articles and popular questions."
 >
   <section class="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -47,7 +47,7 @@ const catNames: Record<string,string> = {
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
       {Object.entries(categories.categories).map(([slug, cat]) => (
-        <a href={`/faq/${slug}`} class="card card-hover group no-underline">
+        <a href={`/kb/${slug}`} class="card card-hover group no-underline">
           <div class="flex items-start justify-between mb-3">
             <h3 class="text-lg font-semibold text-[#333] group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
               {cat.name}
@@ -96,7 +96,7 @@ const catNames: Record<string,string> = {
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
       {popularQa.map(q => (
-        <a href={`/faq/q/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
+        <a href={`/kb/q/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
           <h3 class="text-[#333] font-medium text-sm leading-snug mb-1.5 group-hover:text-[#2ea3f2] transition-colors">
             {q.question}
           </h3>
