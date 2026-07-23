@@ -1,0 +1,61 @@
+---
+// a/index.astro — Articles hub
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import articles from '../../data/articles.json';
+
+const catNames: Record<string,string> = {
+  air: 'Air-side', water: 'Water-side', fluid: 'Fluid Handling',
+  controls: 'Building Controls', iot: 'IoT for FM', products: 'Products',
+};
+---
+
+<BaseLayout 
+  title="Engineering Articles — HVAC Controls & Data Centre Cooling"
+  description="In-depth technical articles for HVAC professionals: glycol cooling economics, data centre energy efficiency, AI building energy management, and more."
+>
+  <section class="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8">
+      <a href="/" class="hover:text-[#2ea3f2] transition-colors">Home</a>
+      <span>/</span>
+      <a href="/faq" class="hover:text-[#2ea3f2] transition-colors">FAQ</a>
+      <span>/</span>
+      <span class="text-[#2ea3f2]">Articles</span>
+    </nav>
+
+    <h1 class="text-3xl md:text-4xl font-bold text-[#333] mb-3" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+      Engineering <span class="gradient-text">Articles</span>
+    </h1>
+    <p class="text-lg text-[#666] max-w-2xl mb-10">
+      In-depth technical analysis, research-backed guides, and practical engineering insights for HVAC professionals and facility engineers.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {articles.map(a => (
+        <a href={`/a/${a.slug}`} class="card card-hover group no-underline flex flex-col"
+           data-ga-event="article_click" data-ga-article={a.slug}>
+          <div class="h-40 overflow-hidden rounded-t-md -mx-4 -mt-4 mb-4">
+            <img src={a.heroImage} alt={a.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <h3 class="text-[#333] font-semibold text-base leading-snug mb-2 group-hover:text-[#2ea3f2] transition-colors line-clamp-2">
+            {a.title}
+          </h3>
+          <p class="text-[#666] text-xs leading-relaxed mb-3 flex-1 line-clamp-3">
+            {a.description}
+          </p>
+          <div class="flex flex-wrap items-center gap-1.5 text-[10px]">
+            <span class="text-[#aaa]">{a.date}</span>
+            <span class="text-[#ddd]">·</span>
+            {a.categories.map((c: string) => (
+              <span class="px-1.5 py-0.5 rounded bg-[#f8f9fa] text-[#888] border border-[#e5e5e5]">{catNames[c] || c}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="text-center mt-10 text-sm text-[#888]">
+      More articles coming — subscribe to <a href="https://t.me/hai5bot" target="_blank" rel="noopener" class="text-[#2ea3f2] hover:underline">t.me/hai5bot</a> for updates.
+    </div>
+  </section>
+</BaseLayout>

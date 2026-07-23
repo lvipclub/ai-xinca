@@ -17,6 +17,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
+from typing import Optional, List, Dict
 
 # ---------- CONFIG ----------
 # Load env early (before DEEPSEEK_KEY resolution)
@@ -64,7 +65,7 @@ CATEGORIES = {
 }
 
 # ---------- SHOPIFY GRAPHQL ----------
-def gql(query: str, variables: dict | None = None) -> dict:
+def gql(query: str, variables: Optional[Dict] = None) -> dict:
     """Execute a Shopify Admin GraphQL query."""
     body = json.dumps({"query": query, "variables": variables or {}})
     req = Request(SHOPIFY_API, data=body.encode(), method="POST")
@@ -84,7 +85,7 @@ def gql(query: str, variables: dict | None = None) -> dict:
                 continue
             raise RuntimeError(f"Shopify API error after 3 attempts: {e}") from e
 
-def fetch_category_products(collection_id: str, limit: int = 30) -> list[dict]:
+def fetch_category_products(collection_id: str, limit: int = 30) -> List[dict]:
     """Fetch products from a collection, returning more than needed for LLM selection."""
     query = """
     query($id: ID!, $first: Int!) {
@@ -116,7 +117,7 @@ def fetch_category_products(collection_id: str, limit: int = 30) -> list[dict]:
             products.append(_normalize_product(node))
     return products
 
-def fetch_iot_products(query_str: str, limit: int = 30) -> list[dict]:
+def fetch_iot_products(query_str: str, limit: int = 30) -> List[dict]:
     """Fetch IoT products using product query (no collection)."""
     gql_query = """
     query($q: String!, $first: Int!) {
@@ -167,7 +168,7 @@ def _normalize_product(node: dict) -> dict:
     }
 
 # ---------- LLM SELECTION ----------
-def llm_pick_products(category_products: dict[str, list[dict]]) -> dict[str, list[dict]]:
+def llm_pick_products(category_products: Dict[str, List[dict]]) -> Dict[str, List[dict]]:
     """
     Feed candidate products to deepseek-v4-flash for random selection + alt-text writing.
     
@@ -265,7 +266,7 @@ Output STRICT JSON (no markdown, no backticks):
     return final
 
 # ---------- OUTPUT ----------
-def write_json(data: dict[str, list[dict]]):
+def write_json(data: Dict[str, List[dict]]):
     """Write featured-products.json with category metadata."""
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -317,7 +318,7 @@ def main():
 
     print(f"\n✅ Done. Ready for Astro build.")
 
-def _fallback_random_picks(category_products: dict) -> dict[str, list[dict]]:
+def _fallback_random_picks(category_products: dict) -> Dict[str, List[dict]]:
     """Random fallback when no LLM key available."""
     result = {}
     for cat_name, products in category_products.items():

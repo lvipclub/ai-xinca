@@ -1,37 +1,111 @@
 ---
-// faq/index.astro - FAQ Hub (light theme)
+// faq/index.astro — FAQ Hub: categories, articles, and Q&A
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import categories from '../../content/faq/categories.json';
+import articles from '../../data/articles.json';
+import qaData from '../../data/seed-qa.json';
+
+// Top 6 popular Q&A
+const popularQa = qaData.slice(0, 6);
+
+// Category names for display
+const catNames: Record<string,string> = {
+  air: 'Air-side', water: 'Water-side', fluid: 'Fluid Handling',
+  controls: 'Building Controls', iot: 'IoT for FM', products: 'Products',
+};
 ---
 
 <BaseLayout 
-  title="FAQ — HVAC Controls Engineering"
-  description="Structured FAQ knowledge base for HVAC controls engineering. A growing library covering air-side, water-side, building controls, and products."
+  title="FAQ — HVAC Controls Engineering Knowledge Base"
+  description="Explore HVAC controls engineering topics: air-side, water-side, building controls, IoT for facility management, and product-specific guides. Browse engineering articles and popular questions."
 >
   <section class="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- Header -->
     <div class="mb-10">
-      <h1 class="text-3xl md:text-4xl font-bold text-[#333] mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
-        FAQ <span class="gradient-text">Knowledge Base</span>
+      <h1 class="text-3xl md:text-4xl font-bold text-[#333] mb-3" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        HVAC Controls <span class="gradient-text">Knowledge Base</span>
       </h1>
-      <p class="text-sm text-gray-400">
-        A growing library of structured FAQ entries for search engine indexing
+      <p class="text-lg text-[#666] max-w-2xl">
+        From damper sizing to data centre cooling — explore engineering articles, practical guides, and technical Q&amp;A written for HVAC professionals.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- In-Page Nav -->
+    <div class="flex flex-wrap gap-3 mb-12 text-sm">
+      <a href="#categories" class="text-[#2ea3f2] font-medium hover:underline">Categories</a>
+      <span class="text-[#ddd]">|</span>
+      <a href="#articles" class="text-[#2ea3f2] font-medium hover:underline">Articles</a>
+      <span class="text-[#ddd]">|</span>
+      <a href="#popular" class="text-[#2ea3f2] font-medium hover:underline">Popular Questions</a>
+    </div>
+
+    <!-- === CATEGORIES === -->
+    <h2 id="categories" class="text-2xl font-bold text-[#333] mb-6" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+      Browse by Category
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
       {Object.entries(categories.categories).map(([slug, cat]) => (
         <a href={`/faq/${slug}`} class="card card-hover group no-underline">
-          <div class="flex items-start justify-between mb-4">
+          <div class="flex items-start justify-between mb-3">
             <h3 class="text-lg font-semibold text-[#333] group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
               {cat.name}
             </h3>
-            <span class="text-xs text-[#666] bg-[#f8f9fa] px-2 py-1 rounded border border-[#e5e5e5]">
+            <span class="text-xs text-[#666] bg-[#f8f9fa] px-2 py-1 rounded border border-[#e5e5e5] shrink-0">
               {cat.count} entries
             </span>
           </div>
-          <p class="text-[#666] text-sm">{cat.description}</p>
+          <p class="text-[#666] text-sm leading-relaxed">{cat.description}</p>
         </a>
       ))}
     </div>
+
+    <!-- === ARTICLES === -->
+    <h2 id="articles" class="text-2xl font-bold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+      Engineering Articles
+    </h2>
+    <p class="text-sm text-[#888] mb-6">In-depth technical guides and research-backed analysis</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
+      {articles.map(a => (
+        <a href={`/a/${a.slug}`} class="card card-hover group no-underline flex flex-col">
+          <div class="h-36 overflow-hidden rounded-t-md -mx-4 -mt-4 mb-4">
+            <img src={a.heroImage} alt={a.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+          </div>
+          <h3 class="text-[#333] font-semibold text-sm leading-snug mb-2 group-hover:text-[#2ea3f2] transition-colors line-clamp-2">
+            {a.title}
+          </h3>
+          <p class="text-[#666] text-xs leading-relaxed mb-3 line-clamp-2 flex-1">
+            {a.description}
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            {a.categories.map((c: string) => (
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#f8f9fa] text-[#888] border border-[#e5e5e5]">{catNames[c] || c}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- === POPULAR QUESTIONS === -->
+    <h2 id="popular" class="text-2xl font-bold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+      Popular Questions
+    </h2>
+    <p class="text-sm text-[#888] mb-6">Frequently referenced topics from the Q&amp;A knowledge base</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
+      {popularQa.map(q => (
+        <a href={`/faq/q/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
+          <h3 class="text-[#333] font-medium text-sm leading-snug mb-1.5 group-hover:text-[#2ea3f2] transition-colors">
+            {q.question}
+          </h3>
+          <p class="text-[#666] text-xs leading-relaxed line-clamp-2">
+            {q.answer.substring(0, 150)}...
+          </p>
+        </a>
+      ))}
+    </div>
+
   </section>
 </BaseLayout>

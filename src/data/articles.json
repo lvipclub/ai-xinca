@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "data-center-glycol-cooling",
+    "title": "The Coolant Trade-Off That Transforms Data Centre Economics",
+    "description": "Why data centres are switching from ethylene glycol to food-grade propylene glycol — and how this single choice drops cooling from ~40% of facility power to single digits.",
+    "date": "2026-06-30",
+    "categories": ["water", "fluid"],
+    "heroImage": "/articles/data-center-glycol-hero.jpg",
+    "editorPick": true,
+    "readCount": 342
+  },
+  {
+    "slug": "data-center-energy-efficiency",
+    "title": "Data Center Energy Efficiency: From Rack Cooling to Liquid Cooling",
+    "description": "A practical guide for facilities engineers on improving cooling efficiency — from PUE fundamentals and rack airflow optimization to liquid cooling adoption.",
+    "date": "2026-07-02",
+    "categories": ["water", "controls"],
+    "heroImage": "/articles/dc-cooling-logbook-hero.png",
+    "editorPick": true,
+    "readCount": 215
+  },
+  {
+    "slug": "ai-building-energy-management",
+    "title": "How AI Is Reshaping Building Energy Management",
+    "description": "Machine learning and deep learning are transforming building energy systems — from predictive maintenance to occupancy-driven HVAC control.",
+    "date": "2026-07-06",
+    "categories": ["controls", "iot"],
+    "heroImage": "/articles/ai-energy-logbook-hero.png",
+    "editorPick": false,
+    "readCount": 178
+  }
+]

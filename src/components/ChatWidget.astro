@@ -111,7 +111,7 @@ const { compact = false } = Astro.props;
     var results = fuse.search(q, { limit: 3 });
 
     if (results.length === 0) {
-      resultsDiv.innerHTML = '<div class="bg-[#f8f9fa] border border-[#e5e5e5] rounded p-6 text-center"><p class="text-[#666]">No matches found for "<span style=\"color:#333\">' + escapeHtml(q) + '</span>".</p><p class="text-gray-400 text-sm mt-1">Try rephrasing your question or check the <a href="/qa" class="text-[#2ea3f2] hover:underline">Popular Q&A</a> page.</p></div>';
+      resultsDiv.innerHTML = '<div class="bg-[#f8f9fa] border border-[#e5e5e5] rounded p-6 text-center"><p class="text-[#666]">No matches found for "<span style=\"color:#333\">' + escapeHtml(q) + '</span>".</p><p class="text-gray-400 text-sm mt-1">Try rephrasing your question or browse the <a href="/faq" class="text-[#2ea3f2] hover:underline">FAQ Knowledge Base</a>.</p></div>';
       return;
     }
 

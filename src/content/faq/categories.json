@@ -1,31 +1,35 @@
 {
   "description": "XINCA HVAC FAQ Categories",
   "source": "xinca.com product knowledge base",
-  "total_faqs": "growing",
   "categories": {
     "air": {
       "name": "Air-side HVAC",
-      "description": "Air-side HVAC (dampers, VAV, air distribution)",
+      "description": "Dampers, VAV terminals, air distribution, ductwork, and ventilation strategies for commercial buildings",
       "count": 13
     },
     "water": {
       "name": "Water-side HVAC",
-      "description": "Water-side HVAC (valves, coils, hydronics)",
+      "description": "Control valves, hydronic balancing, PICV, coils, and chilled water system design",
       "count": 37
     },
     "fluid": {
       "name": "Fluid Handling",
-      "description": "Fluid handling (flow sensors, pressure)",
+      "description": "Flow sensors, pressure transmitters, glycol concentration, and pipe sizing for hydronic systems",
       "count": 0
     },
     "controls": {
       "name": "Building Controls",
-      "description": "Building controls (actuators, sensors, BMS)",
+      "description": "DDC, BACnet/Modbus integration, actuator sizing, sensors, and BMS architecture",
       "count": 55
+    },
+    "iot": {
+      "name": "IoT for Facility Management",
+      "description": "Wireless sensors, LoRaWAN/BACnet gateways, edge analytics, and smart building integration",
+      "count": 0
     },
     "products": {
       "name": "Product-specific",
-      "description": "Product-specific (installation, compatibility)",
+      "description": "Installation guides, compatibility matrices, wiring diagrams, and cross-brand pairing",
       "count": 32
     }
   }
