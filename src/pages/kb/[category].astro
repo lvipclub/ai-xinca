@@ -1,7 +1,8 @@
 ---
-// faq/[category].astro - Category FAQ page with JSON-LD structured data (light theme)
+// kb/[category].astro - Category KB page showing articles tagged to this category
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import categories from '../../content/faq/categories.json';
+import articles from '../../data/articles.json';
 
 export function getStaticPaths() {
   const slugs = Object.keys(categories.categories);
@@ -15,25 +16,39 @@ if (!cat) {
   return Astro.redirect('/kb');
 }
 
-// Build JSON-LD FAQPage structured data
-const faqEntries = [{
-  "@type": "Question",
-  "name": `Browse ${cat.name} FAQ`,
-  "acceptedAnswer": {
-    "@type": "Answer",
-    "text": `${cat.count} FAQ entries covering ${cat.description}.`
-  }
-}];
+// Filter articles tagged to this category, sorted by date (newest first)
+interface Article {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  categories: string[];
+  heroImage: string;
+  editorPick: boolean;
+  readCount: number;
+}
+const catArticles = (articles as Article[])
+  .filter(a => a.categories.includes(category))
+  .sort((a, b) => b.date.localeCompare(a.date));
 
+// All categories for breadcrumb tags
+const catNames: Record<string, string> = {
+  air: 'Air-side', water: 'Water-side', fluid: 'Fluid Handling',
+  controls: 'Building Controls', iot: 'IoT for FM', products: 'Products',
+};
+
+// Build JSON-LD
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqEntries
+  "@type": "CollectionPage",
+  "name": `${cat.name} — Knowledge Base`,
+  "description": cat.description,
+  "numberOfItems": catArticles.length,
 };
 ---
 
 <BaseLayout 
-  title={`${cat.name} FAQ`}
+  title={`${cat.name} — Knowledge Base`}
   description={cat.description}
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
@@ -51,20 +66,39 @@ const jsonLd = {
     <!-- Category Header -->
     <div class="mb-10">
       <h1 class="text-3xl md:text-4xl font-bold text-[#333] mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
-        {cat.name} <span class="gradient-text">FAQ</span>
+        {cat.name}
       </h1>
       <p class="text-lg text-[#666] max-w-2xl">{cat.description}</p>
-      <p class="text-sm text-gray-400 mt-2">{cat.count} entries</p>
+      <p class="text-sm text-gray-400 mt-2">{catArticles.length} article{catArticles.length !== 1 ? 's' : ''}</p>
     </div>
 
-    <!-- FAQ entries loaded from content collections -->
-    <div class="card text-center py-12 mb-8">
-      <div class="text-4xl mb-4">📝</div>
-      <h3 class="text-xl font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Structured FAQ Content</h3>
-      <p class="text-[#666]">
-        {cat.count} FAQ entries indexed for {cat.name.toLowerCase()}. This page is optimized for search engine crawlers.
-      </p>
-    </div>
+    <!-- Articles -->
+    {catArticles.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        {catArticles.map(a => (
+          <a href={`/a/${a.slug}`} class="card card-hover group block no-underline">
+            <h3 class="text-lg font-semibold text-[#333] mb-2 group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              {a.title}
+            </h3>
+            <p class="text-[#666] text-sm leading-relaxed mb-3 line-clamp-2">{a.description}</p>
+            <div class="flex items-center gap-3 text-xs text-gray-400">
+              <span>{new Date(a.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+              {a.categories.filter((c: string) => c !== category).map((c: string) => (
+                <span class="px-2 py-0.5 rounded bg-[#f8f9fa] text-[#888] border border-[#e5e5e5]">{catNames[c] || c}</span>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="card text-center py-12 mb-8">
+        <div class="text-4xl mb-4">📝</div>
+        <h3 class="text-xl font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Articles Coming Soon</h3>
+        <p class="text-[#666]">
+          No articles published under {cat.name} yet. Check back soon or <a href="/kb" class="text-[#2ea3f2] hover:underline">browse all categories</a>.
+        </p>
+      </div>
+    )}
 
     <!-- Back to all categories -->
     <div class="text-center">
