@@ -1,0 +1,12 @@
+---
+// faq/[category].astro — 301 redirect /faq/:category → /kb/:category
+import categories from '../../content/faq/categories.json';
+
+export function getStaticPaths() {
+  const slugs = Object.keys(categories.categories);
+  return slugs.map(slug => ({ params: { category: slug } }));
+}
+
+const { category } = Astro.params;
+return Astro.redirect(`/kb/${category}/`, 301);
+---

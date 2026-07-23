@@ -1,0 +1,11 @@
+---
+// faq/q/[id].astro — 301 redirect /faq/q/:id → /kb/q/:id
+import qaData from '../../../data/seed-qa.json';
+
+export function getStaticPaths() {
+  return qaData.map(q => ({ params: { id: String(q.id) } }));
+}
+
+const { id } = Astro.params;
+return Astro.redirect(`/kb/q/${id}/`, 301);
+---
