@@ -21,7 +21,7 @@ cd /tmp/gh-pages-deploy
 git init
 git add -A
 git commit -m "$MSG"
-git remote add origin git@github.com:lvipclub/ai-xinca.git
+git remote add origin https://github.com/lvipclub/ai-xinca.git
 git push -f origin HEAD:gh-pages
 
 echo ""
