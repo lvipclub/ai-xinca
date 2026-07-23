@@ -1,5 +1,25 @@
 [
   {
+    "slug": "iaq-monitoring-commercial-buildings",
+    "title": "Continuous IAQ Monitoring Is Now Table Stakes for Commercial Buildings",
+    "description": "Why IAQ monitoring moved from 'nice-to-have' to tenant expectation — and what specifiers must require in performance briefs for CO₂, PM2.5, and TVOC sensing with DCV integration.",
+    "date": "2026-07-24",
+    "categories": ["air", "controls"],
+    "heroImage": "/articles/iaq-monitoring-strategies.png",
+    "editorPick": true,
+    "readCount": 0
+  },
+  {
+    "slug": "energy-efficiency-building-codes-asia",
+    "title": "How Asian Building Codes Are Driving a Convergence in Energy Efficiency Specifications",
+    "description": "Singapore's BCA Green Mark 2026, Hong Kong's BEAM Plus v2.0, and Dubai's Al Sa'fat now mandate submetering, continuous commissioning, and minimum 30% energy improvement — here is what it means for controls specifiers.",
+    "date": "2026-07-24",
+    "categories": ["controls", "iot"],
+    "heroImage": "/articles/energy-efficiency-building-codes.png",
+    "editorPick": true,
+    "readCount": 0
+  },
+  {
     "slug": "data-center-glycol-cooling",
     "title": "The Coolant Trade-Off That Transforms Data Centre Economics",
     "description": "Why data centres are switching from ethylene glycol to food-grade propylene glycol — and how this single choice drops cooling from ~40% of facility power to single digits.",
