@@ -5,7 +5,7 @@
     "description": "Why IAQ monitoring moved from 'nice-to-have' to tenant expectation — and what specifiers must require in performance briefs for CO₂, PM2.5, and TVOC sensing with DCV integration.",
     "date": "2026-07-24",
     "categories": ["air", "controls"],
-    "heroImage": "/articles/iaq-monitoring-strategies.png",
+    "heroImage": "/articles/iaq-monitoring-strategies.png?v=2",
     "editorPick": true,
     "readCount": 0
   },
@@ -15,7 +15,7 @@
     "description": "Singapore's BCA Green Mark 2026, Hong Kong's BEAM Plus v2.0, and Dubai's Al Sa'fat now mandate submetering, continuous commissioning, and minimum 30% energy improvement — here is what it means for controls specifiers.",
     "date": "2026-07-24",
     "categories": ["controls", "iot"],
-    "heroImage": "/articles/energy-efficiency-building-codes.png",
+    "heroImage": "/articles/energy-efficiency-building-codes.png?v=2",
     "editorPick": true,
     "readCount": 0
   },

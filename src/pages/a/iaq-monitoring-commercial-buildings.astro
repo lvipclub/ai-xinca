@@ -5,14 +5,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const pageTitle = "Continuous IAQ Monitoring Is Now Table Stakes for Commercial Buildings";
 const pageDescription = "Why indoor air quality monitoring has moved from 'nice-to-have' to tenant expectation — and what specifiers must require in performance briefs for CO₂, PM2.5, and TVOC sensing with DCV integration.";
 const canonicalUrl = "https://ai.xinca.com/a/iaq-monitoring-commercial-buildings/";
-const heroImage = "/articles/iaq-monitoring-strategies.png";
+const heroImage = "/articles/iaq-monitoring-strategies.png?v=2";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": pageTitle,
   "description": pageDescription,
-  "image": "https://ai.xinca.com/articles/iaq-monitoring-strategies.png",
+  "image": "https://ai.xinca.com/articles/iaq-monitoring-strategies.png?v=2",
   "author": { "@type": "Organization", "name": "XINCA" },
   "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://ai.xinca.com" },
   "datePublished": "2026-07-24",
@@ -23,7 +23,7 @@ const jsonLd = {
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  ogImage="https://ai.xinca.com/articles/iaq-monitoring-strategies.png"
+  ogImage="https://ai.xinca.com/articles/iaq-monitoring-strategies.png?v=2"
   ogType="article"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
