@@ -5,14 +5,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const pageTitle = "How Asian Building Codes Are Driving a Convergence in Energy Efficiency Specifications";
 const pageDescription = "Singapore's BCA Green Mark 2026, Hong Kong's BEAM Plus v2.0, and Dubai's Al Sa'fat now mandate submetering, continuous commissioning, and minimum 30% energy improvement — here is what it means for controls specifiers.";
 const canonicalUrl = "https://ai.xinca.com/a/energy-efficiency-building-codes-asia/";
-const heroImage = "/articles/energy-efficiency-building-codes.png";
+const heroImage = "/articles/energy-efficiency-building-codes.png?v=2";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": pageTitle,
   "description": pageDescription,
-  "image": "https://ai.xinca.com/articles/energy-efficiency-building-codes.png",
+  "image": "https://ai.xinca.com/articles/energy-efficiency-building-codes.png?v=2",
   "author": { "@type": "Organization", "name": "XINCA" },
   "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://ai.xinca.com" },
   "datePublished": "2026-07-24",
@@ -23,7 +23,7 @@ const jsonLd = {
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  ogImage="https://ai.xinca.com/articles/energy-efficiency-building-codes.png"
+  ogImage="https://ai.xinca.com/articles/energy-efficiency-building-codes.png?v=2"
   ogType="article"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
