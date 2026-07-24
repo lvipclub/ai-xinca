@@ -1,5 +1,35 @@
 [
   {
+    "slug": "building-controls-bms-integration",
+    "title": "Modern BMS Integration: From Traditional DDC to IoT-Enabled Building Controls",
+    "description": "How BACnet and Modbus protocols underpin modern building automation — sensor network architecture, IoT migration strategies, protocol integration patterns, and the practical steps for upgrading legacy DDC systems.",
+    "date": "2026-07-24",
+    "categories": ["controls", "iot"],
+    "heroImage": "/articles/building-controls-bms-integration-logbook.png",
+    "editorPick": true,
+    "readCount": 0
+  },
+  {
+    "slug": "water-side-control-valve-selection",
+    "title": "Control Valve Selection and Hydronic Balancing for Commercial HVAC",
+    "description": "Globe valves vs PICV, valve authority fundamentals, Cv sizing methodology, common commissioning mistakes, and hydronic balancing strategies for chilled water and heating hot water systems.",
+    "date": "2026-07-24",
+    "categories": ["water", "fluid"],
+    "heroImage": "/articles/water-side-control-valve-selection-logbook.png",
+    "editorPick": true,
+    "readCount": 0
+  },
+  {
+    "slug": "air-side-vav-damper-selection",
+    "title": "VAV Damper Selection for Commercial Buildings: Sizing, Types, and Specification Pitfalls",
+    "description": "How to select the right damper for VAV terminal units — opposed-blade vs parallel-blade, sizing methods from ASHRAE applications, common specification mistakes, and BACnet/Modbus integration requirements.",
+    "date": "2026-07-24",
+    "categories": ["air", "controls"],
+    "heroImage": "/articles/air-side-vav-damper-selection-logbook.png",
+    "editorPick": true,
+    "readCount": 0
+  },
+  {
     "slug": "iaq-monitoring-commercial-buildings",
     "title": "Continuous IAQ Monitoring Is Now Table Stakes for Commercial Buildings",
     "description": "Why IAQ monitoring moved from 'nice-to-have' to tenant expectation — and what specifiers must require in performance briefs for CO₂, PM2.5, and TVOC sensing with DCV integration.",

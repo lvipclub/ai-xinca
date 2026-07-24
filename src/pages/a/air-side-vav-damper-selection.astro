@@ -1,0 +1,274 @@
+---
+// a/air-side-vav-damper-selection.astro — Article: VAV Damper Selection for Commercial Buildings
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pageTitle = "VAV Damper Selection for Commercial Buildings: Sizing, Types, and Specification Pitfalls";
+const pageDescription = "How to select the right damper for VAV terminal units — opposed-blade vs parallel-blade, sizing methods from ASHRAE applications, common specification mistakes, and BACnet/Modbus integration requirements.";
+const canonicalUrl = "https://ai.xinca.com/a/air-side-vav-damper-selection/";
+const heroImage = "/articles/air-side-vav-damper-selection-logbook.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": pageTitle,
+  "description": pageDescription,
+  "image": "https://ai.xinca.com/articles/air-side-vav-damper-selection-logbook.png",
+  "author": { "@type": "Organization", "name": "XINCA" },
+  "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://ai.xinca.com" },
+  "datePublished": "2026-07-24",
+  "mainEntityOfPage": canonicalUrl
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage="https://ai.xinca.com/articles/air-side-vav-damper-selection-logbook.png"
+  ogType="article"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-[#0a1628] to-[#1a2942] text-white">
+    <div class="absolute inset-0 opacity-20">
+      <img
+        src={heroImage}
+        alt="Engineer's notebook with hand-drawn VAV damper sizing chart, airflow curves, and damper blade diagrams"
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0a1628]/80 to-transparent"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <a href="/kb" class="hover:text-white transition-colors">KB</a>
+        <span>/</span>
+        <a href="/a" class="hover:text-white transition-colors">Articles</a>
+        <span>/</span>
+        <span class="text-[#7EBEC5]">VAV Damper Selection</span>
+      </nav>
+
+      <div class="flex flex-wrap gap-3 mb-6">
+        <span class="badge-category">Air-side</span>
+        <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30">Building Controls</span>
+        <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30">VAV</span>
+        <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30">Dampers</span>
+      </div>
+
+      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-6 text-white" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        {pageTitle}
+      </h1>
+
+      <p class="text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed mb-8">
+        {pageDescription}
+      </p>
+
+      <div class="flex items-center gap-4">
+        <span class="text-sm text-gray-400">Share:</span>
+        <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(pageTitle)}&url=${encodeURIComponent(canonicalUrl)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href={`https://t.me/share/url?url=${encodeURIComponent(canonicalUrl)}&text=${encodeURIComponent(pageTitle)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.46-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.441-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.139.121.098.154.228.17.32.016.092.036.303.02.466z"/></svg>
+          Telegram
+        </a>
+        <a href={`https://wa.me/?text=${encodeURIComponent(pageTitle + ' ' + canonicalUrl)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Body -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div class="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-[#333] prose-p:text-[#666] prose-a:text-[#2ea3f2] prose-strong:text-[#333] prose-table:border prose-table:border-[#e5e5e5] prose-th:bg-[#f8f9fa] prose-th:text-[#333] prose-td:text-[#666]">
+
+      <p class="text-lg leading-relaxed">
+        The VAV terminal unit damper is one of the most routinely mis-specified components in commercial HVAC design. A damper that is too large loses modulating authority at low flow; one that is too small generates excessive pressure drop and noise. Between ASHRAE Handbook applications data and manufacturers' catalogue curves, consulting engineers face a deceptively simple component that carries outsized consequences for comfort and energy performance.
+      </p>
+
+      <h2>The Two Damper Families: Opposed-Blade vs Parallel-Blade</h2>
+
+      <p>All VAV terminal dampers fall into two fundamental categories, each with distinct flow characteristics that drive selection decisions:</p>
+
+      <div class="not-prose my-8 overflow-x-auto">
+        <table class="w-full border-collapse border border-[#e5e5e5] text-sm">
+          <thead>
+            <tr class="bg-[#f8f9fa]">
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Characteristic</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Opposed-Blade</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Parallel-Blade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Flow characteristic</td><td class="border border-[#e5e5e5] px-4 py-3">Linear to modified-linear — predictable across full stroke</td><td class="border border-[#e5e5e5] px-4 py-3">Quick-opening — exponential at low angles, flat beyond 60°</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Best application</td><td class="border border-[#e5e5e5] px-4 py-3">VAV volume control, modulating duty</td><td class="border border-[#e5e5e5] px-4 py-3">Two-position isolation, minimum pressure drop when open</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Pressure drop at full open</td><td class="border border-[#e5e5e5] px-4 py-3">Higher — blades remain in the airstream</td><td class="border border-[#e5e5e5] px-4 py-3">Lower — blades rotate parallel to flow</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Noise</td><td class="border border-[#e5e5e5] px-4 py-3">Generally quieter in modulating service</td><td class="border border-[#e5e5e5] px-4 py-3">Can generate turbulence noise at partial stroke</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Cost</td><td class="border border-[#e5e5e5] px-4 py-3">Slightly higher due to linkage complexity</td><td class="border border-[#e5e5e5] px-4 py-3">Lower — simpler linkage geometry</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>For VAV terminal unit applications, opposed-blade dampers are the default selection. ASHRAE Handbook — HVAC Applications (Chapter 48) recommends opposed-blade dampers for modulating airflow control because their near-linear characteristic simplifies control loop tuning. Parallel-blade dampers are reserved for isolation duty — fire/smoke dampers, maintenance isolation, and bypass applications where the damper operates fully open or fully closed.</p>
+
+      <blockquote class="border-l-4 border-[#7EBEC5] pl-4 italic text-[#555] my-6">
+        <p class="text-lg"><strong>An oversized opposed-blade damper operating below 15% stroke for most of the cooling season is not saving money — it is creating hunting, noise, and premature actuator wear.</strong> The most common VAV specification mistake is selecting the damper for peak design flow rather than the turndown range where it will actually operate.</p>
+      </blockquote>
+
+      <h2>Sizing Methods: Beyond the Rule of Thumb</h2>
+
+      <p>Three methods dominate damper sizing practice, and each produces different results for the same terminal unit:</p>
+
+      <div class="not-prose my-8 overflow-x-auto">
+        <table class="w-full border-collapse border border-[#e5e5e5] text-sm">
+          <thead>
+            <tr class="bg-[#f8f9fa]">
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Method</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Approach</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Suitable For</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Pitfall</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Face velocity</td><td class="border border-[#e5e5e5] px-4 py-3">Size damper for 6-8 m/s (1,200-1,600 fpm) at peak flow</td><td class="border border-[#e5e5e5] px-4 py-3">Quick sizing during schematic design</td><td class="border border-[#e5e5e5] px-4 py-3">Ignores turndown; damper may be oversized at minimum flow</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Authority (β ratio)</td><td class="border border-[#e5e5e5] px-4 py-3">Damper pressure drop = 15-25% of total branch ΔP at full flow</td><td class="border border-[#e5e5e5] px-4 py-3">Detailed design — best modulating control</td><td class="border border-[#e5e5e5] px-4 py-3">Requires accurate duct pressure calculations</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Catalogue selection</td><td class="border border-[#e5e5e5] px-4 py-3">Manufacturer software sizes damper based on inlet conditions</td><td class="border border-[#e5e5e5] px-4 py-3">Final specification — endorsed by ASHRAE</td><td class="border border-[#e5e5e5] px-4 py-3">Vendor lock-in if not cross-checked with authority method</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The authority method — maintaining damper pressure drop at 15-25% of the total branch pressure drop at design flow — produces the most linear installed characteristic. When the damper pressure drop is less than 10% of the system total, the installed characteristic distorts towards quick-opening behaviour regardless of the inherent blade characteristic. ASHRAE Guideline 36-2021 reinforces this with specific trim-and-respond logic that assumes the damper has adequate authority to deliver stable modulation.</p>
+
+      <h2>Common Specification Mistakes</h2>
+
+      <p>Three recurring errors appear in VAV damper specifications across markets:</p>
+
+      <ol>
+        <li><strong>Specifying the damper by duct dimensions alone.</strong> A 300 mm round damper in a 300 mm duct may be the correct physical fit but the wrong aerodynamic selection. The damper free area ratio — typically 75-85% for opposed-blade dampers — means the actual flow area is smaller than the duct cross-section. Always specify damper size based on free area, not nominal duct diameter.</li>
+        <li><strong>Ignoring the actuator torque requirement at the pressure differential, not the static rating.</strong> Actuator catalogues quote torque at zero differential pressure. At 750 Pa closing pressure, the required torque can be 2-3 times the catalogue rating. Specify actuators for the worst-case shut-off pressure differential in the system — typically at the AHU discharge with all downstream VAV boxes closed.</li>
+        <li><strong>Omitting the minimum controllable stroke.</strong> Every damper-actuator combination has a practical minimum stroke below which the flow is uncontrolled. For opposed-blade dampers with standard electric actuators, this is typically 10-15% of stroke — corresponding to roughly 5-8% of design flow. Below this point, blade edge leakage and hysteresis dominate. Specify the turndown requirement explicitly: "damper-actuator assembly shall provide stable modulation from 15% to 100% of design flow."</li>
+      </ol>
+
+      <h2>BACnet and Modbus Integration</h2>
+
+      <p>The actuator is no longer just a motor — it is a networked device. Modern VAV damper actuators carry native BACnet MS/TP or Modbus RTU interfaces, transmitting position feedback, cycle count, and torque data directly to the BMS. This shifts the specification from "spring-return, 0-10 V" to a data-rich integration decision:</p>
+
+      <div class="not-prose my-8 overflow-x-auto">
+        <table class="w-full border-collapse border border-[#e5e5e5] text-sm">
+          <thead>
+            <tr class="bg-[#f8f9fa]">
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Feature</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Analogue (0-10 V)</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">BACnet MS/TP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Position feedback</td><td class="border border-[#e5e5e5] px-4 py-3">0-10 V proportional signal — no diagnostics</td><td class="border border-[#e5e5e5] px-4 py-3">Absolute position (0-100%), fault codes, cycle count</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Predictive maintenance</td><td class="border border-[#e5e5e5] px-4 py-3">Reactive — wait for failure</td><td class="border border-[#e5e5e5] px-4 py-3">Cycle count trending; torque rise alerts before stall</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Wiring</td><td class="border border-[#e5e5e5] px-4 py-3">3 wires per actuator to DDC controller</td><td class="border border-[#e5e5e5] px-4 py-3">Daisy-chain on MS/TP trunk — fewer home runs</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Cost delta</td><td class="border border-[#e5e5e5] px-4 py-3">Baseline</td><td class="border border-[#e5e5e5] px-4 py-3">15-25% premium offset by wiring savings at scale</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>For projects with more than 50 VAV terminals, the BACnet MS/TP actuator premium is typically recovered through reduced controller I/O and wiring costs — the damper actuator becomes a node on the trunk, eliminating individual analogue I/O points at the VAV controller.</p>
+
+      <h2>Cross-Border Relevance: Singapore, Hong Kong, and Dubai</h2>
+
+      <p>For firms operating across Asia-Pacific and the Middle East, damper selection standards converge on a common core with regional variations:</p>
+
+      <div class="not-prose my-8 overflow-x-auto">
+        <table class="w-full border-collapse border border-[#e5e5e5] text-sm">
+          <thead>
+            <tr class="bg-[#f8f9fa]">
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Jurisdiction</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Standard</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Key Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Singapore</td><td class="border border-[#e5e5e5] px-4 py-3">SS 553:2016 (Code for Air-Conditioning and Mechanical Ventilation)</td><td class="border border-[#e5e5e5] px-4 py-3">VAV dampers must maintain minimum outdoor air under all operating conditions — drives sizing at turndown</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Hong Kong</td><td class="border border-[#e5e5e5] px-4 py-3">Buildings Department PNAP APP-151 (ventilation requirements)</td><td class="border border-[#e5e5e5] px-4 py-3">Fire/smoke damper integration with VAV terminal — dual-function assemblies common in HK high-rise</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3 font-medium">Dubai</td><td class="border border-[#e5e5e5] px-4 py-3">Dubai Green Building Regulations, ASHRAE 90.1-2019 reference</td><td class="border border-[#e5e5e5] px-4 py-3">High ambient temperature requires actuator thermal derating; specify 85 °C rated actuators for ceiling plenum installation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>A damper specification written to ASHRAE Handbook methods with 15-25% authority is accepted in all three jurisdictions without modification — the physics of airflow does not change at the border. The regional variations are in the supporting requirements: fire/smoke integration, actuator temperature rating, and minimum outdoor air compliance at turndown.</p>
+
+      <h2>Bottom Line</h2>
+
+      <p>VAV damper selection rewards the engineer who looks past the catalogue face velocity table. The three decisions that separate a well-controlled VAV system from a chronic comfort complaint are: opposed-blade dampers for modulating service, sized for 15-25% authority at design flow (not just face velocity), with BACnet-enabled actuators that report position and torque to the BMS for predictive maintenance. The material cost difference between the right damper and the wrong damper is typically under AUD 80 per terminal unit — a fraction of the rebalancing and occupant complaint cost of getting it wrong.</p>
+
+      <!-- CTA Section -->
+      <div class="not-prose my-10 p-8 rounded-lg border-2 border-[#7EBEC5] bg-gradient-to-r from-[#f8f9fa] to-white">
+        <div class="flex flex-col md:flex-row items-start gap-6">
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-[#333] mb-3" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              Have a VAV damper selection question?
+            </h3>
+            <p class="text-[#666] mb-4 leading-relaxed">
+              Search the HVAC controls knowledge base — opposed-blade vs parallel-blade characteristics, damper authority calculations, BACnet actuator integration, ASHRAE Guideline 36 trim-and-respond logic. Ask Havi, the AI chatbot, for answers backed by engineering standards.
+            </p>
+            <a href="/" class="btn-accent text-sm">
+              Ask Havi
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+          </div>
+          <div class="shrink-0">
+            <img src="/avatars/lady-havi-square.jpg" alt="Lady Havi — AI host at ai.xinca.com" class="w-20 h-20 rounded-full object-cover" />
+          </div>
+        </div>
+      </div>
+
+      <h2>Sources</h2>
+      <ul class="text-sm text-[#888]">
+        <li>ASHRAE Handbook — HVAC Applications (2023), Chapter 48: "Valves and Dampers."</li>
+        <li>ASHRAE Guideline 36-2021: "High-Performance Sequences of Operation for HVAC Systems."</li>
+        <li>SS 553:2016 — Singapore Standard Code of Practice for Air-Conditioning and Mechanical Ventilation in Buildings.</li>
+        <li>Buildings Department Hong Kong, PNAP APP-151: "Ventilation Requirements."</li>
+        <li>Dubai Municipality Green Building Regulations and Specifications (2020), referencing ASHRAE 90.1-2019.</li>
+        <li>Belimo Holding AG. "Damper Actuator Selection Guide — Torque Rating vs Differential Pressure" (2024).</li>
+      </ul>
+
+      <h2>Related Questions</h2>
+      <ul>
+        <li><a href="/kb/q/44">How do I select damper blade and frame material for corrosive environments?</a></li>
+        <li><a href="/kb/q/50">What is ASHRAE Guideline 36 and how does it improve HVAC control sequences?</a></li>
+        <li><a href="/a/iaq-monitoring-commercial-buildings/">Continuous IAQ Monitoring Is Now Table Stakes for Commercial Buildings</a></li>
+      </ul>
+
+      <p class="text-sm text-gray-400 mt-10">
+        Published July 2026. This article is part of the XINCA HVAC controls engineering knowledge base. For consulting engineers, commissioning agents, and facility managers specifying VAV terminal units in commercial buildings. Search the knowledge base at <a href="/">ai.xinca.com</a>.
+      </p>
+      <p class="text-xs text-gray-500 mt-2">
+        <a href="https://twitter.com/hashtag/VAV" class="hover:text-[#2ea3f2]">#VAV</a>
+        &nbsp;<a href="https://twitter.com/hashtag/DamperSelection" class="hover:text-[#2ea3f2]">#DamperSelection</a>
+        &nbsp;<a href="https://twitter.com/hashtag/BACnet" class="hover:text-[#2ea3f2]">#BACnet</a>
+        &nbsp;<a href="https://twitter.com/hashtag/HVAC" class="hover:text-[#2ea3f2]">#HVAC</a>
+        &nbsp;<a href="https://twitter.com/hashtag/BuildingAutomation" class="hover:text-[#2ea3f2]">#BuildingAutomation</a>
+        &nbsp;<a href="https://twitter.com/hashtag/ASHRAE" class="hover:text-[#2ea3f2]">#ASHRAE</a>
+      </p>
+
+    </div>
+  </article>
+</BaseLayout>
