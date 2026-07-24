@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="60%" stop-color="#0d2137"/>
+      <stop offset="100%" stop-color="#0a1a2e"/>
+    </linearGradient>
+    <linearGradient id="energyFlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2ea3f2" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#2ea3f2" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#7EBEC5" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="nodeGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2ea3f2"/>
+      <stop offset="100%" stop-color="#7EBEC5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg2)"/>
+  <!-- Building wireframe -->
+  <rect x="100" y="80" width="400" height="470" rx="6" fill="none" stroke="#1e3a5f" stroke-width="2" opacity="0.7"/>
+  <rect x="520" y="280" width="250" height="270" rx="6" fill="none" stroke="#1e3a5f" stroke-width="2" opacity="0.6"/>
+  <rect x="790" y="180" width="310" height="370" rx="6" fill="none" stroke="#1e3a5f" stroke-width="2" opacity="0.7"/>
+  <!-- Floor lines -->
+  <line x1="102" y1="140" x2="498" y2="140" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="102" y1="210" x2="498" y2="210" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="102" y1="280" x2="498" y2="280" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="102" y1="350" x2="498" y2="350" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="102" y1="420" x2="498" y2="420" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="522" y1="340" x2="768" y2="340" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="522" y1="410" x2="768" y2="410" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="792" y1="240" x2="1098" y2="240" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="792" y1="310" x2="1098" y2="310" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="792" y1="380" x2="1098" y2="380" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="792" y1="450" x2="1098" y2="450" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <!-- Sensor nodes -->
+  <circle cx="200" cy="175" r="8" fill="url(#nodeGlow)" opacity="0.8"/>
+  <circle cx="350" cy="245" r="8" fill="url(#nodeGlow)" opacity="0.7"/>
+  <circle cx="300" cy="385" r="8" fill="url(#nodeGlow)" opacity="0.6"/>
+  <circle cx="200" cy="455" r="8" fill="url(#nodeGlow)" opacity="0.7"/>
+  <circle cx="640" cy="325" r="8" fill="url(#nodeGlow)" opacity="0.6"/>
+  <circle cx="640" cy="445" r="8" fill="url(#nodeGlow)" opacity="0.7"/>
+  <circle cx="900" cy="215" r="8" fill="url(#nodeGlow)" opacity="0.7"/>
+  <circle cx="950" cy="345" r="8" fill="url(#nodeGlow)" opacity="0.6"/>
+  <circle cx="900" cy="485" r="8" fill="url(#nodeGlow)" opacity="0.8"/>
+  <!-- Energy flow lines connecting nodes -->
+  <path d="M200 175 Q350 150 350 245" fill="none" stroke="url(#energyFlow)" stroke-width="2" opacity="0.5"/>
+  <path d="M350 245 Q300 300 300 385" fill="none" stroke="url(#energyFlow)" stroke-width="2" opacity="0.5"/>
+  <path d="M300 385 Q200 400 200 455" fill="none" stroke="url(#energyFlow)" stroke-width="2" opacity="0.5"/>
+  <path d="M640 325 Q640 380 640 445" fill="none" stroke="url(#energyFlow)" stroke-width="2" opacity="0.5"/>
+  <path d="M900 215 Q950 280 950 345" fill="none" stroke="url(#energyFlow)" stroke-width="2" opacity="0.5"/>
+  <path d="M950 345 Q900 420 900 485" fill="none" stroke="url(#energyFlow)" stroke-width="2" opacity="0.5"/>
+  <!-- Data flow dots on paths -->
+  <circle cx="250" cy="200" r="3" fill="#2ea3f2" opacity="0.9"/>
+  <circle cx="325" cy="320" r="3" fill="#7EBEC5" opacity="0.9"/>
+  <circle cx="240" cy="430" r="3" fill="#2ea3f2" opacity="0.7"/>
+  <circle cx="640" cy="390" r="3" fill="#7EBEC5" opacity="0.8"/>
+  <circle cx="925" cy="280" r="3" fill="#2ea3f2" opacity="0.9"/>
+  <!-- Subtle grid -->
+  <line x1="0" y1="315" x2="1200" y2="315" stroke="#1e3a5f" stroke-width="0.5" opacity="0.2"/>
+  <line x1="600" y1="0" x2="600" y2="630" stroke="#1e3a5f" stroke-width="0.5" opacity="0.2"/>
+</svg>
