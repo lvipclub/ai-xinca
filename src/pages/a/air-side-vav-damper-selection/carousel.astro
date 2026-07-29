@@ -1,0 +1,397 @@
+---
+// a/air-side-vav-damper-selection/carousel.astro — Carousel slide deck for LinkedIn/X sharing
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const pageTitle = "VAV Damper Selection — Carousel Slides";
+const pageDescription = "5-slide carousel deck for LinkedIn and X: opposed-blade vs parallel-blade, damper authority, sizing methods, BACnet/Modbus integration, and cross-border standards.";
+const canonicalUrl = "https://ai.xinca.com/a/air-side-vav-damper-selection/carousel/";
+const articleUrl = "https://ai.xinca.com/a/air-side-vav-damper-selection/";
+const articleSlug = "air-side-vav-damper-selection";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": pageTitle,
+  "description": pageDescription,
+  "url": canonicalUrl,
+  "isPartOf": {
+    "@type": "Article",
+    "url": articleUrl,
+    "name": "VAV Damper Selection for Commercial Buildings: Sizing, Types, and Specification Pitfalls"
+  }
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage="https://ai.xinca.com/articles/air-side-vav-damper-selection-logbook.png"
+  ogType="article"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
+  <!-- Hero Strip -->
+  <section class="bg-gradient-to-r from-[#0a1628] to-[#1a2942] text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <nav class="flex items-center gap-2 text-sm text-gray-400 mb-4">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <a href="/kb" class="hover:text-white transition-colors">KB</a>
+        <span>/</span>
+        <a href="/a" class="hover:text-white transition-colors">Articles</a>
+        <span>/</span>
+        <a href={articleUrl} class="hover:text-white transition-colors">VAV Damper Selection</a>
+        <span>/</span>
+        <span class="text-[#7EBEC5]">Carousel</span>
+      </nav>
+      <h1 class="text-2xl md:text-4xl font-extrabold mb-3" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        Carousel Slides: VAV Damper Selection
+      </h1>
+      <p class="text-gray-300 max-w-2xl">
+        5 vertical slides for LinkedIn Document Posts and X. Download individual slides or the full deck.
+        <a href={articleUrl} class="text-[#7EBEC5] hover:underline">Read the full article</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Carousel Viewer -->
+  <section class="max-w-2xl mx-auto px-4 pt-12 pb-12">
+    <div id="carousel-viewer" class="relative">
+      <!-- Slides container -->
+      <div id="carousel-track" class="overflow-hidden rounded-xl shadow-2xl bg-[#0a1628]">
+        <!-- Slide 1: Hook -->
+        <div class="carousel-panel" data-index="0">
+          <div style="aspect-ratio: 1080/1350; max-width: 1080px; width: 100%;" class="relative overflow-hidden bg-gradient-to-b from-[#0a1628] via-[#112240] to-[#0a1628] flex flex-col justify-center items-center text-center p-12 md:p-16">
+            <div class="absolute top-0 left-0 w-full h-2 bg-[#7EBEC5]"></div>
+            <div class="absolute top-8 right-8 text-[#7EBEC5]/30 text-xs font-mono tracking-widest uppercase">Slide 1 / 5</div>
+            <div class="mb-8">
+              <span class="inline-block text-xs px-3 py-1 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30 uppercase tracking-wider">Hook</span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              5 Pitfalls in<br/>VAV Damper<br/>Specification
+            </h2>
+            <p class="text-lg md:text-xl text-gray-400 max-w-lg">
+              And how they sabotage your comfort and energy performance.
+            </p>
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </div>
+        </div>
+        <!-- Slide 2: Problem -->
+        <div class="carousel-panel hidden" data-index="1">
+          <div style="aspect-ratio: 1080/1350; max-width: 1080px; width: 100%;" class="relative overflow-hidden bg-white flex flex-col justify-center items-center text-center p-12 md:p-16 border border-[#e5e5e5]">
+            <div class="absolute top-0 left-0 w-full h-2 bg-[#7EBEC5]"></div>
+            <div class="absolute top-8 right-8 text-[#7EBEC5]/40 text-xs font-mono tracking-widest uppercase">Slide 2 / 5</div>
+            <div class="mb-8">
+              <span class="inline-block text-xs px-3 py-1 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30 uppercase tracking-wider">Problem</span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-[#333] leading-tight mb-8" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              "Size by Duct<br/>Diameter" is Wrong
+            </h2>
+            <div class="flex items-center justify-center gap-8 my-8">
+              <div class="flex flex-col items-center gap-2">
+                <div class="w-20 h-20 rounded-full bg-[#f8f9fa] border-2 border-[#e5e5e5] flex items-center justify-center">
+                  <svg class="w-10 h-10 text-[#666]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke-width="2"/></svg>
+                </div>
+                <span class="text-xs text-[#888] font-medium uppercase tracking-wide">Duct &Oslash;300</span>
+              </div>
+              <div class="text-3xl font-bold text-[#7EBEC5]">&#8800;</div>
+              <div class="flex flex-col items-center gap-2">
+                <div class="w-20 h-20 rounded-full bg-[#f8f9fa] border-2 border-[#7EBEC5] flex items-center justify-center">
+                  <svg class="w-10 h-10 text-[#7EBEC5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke-width="2"/><line x1="12" y1="5" x2="12" y2="19" stroke-width="2"/></svg>
+                </div>
+                <span class="text-xs text-[#7EBEC5] font-medium uppercase tracking-wide">Free Area ~75%</span>
+              </div>
+            </div>
+            <p class="text-base md:text-lg text-[#666] max-w-lg mx-auto text-center leading-relaxed">
+              A 300 mm round damper in a 300 mm duct has only 75-85% free area. Always specify damper size based on free area, not nominal duct diameter.
+            </p>
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </div>
+        </div>
+        <!-- Slide 3: Concept (Damper Authority) -->
+        <div class="carousel-panel hidden" data-index="2">
+          <div style="aspect-ratio: 1080/1350; max-width: 1080px; width: 100%;" class="relative overflow-hidden bg-gradient-to-br from-[#f8f9fa] to-white flex flex-col justify-center items-center text-center p-12 md:p-16 border border-[#e5e5e5]">
+            <div class="absolute top-0 left-0 w-full h-2 bg-[#7EBEC5]"></div>
+            <div class="absolute top-8 right-8 text-[#7EBEC5]/40 text-xs font-mono tracking-widest uppercase">Slide 3 / 5</div>
+            <div class="mb-8">
+              <span class="inline-block text-xs px-3 py-1 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30 uppercase tracking-wider">Concept</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#333] leading-tight mb-6" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              What is Damper Authority?
+            </h2>
+            <!-- Formula -->
+            <div class="my-8 p-8 bg-white rounded-xl border-2 border-[#7EBEC5]/30 shadow-lg max-w-lg mx-auto">
+              <p class="font-mono text-xl md:text-2xl text-[#333] text-center leading-relaxed">
+                <span class="text-[#7EBEC5] font-bold">&#946;</span> =
+                <span class="inline-block border-b-2 border-[#333] pb-1 mx-1">&#916;P<sub class="text-sm">damper</sub></span>
+                <br/>
+                <span class="inline-block border-b-2 border-[#333] pb-1">&#916;P<sub class="text-sm">damper</sub> + &#916;P<sub class="text-sm">branch</sub></span>
+              </p>
+            </div>
+            <p class="text-base md:text-lg text-[#666] max-w-lg mx-auto text-center leading-relaxed">
+              Ratio of damper pressure drop to total branch pressure drop at design flow.
+            </p>
+            <!-- Target badge -->
+            <div class="mt-6 flex items-center justify-center gap-3">
+              <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#7EBEC5]/10 text-[#333] font-semibold text-sm border border-[#7EBEC5]/30">
+                Target: <span class="text-[#7EBEC5] text-lg">&#946; = 0.15–0.25</span>
+              </span>
+            </div>
+            <!-- Authority scale -->
+            <div class="mt-8 max-w-lg mx-auto w-full">
+              <div class="flex justify-between text-xs text-[#888] mb-2 px-1">
+                <span>0</span><span>0.05</span><span>0.15</span><span>0.25</span><span>0.5</span>
+              </div>
+              <div class="h-3 rounded-full bg-gradient-to-r from-red-400 via-yellow-400 to-green-500 relative">
+                <div class="absolute -top-1 left-[30%] w-1 h-5 bg-[#333] rounded"></div>
+                <div class="absolute -top-7 left-[26%] text-xs text-[#333] font-bold">&#946;=0.15</div>
+              </div>
+              <div class="flex justify-between text-xs text-[#888] mt-2 px-1">
+                <span>Poor</span><span class="text-[#7EBEC5] font-semibold">Min</span><span>&nbsp;</span><span>Ideal</span>
+              </div>
+            </div>
+            <p class="text-xs text-[#888] mt-4 max-w-lg">When damper &Delta;P &lt; 10% of system total, installed characteristic distorts to quick-opening regardless of blade design. ASHRAE Guideline 36-2021.</p>
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </div>
+        </div>
+        <!-- Slide 4: Comparison -->
+        <div class="carousel-panel hidden" data-index="3">
+          <div style="aspect-ratio: 1080/1350; max-width: 1080px; width: 100%;" class="relative overflow-hidden bg-[#0a1628] flex flex-col justify-center items-center text-center p-12 md:p-16">
+            <div class="absolute top-0 left-0 w-full h-2 bg-[#7EBEC5]"></div>
+            <div class="absolute top-8 right-8 text-[#7EBEC5]/40 text-xs font-mono tracking-widest uppercase">Slide 4 / 5</div>
+            <div class="mb-8">
+              <span class="inline-block text-xs px-3 py-1 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30 uppercase tracking-wider">Comparison</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-8" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              Analogue vs BACnet Actuators
+            </h2>
+            <!-- 2-column comparison -->
+            <div class="grid grid-cols-2 gap-3 md:gap-4 max-w-xl mx-auto">
+              <div class="bg-white/5 rounded-lg p-4 text-center border border-white/10">
+                <div class="text-gray-400 text-2xl font-bold mb-2">0–10 V</div>
+                <p class="text-gray-400 text-xs leading-relaxed">Analogue signal<br/>3 wires/actuator<br/>No diagnostics<br/>Reactive maintenance</p>
+                <div class="mt-3 pt-2 border-t border-white/10">
+                  <span class="text-xs text-yellow-400">Baseline cost</span>
+                </div>
+              </div>
+              <div class="bg-[#7EBEC5]/10 rounded-lg p-4 text-center border border-[#7EBEC5]/30">
+                <div class="text-[#7EBEC5] text-2xl font-bold mb-2">BACnet MS/TP</div>
+                <p class="text-gray-300 text-xs leading-relaxed">Daisy-chain &#10003;<br/>Position + fault codes<br/>Cycle count trending<br/>Predictive maintenance</p>
+                <div class="mt-3 pt-2 border-t border-[#7EBEC5]/30">
+                  <span class="text-xs text-green-400">15–25% premium</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-sm text-gray-400 max-w-lg mx-auto text-center mt-6 leading-relaxed">
+              For 50+ VAV terminals, BACnet premium is recovered through reduced I/O and wiring costs. The actuator becomes a node on the trunk.
+            </p>
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </div>
+        </div>
+        <!-- Slide 5: CTA -->
+        <div class="carousel-panel hidden" data-index="4">
+          <div style="aspect-ratio: 1080/1350; max-width: 1080px; width: 100%;" class="relative overflow-hidden bg-gradient-to-b from-[#0a1628] via-[#112240] to-[#0a1628] flex flex-col justify-center items-center text-center p-12 md:p-16">
+            <div class="absolute top-0 left-0 w-full h-2 bg-[#7EBEC5]"></div>
+            <div class="absolute top-8 right-8 text-[#7EBEC5]/30 text-xs font-mono tracking-widest uppercase">Slide 5 / 5</div>
+            <div class="mb-6">
+              <span class="inline-block text-xs px-3 py-1 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] border border-[#7EBEC5]/30 uppercase tracking-wider">CTA</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              Ready to specify better<br/>VAV dampers?
+            </h2>
+            <p class="text-lg text-gray-400 mb-8 max-w-md">
+              Read the complete technical guide — opposed-blade vs parallel-blade, sizing methods, BACnet integration, and cross-border standards.
+            </p>
+            <!-- Lady Havi + CTA -->
+            <div class="flex flex-col items-center gap-4 mb-8">
+              <img src="/avatars/lady-havi-square.jpg" alt="Lady Havi" class="w-16 h-16 rounded-full object-cover border-2 border-[#7EBEC5]" />
+              <span class="text-xs text-[#7EBEC5] uppercase tracking-widest font-medium">Lady Havi</span>
+            </div>
+            <a href={articleUrl} class="inline-flex items-center gap-2 bg-[#7EBEC5] text-[#0a1628] font-bold px-8 py-3 rounded-lg hover:bg-[#6aabaf] transition-colors text-lg">
+              Read the Full Guide
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </a>
+            <p class="text-sm text-gray-500 mt-6">
+              ai.xinca.com/a/air-side-vav-damper-selection/
+            </p>
+            <a href="https://t.me/hvaccontrols" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-[#7EBEC5] transition-colors mt-4">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.46-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.441-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.139.121.098.154.228.17.32.016.092.036.303.02.466z"/></svg>
+              Subscribe on Telegram — HVAC Controls 101
+            </a>
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation arrows -->
+      <button id="carousel-prev" class="absolute top-1/2 -left-3 md:-left-5 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-[#333] shadow-lg hover:bg-white flex items-center justify-center transition-colors z-10" aria-label="Previous slide">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="carousel-next" class="absolute top-1/2 -right-3 md:-right-5 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-[#333] shadow-lg hover:bg-white flex items-center justify-center transition-colors z-10" aria-label="Next slide">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <!-- Dot indicators -->
+      <div id="carousel-dots" class="flex items-center justify-center gap-2 mt-4">
+        <button class="w-3 h-3 rounded-full bg-[#7EBEC5] transition-all" data-dot="0" aria-label="Slide 1"></button>
+        <button class="w-3 h-3 rounded-full bg-[#ccc] transition-all" data-dot="1" aria-label="Slide 2"></button>
+        <button class="w-3 h-3 rounded-full bg-[#ccc] transition-all" data-dot="2" aria-label="Slide 3"></button>
+        <button class="w-3 h-3 rounded-full bg-[#ccc] transition-all" data-dot="3" aria-label="Slide 4"></button>
+        <button class="w-3 h-3 rounded-full bg-[#ccc] transition-all" data-dot="4" aria-label="Slide 5"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section class="max-w-2xl mx-auto px-4 pb-16">
+    <h2 class="text-xl font-bold text-[#333] mb-2 text-center" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Download Slides</h2>
+    <p class="text-[#666] mb-6 text-sm text-center">1080×1350 PNGs — optimised for LinkedIn Document Posts. Click any preview to enlarge, or download the full set.</p>
+
+    <!-- Download All button -->
+    <div class="text-center mb-8">
+      <a href="/articles/slides/slides-bundle.zip" download={`Slidedesk-ai-xinca-com-${articleSlug}.zip`} class="inline-flex items-center gap-2 bg-[#7EBEC5] text-[#0a1628] font-bold px-6 py-3 rounded-lg hover:bg-[#6aabaf] transition-colors text-base">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Download All 5 Slides (ZIP)
+      </a>
+    </div>
+
+    <!-- Preview grid (placeholder until PNGs generated) -->
+    <p class="text-center text-sm text-[#999] italic mb-8">Slide previews will appear here after PNG screenshots are generated.</p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a href={articleUrl} class="inline-flex items-center gap-2 text-sm bg-[#2ea3f2] text-white px-5 py-2.5 rounded-lg hover:bg-[#2589d9] transition-colors">
+        Read the Full Article
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </a>
+      <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`} target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm bg-[#0a66c2] text-white px-5 py-2.5 rounded-lg hover:bg-[#095298] transition-colors">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Share on LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 hidden flex-col items-center justify-center" role="dialog" aria-label="Slide preview">
+    <button id="lightbox-close" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-white/80 hover:text-white text-2xl z-10" aria-label="Close">&times;</button>
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white z-10" aria-label="Previous slide">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white z-10" aria-label="Next slide">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl" />
+  </div>
+
+</BaseLayout>
+
+<script>
+  // Interactive carousel viewer
+  (function() {
+    const panels = document.querySelectorAll('.carousel-panel');
+    const dots = document.querySelectorAll('#carousel-dots button');
+    const prev = document.getElementById('carousel-prev');
+    const next = document.getElementById('carousel-next');
+    let current = 0;
+    const total = panels.length;
+
+    if (!total) return;
+
+    function show(index) {
+      panels.forEach(p => p.classList.add('hidden'));
+      dots.forEach(d => { d.classList.remove('bg-[#7EBEC5]'); d.classList.add('bg-[#ccc]'); });
+      panels[index].classList.remove('hidden');
+      dots[index].classList.remove('bg-[#ccc]');
+      dots[index].classList.add('bg-[#7EBEC5]');
+      current = index;
+    }
+
+    // Support ?slide=N URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const startSlide = parseInt(params.get('slide')) - 1;
+    show(startSlide >= 0 && startSlide < total ? startSlide : 0);
+
+    prev.addEventListener('click', () => show(current === 0 ? total - 1 : current - 1));
+    next.addEventListener('click', () => show(current === total - 1 ? 0 : current + 1));
+    dots.forEach(dot => dot.addEventListener('click', () => show(parseInt(dot.dataset.dot))));
+
+    // Keyboard nav
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('lightbox').classList.contains('flex')) return;
+      if (e.key === 'ArrowLeft') { prev.click(); }
+      if (e.key === 'ArrowRight') { next.click(); }
+    });
+  })();
+
+  // Lightbox
+  (function() {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbClose = document.getElementById('lightbox-close');
+    const lbPrev = document.getElementById('lightbox-prev');
+    const lbNext = document.getElementById('lightbox-next');
+
+    const slides = Array.from(document.querySelectorAll('[data-src]')).map(el => el.dataset.src);
+    let lbIndex = 0;
+
+    function openLightbox(src) {
+      lbIndex = slides.indexOf(src);
+      if (lbIndex < 0) lbIndex = 0;
+      lbImg.src = src;
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      updateLightboxArrows();
+    }
+
+    function closeLightbox() {
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function lightboxNavigate(dir) {
+      lbIndex = (lbIndex + dir + slides.length) % slides.length;
+      lbImg.src = slides[lbIndex];
+      updateLightboxArrows();
+    }
+
+    function updateLightboxArrows() {
+      lbPrev.style.visibility = slides.length > 1 ? 'visible' : 'hidden';
+      lbNext.style.visibility = slides.length > 1 ? 'visible' : 'hidden';
+    }
+
+    // Open from download thumbnails
+    document.querySelectorAll('.download-trigger').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLightbox(link.dataset.src);
+      });
+    });
+
+    // Close
+    lbClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+    lbPrev.addEventListener('click', () => lightboxNavigate(-1));
+    lbNext.addEventListener('click', () => lightboxNavigate(1));
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('flex')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lightboxNavigate(-1);
+      if (e.key === 'ArrowRight') lightboxNavigate(1);
+    });
+  })();
+</script>
+
+<style>
+  /* Carousel viewer transitions */
+  #carousel-track {
+    transition: border-radius 0.3s ease;
+  }
+
+  @media print {
+    header, footer { display: none; }
+    .carousel-slide > div { break-inside: avoid; page-break-after: always; }
+  }
+</style>
