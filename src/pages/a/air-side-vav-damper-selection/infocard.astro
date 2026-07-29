@@ -1,0 +1,113 @@
+---
+// a/air-side-vav-damper-selection/infocard.astro
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const pageTitle = "VAV Damper Selection — Infocard";
+const pageDescription = "Editorial infocard: opposed-blade vs parallel-blade damper comparison, sizing methods from ASHRAE, BACnet/Modbus integration, and cross-border standards for Singapore, Hong Kong, and Dubai.";
+const canonicalUrl = "https://ai.xinca.com/a/air-side-vav-damper-selection/infocard/";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage="https://ai.xinca.com/articles/air-side-vav-damper-selection-logbook.png"
+  ogType="article"
+>
+  <main class="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-[#666] mb-6">
+      <a href="/" class="hover:text-[#2ea3f2]">Home</a> &rsaquo;
+      <a href="/kb/air" class="hover:text-[#2ea3f2]">Air-side</a> &rsaquo;
+      <a href="/a/air-side-vav-damper-selection/" class="hover:text-[#2ea3f2]">VAV Damper Selection</a> &rsaquo;
+      <span class="text-[#333]">Infocard</span>
+    </nav>
+
+    <div class="infocard-wrap">
+      <div class="card">
+        <p class="card-meta">Air-Side HVAC &bull; VAV Terminal Units &bull; Damper Specification</p>
+        <h1 class="card-title">VAV Damper Selection for Commercial Buildings</h1>
+        <p class="card-subtitle">How to select the right damper for VAV terminal units — opposed-blade vs parallel-blade, sizing methods from ASHRAE applications, common specification mistakes, and BACnet/Modbus integration requirements.</p>
+        <div class="card-bar"></div>
+        <div class="card-highlight">A damper that is too large loses modulating authority at low flow; one that is too small generates excessive pressure drop and noise. The VAV terminal unit damper is one of the most routinely mis-specified components in commercial HVAC design.</div>
+
+        <div class="card-grid-2"><div class="card-panel heavy"><p class="card-panel-title">Opposed-Blade &mdash; Default Choice</p><p class="card-panel-text">Linear to modified-linear flow characteristic across full stroke. ASHRAE Handbook (Ch. 48) recommends for modulating airflow control. Best for VAV volume control, quieter in modulating service. Slightly higher cost due to linkage complexity.</p></div><div class="card-panel light"><p class="card-panel-title">Parallel-Blade &mdash; Isolation Only</p><p class="card-panel-text">Quick-opening &mdash; exponential at low angles, flat beyond 60&deg;. Reserved for fire/smoke dampers, maintenance isolation, and bypass applications. Lower cost but inappropriate for modulating VAV duty.</p></div></div>
+
+        <div class="card-highlight">An oversized opposed-blade damper operating below 15% stroke for most of the cooling season is not saving money &mdash; it is creating hunting, noise, and premature actuator wear.</div>
+
+        <p class="card-panel-title" style="font-size:13px; margin-bottom:12px;">Three Sizing Methods</p>
+        <div class="card-grid-3"><div class="card-panel"><p class="card-item-label">Face Velocity</p><p class="card-panel-text">Size for 6&ndash;8 m/s (1,200&ndash;1,600 fpm) at peak flow. Quick schematic sizing. <em>Pitfall:</em> ignores turndown; damper may be oversized at minimum flow.</p></div><div class="card-panel"><p class="card-item-label">Authority (&beta; ratio)</p><p class="card-panel-text">Damper &Delta;P = 15&ndash;25% of total branch &Delta;P at full flow. Best modulating control. Endorsed by ASHRAE Guideline 36-2021.</p></div><div class="card-panel"><p class="card-item-label">Catalogue Selection</p><p class="card-panel-text">Manufacturer software sizes based on inlet conditions. ASHRAE-endorsed for final spec. <em>Pitfall:</em> vendor lock-in if not cross-checked with authority method.</p></div></div>
+
+        <p class="card-panel-title" style="font-size:13px; margin-bottom:12px;">Three Common Specification Mistakes</p>
+        <ol class="card-numbered"><li><strong>Specifying by duct dimensions alone.</strong> Damper free area ratio (75&ndash;85% for opposed-blade) means actual flow area is smaller than nominal duct diameter. Size based on free area, not duct cross-section.</li><li><strong>Ignoring actuator torque at pressure differential.</strong> At 750 Pa closing pressure, required torque can be 2&ndash;3&times; catalogue rating. Specify for worst-case shut-off &Delta;P in the system.</li><li><strong>Omitting minimum controllable stroke.</strong> Below 10&ndash;15% stroke (5&ndash;8% of design flow), blade edge leakage and hysteresis dominate. Specify: &ldquo;stable modulation from 15% to 100% of design flow.&rdquo;</li></ol>
+
+        <div class="card-divider"></div>
+
+        <p class="card-panel-title" style="font-size:13px; margin-bottom:12px;">Analogue vs BACnet Actuators</p>
+        <table class="card-table"><tr><th></th><th>Analogue (0&ndash;10 V)</th><th>BACnet MS/TP</th></tr><tr><td>Position feedback</td><td>0&ndash;10 V signal &mdash; no diagnostics</td><td>Absolute position, fault codes, cycle count</td></tr><tr><td>Predictive maintenance</td><td>Reactive &mdash; wait for failure</td><td>Cycle count trending; torque rise alerts before stall</td></tr><tr><td>Wiring</td><td>3 wires per actuator to DDC controller</td><td>Daisy-chain on MS/TP trunk</td></tr><tr><td>Cost delta</td><td>Baseline</td><td>15&ndash;25% premium offset by wiring savings at scale</td></tr></table>
+        <div class="card-highlight">For 50+ VAV terminals, the BACnet MS/TP actuator premium is typically recovered through reduced controller I/O and wiring costs. The damper actuator becomes a node on the trunk.</div>
+
+        <div class="card-divider"></div>
+
+        <p class="card-panel-title" style="font-size:13px; margin-bottom:12px;">Cross-Border Relevance</p>
+        <div class="card-grid-3"><div class="card-panel light"><p class="card-item-label">Singapore <span class="card-tag">SS 553:2016</span></p><p class="card-panel-text">VAV dampers must maintain minimum outdoor air under all conditions &mdash; drives sizing at turndown.</p></div><div class="card-panel light"><p class="card-item-label">Hong Kong <span class="card-tag">PNAP APP-151</span></p><p class="card-panel-text">Fire/smoke damper integration with VAV terminal &mdash; dual-function assemblies common in HK high-rise.</p></div><div class="card-panel light"><p class="card-item-label">Dubai <span class="card-tag">ASHRAE 90.1-2019</span></p><p class="card-panel-text">High ambient temp: specify 85&deg;C rated actuators for ceiling plenum installation.</p></div></div>
+
+        <div class="card-divider"></div>
+
+        <p class="card-body" style="font-size:16px;font-weight:600;color:#1a1d22;">Bottom line:</p>
+        <p class="card-body">The three decisions that separate a well-controlled VAV system from a chronic comfort complaint: <strong>opposed-blade dampers</strong> for modulating service, sized for <strong>15&ndash;25% authority</strong> at design flow (not just face velocity), with <strong>BACnet-enabled actuators</strong> that report position and torque to the BMS for predictive maintenance. The material cost difference between the right damper and the wrong damper is typically under AUD 80 per terminal unit.</p>
+
+        <div class="card-footer"><span>Source: ai.xinca.com &bull; ASHRAE Handbook &mdash; HVAC Applications Ch. 48 &bull; Guideline 36-2021</span><span>July 2026</span></div>
+        <span class="card-endmark">&cularr;</span>
+      </div>
+    </div>
+
+    <!-- Back link -->
+    <div class="text-center mt-8">
+      <a href="/a/air-side-vav-damper-selection/" class="inline-flex items-center gap-2 text-sm bg-[#2ea3f2] text-white px-5 py-2.5 rounded-lg hover:bg-[#2589d9] transition-colors">
+        &larr; Back to Full Article
+      </a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* --- Technical Tone: Background #F5F7FA / Accent #3D5A80 --- */
+  .infocard-wrap { max-width: 720px; margin: 0 auto; font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; }
+  .card { background: #F5F7FA; border: 1px solid #e0e4e8; border-radius: 10px; padding: 36px 40px; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.03; pointer-events: none; }
+  .card-meta { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #3D5A80; margin-bottom: 18px; }
+  .card-title { font-size: 32px; font-weight: 800; line-height: 1.18; letter-spacing: -0.02em; color: #1a1d22; margin-bottom: 12px; }
+  .card-subtitle { font-size: 17px; font-weight: 400; line-height: 1.55; color: #4a5568; margin-bottom: 24px; max-width: 620px; }
+  .card-bar { width: 48px; height: 4px; background: #3D5A80; border-radius: 2px; margin-bottom: 22px; }
+  .card-highlight { padding: 14px 18px; border-left: 4px solid #3D5A80; background: rgba(61,90,128,0.06); border-radius: 0 6px 6px 0; font-size: 16px; font-weight: 500; line-height: 1.55; color: #2d3748; margin-bottom: 26px; }
+  .card-body { font-size: 15px; font-weight: 400; line-height: 1.68; color: #3a3f47; margin-bottom: 18px; }
+  .card-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .card-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+  .card-panel { background: #fff; border: 1px solid #e2e6ea; border-radius: 8px; padding: 18px 20px; }
+  .card-panel.heavy { background: rgba(61,90,128,0.05); border-left: 4px solid #3D5A80; padding: 20px 22px; }
+  .card-panel.light { background: #fafbfc; border: 1px solid #eceef1; }
+  .card-panel-title { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #3D5A80; margin-bottom: 8px; }
+  .card-panel-text { font-size: 14px; font-weight: 400; line-height: 1.6; color: #4a5568; }
+  .card-item-label { font-size: 13px; font-weight: 700; color: #1a1d22; margin-bottom: 2px; }
+  .card-item { margin-bottom: 14px; }
+  .card-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; background: rgba(61,90,128,0.1); color: #3D5A80; }
+  .card-divider { height: 1px; background: #e2e6ea; margin: 22px 0; }
+  .card-footer { margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e6ea; font-size: 12px; color: #8899a6; display: flex; justify-content: space-between; align-items: center; }
+  .card-endmark { display: block; text-align: center; font-size: 18px; color: #8899a6; margin-top: 20px; }
+  .card-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.55; margin-bottom: 24px; }
+  .card-table th { text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #3D5A80; padding: 8px 12px; border-bottom: 2px solid #3D5A80; }
+  .card-table td { padding: 8px 12px; border-bottom: 1px solid #e8ebf0; color: #3a3f47; vertical-align: top; }
+  .card-table tr:last-child td { border-bottom: none; }
+  .card-numbered { counter-reset: item; list-style: none; margin: 0 0 24px 0; padding: 0; }
+  .card-numbered li { counter-increment: item; padding: 12px 14px 12px 44px; position: relative; margin-bottom: 8px; background: #fff; border: 1px solid #e8ebf0; border-radius: 6px; font-size: 14px; line-height: 1.6; color: #3a3f47; }
+  .card-numbered li::before { content: '0' counter(item); position: absolute; left: 12px; top: 12px; font-size: 13px; font-weight: 800; color: #3D5A80; }
+  .card-numbered li strong { display: block; font-size: 13px; font-weight: 700; color: #1a1d22; margin-bottom: 2px; }
+
+  @media (max-width: 640px) {
+    .card { padding: 24px 20px; }
+    .card-title { font-size: 24px; }
+    .card-subtitle { font-size: 15px; }
+    .card-grid-2 { grid-template-columns: 1fr; }
+    .card-grid-3 { grid-template-columns: 1fr; }
+  }
+</style>
