@@ -95,34 +95,178 @@ const jsonLd = {
     </div>
   </section>
 
-  <!-- Infocard Strip -->
+  <!-- Inline Carousel Slider -->
   <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <h2 class="text-lg font-bold text-[#333] text-center mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
-      Infocard
+      Slide Desk
     </h2>
-    <div class="flex justify-center">
-      <a href="/a/air-side-vav-damper-selection/infocard/" class="block w-full max-w-[320px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-white border border-[#e0e4e8] group">
-        <div class="bg-[#F5F7FA] p-5">
-          <span class="inline-block text-[10px] px-2 py-0.5 rounded-full font-medium bg-[rgba(61,90,128,0.1)] text-[#3D5A80] uppercase tracking-wider mb-3">
-            VAV Damper Selection
-          </span>
-          <p class="text-[#1a1d22] text-sm font-bold leading-snug group-hover:text-[#3D5A80] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
-            Opposed-Blade vs Parallel-Blade &mdash; Sizing, BACnet Integration &amp; Cross-Border Standards
-          </p>
-          <p class="text-[#8899a6] text-xs mt-1.5">
-            One-page editorial infocard for LinkedIn and X sharing. Download as PNG.
-          </p>
+    <div id="strip-slider" class="relative flex items-center">
+      <!-- Left Arrow -->
+      <button id="strip-prev" class="shrink-0 w-10 h-10 flex items-center justify-center text-[#7EBEC5] hover:text-[#5a9a9f] transition-colors disabled:opacity-30 disabled:cursor-default disabled:hover:text-[#7EBEC5] -ml-2" aria-label="Previous slides">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <!-- Cards Viewport -->
+      <div id="strip-viewport" class="overflow-hidden flex-1 mx-1">
+        <div id="strip-track" class="flex gap-4 transition-transform duration-300 ease-in-out">
+          <!-- Card 1 -->
+          <a href="/a/air-side-vav-damper-selection/carousel/?slide=1" class="strip-card shrink-0 w-[260px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-gradient-to-b from-[#0a1628] to-[#112240] border border-gray-200 group">
+            <div class="p-4 text-center">
+              <span class="inline-block text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] uppercase tracking-wider mb-2">Hook</span>
+              <p class="text-white text-sm font-bold leading-snug group-hover:text-[#7EBEC5] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+                5 Pitfalls in VAV Damper Specification
+              </p>
+              <p class="text-gray-400 text-xs mt-1">And how they sabotage your comfort and energy performance.</p>
+            </div>
+            <div class="h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </a>
+          <!-- Card 2 -->
+          <a href="/a/air-side-vav-damper-selection/carousel/?slide=2" class="strip-card shrink-0 w-[260px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-white border border-gray-200 group">
+            <div class="p-4 text-center">
+              <span class="inline-block text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] uppercase tracking-wider mb-2">Problem</span>
+              <p class="text-[#333] text-sm font-bold leading-snug group-hover:text-[#7EBEC5] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+                "Size by Duct Diameter" is Wrong
+              </p>
+              <p class="text-[#888] text-xs mt-1">Free area — not nominal duct size — dictates correct damper sizing.</p>
+            </div>
+            <div class="h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </a>
+          <!-- Card 3 -->
+          <a href="/a/air-side-vav-damper-selection/carousel/?slide=3" class="strip-card shrink-0 w-[260px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-gradient-to-br from-[#f8f9fa] to-white border border-gray-200 group">
+            <div class="p-4 text-center">
+              <span class="inline-block text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] uppercase tracking-wider mb-2">Concept</span>
+              <p class="text-[#333] text-sm font-bold leading-snug group-hover:text-[#7EBEC5] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+                What is Damper Authority?
+              </p>
+              <p class="text-[#888] text-xs mt-1">β = ΔP<sub>damper</sub> / (ΔP<sub>damper</sub> + ΔP<sub>branch</sub>)</p>
+            </div>
+            <div class="h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </a>
+          <!-- Card 4 -->
+          <a href="/a/air-side-vav-damper-selection/carousel/?slide=4" class="strip-card shrink-0 w-[260px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-[#0a1628] border border-gray-200 group">
+            <div class="p-4 text-center">
+              <span class="inline-block text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] uppercase tracking-wider mb-2">Comparison</span>
+              <p class="text-white text-sm font-bold leading-snug group-hover:text-[#7EBEC5] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+                Analogue vs BACnet Actuators
+              </p>
+              <p class="text-gray-400 text-xs mt-1">0–10 V baseline vs BACnet MS/TP with predictive maintenance.</p>
+            </div>
+            <div class="h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </a>
+          <!-- Card 5 -->
+          <a href="/a/air-side-vav-damper-selection/carousel/?slide=5" class="strip-card shrink-0 w-[260px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-gradient-to-b from-[#0a1628] to-[#1a2942] border border-gray-200 group">
+            <div class="p-4 text-center">
+              <span class="inline-block text-[10px] px-2 py-0.5 rounded-full font-medium bg-[#7EBEC5]/20 text-[#7EBEC5] uppercase tracking-wider mb-2">CTA</span>
+              <p class="text-white text-sm font-bold leading-snug group-hover:text-[#7EBEC5] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+                Ready to specify better VAV dampers?
+              </p>
+              <p class="text-gray-400 text-xs mt-1">Read the complete technical guide.</p>
+            </div>
+            <div class="h-1 bg-gradient-to-r from-[#7EBEC5]/40 via-[#7EBEC5] to-[#7EBEC5]/40"></div>
+          </a>
         </div>
-        <div class="h-1 bg-gradient-to-r from-[#3D5A80]/40 via-[#3D5A80] to-[#3D5A80]/40"></div>
-      </a>
+      </div>
+      <!-- Right Arrow -->
+      <button id="strip-next" class="shrink-0 w-10 h-10 flex items-center justify-center text-[#7EBEC5] hover:text-[#5a9a9f] transition-colors disabled:opacity-30 disabled:cursor-default disabled:hover:text-[#7EBEC5] -mr-2" aria-label="Next slides">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
     </div>
     <div class="text-center mt-4">
-      <a href="/a/air-side-vav-damper-selection/infocard/" class="text-sm text-[#2ea3f2] hover:underline inline-flex items-center gap-1">
-        Download Infocard
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      <a href="/a/air-side-vav-damper-selection/carousel/" class="text-sm text-[#2ea3f2] hover:underline inline-flex items-center gap-1">
+        View all slides
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
       </a>
     </div>
   </section>
+
+  <script>
+    (function() {
+      const track = document.getElementById('strip-track');
+      const viewport = document.getElementById('strip-viewport');
+      const prevBtn = document.getElementById('strip-prev');
+      const nextBtn = document.getElementById('strip-next');
+      const cards = track.querySelectorAll('.strip-card');
+      if (!track || !cards.length) return;
+
+      const CARD_WIDTH = 260;
+      const GAP = 16;
+
+      let position = 0;
+      let visibleCards = 2;
+
+      function getVisibleCards() {
+        const vw = viewport.clientWidth;
+        return Math.max(1, Math.floor((vw + GAP) / (CARD_WIDTH + GAP)));
+      }
+
+      function getMaxPosition() {
+        return Math.max(0, cards.length - visibleCards);
+      }
+
+      function updateArrows() {
+        prevBtn.disabled = position <= 0;
+        nextBtn.disabled = position >= getMaxPosition();
+      }
+
+      function slideTo(pos) {
+        visibleCards = getVisibleCards();
+        const maxPos = getMaxPosition();
+        position = Math.max(0, Math.min(pos, maxPos));
+        const offset = position * (CARD_WIDTH + GAP);
+        track.style.transform = `translateX(-${offset}px)`;
+        updateArrows();
+      }
+
+      prevBtn.addEventListener('click', () => slideTo(position - 1));
+      nextBtn.addEventListener('click', () => slideTo(position + 1));
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => slideTo(position), 150);
+      });
+
+      let touchStartX = 0;
+      let touchCurrentX = 0;
+      let isDragging = false;
+
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        isDragging = true;
+        track.style.transition = 'none';
+      }, { passive: true });
+
+      track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        touchCurrentX = e.touches[0].clientX;
+        const diff = touchStartX - touchCurrentX;
+        const offset = position * (CARD_WIDTH + GAP) + diff;
+        track.style.transform = `translateX(-${offset}px)`;
+      }, { passive: true });
+
+      track.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.transition = 'transform 0.3s ease-in-out';
+        const diff = touchStartX - touchCurrentX;
+        if (Math.abs(diff) > 40) {
+          slideTo(diff > 0 ? position + 1 : position - 1);
+        } else {
+          slideTo(position);
+        }
+      });
+
+      slideTo(0);
+    })();
+  </script>
+
+  <style>
+    @media (max-width: 639px) {
+      .strip-card {
+        width: calc(100vw - 7rem) !important;
+        min-width: 200px;
+      }
+    }
+  </style>
 
   <!-- Article Body -->
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
