@@ -244,21 +244,105 @@ const jsonLd = {
 
   <!-- Download Section -->
   <section class="max-w-2xl mx-auto px-4 pb-16">
-    <div class="bg-[#f8f9fa] rounded-xl border border-[#e5e5e5] p-8 text-center">
-      <h2 class="text-xl font-bold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Download Slides</h2>
-      <p class="text-[#666] mb-6 text-sm">Individual slides for LinkedIn Document Posts. Right-click any slide above and "Save Image As" to download.</p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href={articleUrl} class="inline-flex items-center gap-2 text-sm bg-[#2ea3f2] text-white px-5 py-2.5 rounded-lg hover:bg-[#2589d9] transition-colors">
-          Read the Full Article
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    <h2 class="text-xl font-bold text-[#333] mb-2 text-center" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Download Slides</h2>
+    <p class="text-[#666] mb-6 text-sm text-center">1080×1350 PNGs — optimised for LinkedIn Document Posts. Click to preview, then download.</p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+      <!-- Slide 1 -->
+      <div class="group relative rounded-lg overflow-hidden shadow-md bg-white border border-[#e5e5e5]">
+        <a href="/articles/slides/01-hook-5-pitfalls.png" class="download-trigger block cursor-zoom-in" data-slide="1" data-src="/articles/slides/01-hook-5-pitfalls.png">
+          <img src="/articles/slides/01-hook-5-pitfalls.png" alt="Slide 1: 5 Pitfalls" class="w-full h-auto" loading="lazy" />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
         </a>
-        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`} target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm bg-[#0a66c2] text-white px-5 py-2.5 rounded-lg hover:bg-[#095298] transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          Share on LinkedIn
+        <div class="p-2 flex items-center justify-between">
+          <span class="text-xs text-[#666] font-medium">Slide 1 · Hook</span>
+          <a href="/articles/slides/01-hook-5-pitfalls.png" download class="text-xs text-[#7EBEC5] hover:text-[#5a9a9f] font-medium inline-flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            PNG
+          </a>
+        </div>
+      </div>
+      <!-- Slide 2 -->
+      <div class="group relative rounded-lg overflow-hidden shadow-md bg-white border border-[#e5e5e5]">
+        <a href="/articles/slides/02-problem-pipe-size.png" class="download-trigger block cursor-zoom-in" data-slide="2" data-src="/articles/slides/02-problem-pipe-size.png">
+          <img src="/articles/slides/02-problem-pipe-size.png" alt="Slide 2: Pipe Size Problem" class="w-full h-auto" loading="lazy" />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
         </a>
+        <div class="p-2 flex items-center justify-between">
+          <span class="text-xs text-[#666] font-medium">Slide 2 · Problem</span>
+          <a href="/articles/slides/02-problem-pipe-size.png" download class="text-xs text-[#7EBEC5] hover:text-[#5a9a9f] font-medium inline-flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            PNG
+          </a>
+        </div>
+      </div>
+      <!-- Slide 3 -->
+      <div class="group relative rounded-lg overflow-hidden shadow-md bg-white border border-[#e5e5e5]">
+        <a href="/articles/slides/03-concept-valve-authority.png" class="download-trigger block cursor-zoom-in" data-slide="3" data-src="/articles/slides/03-concept-valve-authority.png">
+          <img src="/articles/slides/03-concept-valve-authority.png" alt="Slide 3: Valve Authority" class="w-full h-auto" loading="lazy" />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+        </a>
+        <div class="p-2 flex items-center justify-between">
+          <span class="text-xs text-[#666] font-medium">Slide 3 · Concept</span>
+          <a href="/articles/slides/03-concept-valve-authority.png" download class="text-xs text-[#7EBEC5] hover:text-[#5a9a9f] font-medium inline-flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            PNG
+          </a>
+        </div>
+      </div>
+      <!-- Slide 4 -->
+      <div class="group relative rounded-lg overflow-hidden shadow-md bg-white border border-[#e5e5e5]">
+        <a href="/articles/slides/04-comparison-globe-ball-picv.png" class="download-trigger block cursor-zoom-in" data-slide="4" data-src="/articles/slides/04-comparison-globe-ball-picv.png">
+          <img src="/articles/slides/04-comparison-globe-ball-picv.png" alt="Slide 4: Globe vs Ball vs PICV" class="w-full h-auto" loading="lazy" />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+        </a>
+        <div class="p-2 flex items-center justify-between">
+          <span class="text-xs text-[#666] font-medium">Slide 4 · Comparison</span>
+          <a href="/articles/slides/04-comparison-globe-ball-picv.png" download class="text-xs text-[#7EBEC5] hover:text-[#5a9a9f] font-medium inline-flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            PNG
+          </a>
+        </div>
+      </div>
+      <!-- Slide 5 -->
+      <div class="group relative rounded-lg overflow-hidden shadow-md bg-white border border-[#e5e5e5]">
+        <a href="/articles/slides/05-cta-hydronic-balancing.png" class="download-trigger block cursor-zoom-in" data-slide="5" data-src="/articles/slides/05-cta-hydronic-balancing.png">
+          <img src="/articles/slides/05-cta-hydronic-balancing.png" alt="Slide 5: CTA" class="w-full h-auto" loading="lazy" />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+        </a>
+        <div class="p-2 flex items-center justify-between">
+          <span class="text-xs text-[#666] font-medium">Slide 5 · CTA</span>
+          <a href="/articles/slides/05-cta-hydronic-balancing.png" download class="text-xs text-[#7EBEC5] hover:text-[#5a9a9f] font-medium inline-flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            PNG
+          </a>
+        </div>
       </div>
     </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a href={articleUrl} class="inline-flex items-center gap-2 text-sm bg-[#2ea3f2] text-white px-5 py-2.5 rounded-lg hover:bg-[#2589d9] transition-colors">
+        Read the Full Article
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </a>
+      <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`} target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm bg-[#0a66c2] text-white px-5 py-2.5 rounded-lg hover:bg-[#095298] transition-colors">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Share on LinkedIn
+      </a>
+    </div>
   </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 hidden flex-col items-center justify-center" role="dialog" aria-label="Slide preview">
+    <button id="lightbox-close" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-white/80 hover:text-white text-2xl z-10" aria-label="Close">&times;</button>
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white z-10" aria-label="Previous slide">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white z-10" aria-label="Next slide">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl" />
+  </div>
 
 </BaseLayout>
 
@@ -294,8 +378,70 @@ const jsonLd = {
 
     // Keyboard nav
     document.addEventListener('keydown', (e) => {
+      if (document.getElementById('lightbox').classList.contains('flex')) return; // lightbox handles own keys
       if (e.key === 'ArrowLeft') { prev.click(); }
       if (e.key === 'ArrowRight') { next.click(); }
+    });
+  })();
+
+  // Lightbox
+  (function() {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbClose = document.getElementById('lightbox-close');
+    const lbPrev = document.getElementById('lightbox-prev');
+    const lbNext = document.getElementById('lightbox-next');
+
+    const slides = Array.from(document.querySelectorAll('[data-src]')).map(el => el.dataset.src);
+    let lbIndex = 0;
+
+    function openLightbox(src) {
+      lbIndex = slides.indexOf(src);
+      if (lbIndex < 0) lbIndex = 0;
+      lbImg.src = src;
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      updateLightboxArrows();
+    }
+
+    function closeLightbox() {
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function lightboxNavigate(dir) {
+      lbIndex = (lbIndex + dir + slides.length) % slides.length;
+      lbImg.src = slides[lbIndex];
+      updateLightboxArrows();
+    }
+
+    function updateLightboxArrows() {
+      lbPrev.style.visibility = slides.length > 1 ? 'visible' : 'hidden';
+      lbNext.style.visibility = slides.length > 1 ? 'visible' : 'hidden';
+    }
+
+    // Open from download thumbnails
+    document.querySelectorAll('.download-trigger').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLightbox(link.dataset.src);
+      });
+    });
+
+    // Close
+    lbClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+    lbPrev.addEventListener('click', () => lightboxNavigate(-1));
+    lbNext.addEventListener('click', () => lightboxNavigate(1));
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('flex')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lightboxNavigate(-1);
+      if (e.key === 'ArrowRight') lightboxNavigate(1);
     });
   })();
 </script>
