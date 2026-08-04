@@ -1,0 +1,13 @@
+# Cloudflare Pages Redirects
+# /qa/ → /kb/ merge (2026-07-23)
+/qa/ /kb/ 301
+/qa/* /kb/q/:splat 301
+
+# Old /faq/ → /kb/ rebrand (2026-07-23)
+/faq/ /kb/ 301
+/faq/* /kb/:splat 301
+
+# Old article URLs → new /a/ URLs
+/faq/data-center-glycol-cooling/ /a/data-center-glycol-cooling/ 301
+/faq/ai-building-energy-management/ /a/ai-building-energy-management/ 301
+/faq/data-center-energy-efficiency/ /a/data-center-energy-efficiency/ 301
