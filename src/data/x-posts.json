@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "iaq-sensor-networks-bms-integration",
+    "account": "woofaasocial",
+    "title": "IAQ Sensor Networks & BMS Integration",
+    "date": "2026-07-30",
+    "text": "The gap between IAQ sensor specs and real BMS integration is where healthy-building projects fail. BACnet MS/TP or Modbus RTU on every breathing-zone sensor, sub-60s CO₂ polling for DCV, calibration logging.\n\nhttps://ai.xinca.com/a/building-controls-bms-integration/?utm_source=x&utm_medium=social&utm_campaign=woofaasocial\n\n#IAQ #HealthyBuildings #BACnet",
+    "source": "https://ai.xinca.com/a/building-controls-bms-integration/",
+    "image": null
+  },
+  {
+    "slug": "hydronic-balancing-valve-authority",
+    "account": "woofaasocial",
+    "title": "Hydronic Balancing & Valve Authority",
+    "date": "2026-08-06",
+    "text": "Unbalanced chilled-water loops overfeed coils near the plant while the far end runs warm — and the pump burns extra kW. Valve authority ≥0.3, a balancing record, pump kW/L/s from BAS data.\n\nhttps://ai.xinca.com/a/water-side-control-valve-selection/?utm_source=x&utm_medium=social&utm_campaign=woofaasocial\n\n#HydronicBalancing #ThermalComfort #EnergyEfficiency",
+    "source": "https://ai.xinca.com/a/water-side-control-valve-selection/",
+    "image": null
+  }
+]
