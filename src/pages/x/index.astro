@@ -1,0 +1,42 @@
+---
+// x/index.astro — X post catalog hub
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import xPosts from '../../data/x-posts.json';
+
+const accounts = [...new Set(xPosts.map((p) => p.account))];
+---
+
+<BaseLayout
+  title="X Posts — ai.xinca.com"
+  description="Short-form X posts from ai.xinca.com — automated posting source feeds."
+>
+  <main class="min-h-screen bg-white">
+    <section class="mx-auto max-w-3xl px-6 py-16">
+      <h1 class="text-4xl font-bold text-slate-900">X Posts</h1>
+      <p class="mt-2 text-slate-600">
+        Short-form posts distilled from ai.xinca.com articles. Accounts:
+        {accounts.map((a) => `@${a}`).join(' · ')}
+      </p>
+      <p class="mt-1 text-sm text-slate-500">
+        Feed: <a class="text-sky-700 hover:underline" href="/x/rss.xml">rss.xml</a>
+      </p>
+
+      <ul class="mt-10 space-y-4">
+        {xPosts
+          .slice()
+          .sort((a, b) => b.date.localeCompare(a.date))
+          .map((p) => (
+            <li class="rounded-2xl border border-slate-200 p-5 transition hover:border-sky-300">
+              <a href={`/x/${p.slug}/`} class="block">
+                <p class="text-sm font-semibold uppercase tracking-wide text-sky-700">
+                  @{p.account} · {p.date}
+                </p>
+                <h2 class="mt-1 text-xl font-semibold text-slate-900">{p.title}</h2>
+                <p class="mt-2 line-clamp-2 text-slate-600">{p.text}</p>
+              </a>
+            </li>
+          ))}
+      </ul>
+    </section>
+  </main>
+</BaseLayout>

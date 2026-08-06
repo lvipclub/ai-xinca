@@ -66,7 +66,7 @@ if [[ "$DRY" -eq 0 ]]; then
   CF_ZONE="${CF_ZONE_XINCA:-a5111dd78fc21ff12d5f48bb982fd8b7}"
   if [[ -n "$CF_TOKEN" ]]; then
     log "CF purge zone ${CF_ZONE:0:8}… files:[]"
-    FILES='["https://ai.xinca.com/","https://ai.xinca.com/kb/","https://ai.xinca.com/faq/","https://ai.xinca.com/sitemap-index.xml"]'
+    FILES='["https://ai.xinca.com/","https://ai.xinca.com/kb/","https://ai.xinca.com/faq/","https://ai.xinca.com/x/","https://ai.xinca.com/x/rss.xml","https://ai.xinca.com/sitemap-index.xml"]'
     curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE}/purge_cache" \
       -H "Authorization: Bearer ${CF_TOKEN}" -H "Content-Type: application/json" \
       --data "{\"files\":${FILES}}" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("purge_success", d.get("success"))'
@@ -84,6 +84,8 @@ if [[ "$DRY" -eq 0 ]]; then
     "/kb/" \
     "/faq/" \
     "/qa/" \
+    "/x/" \
+    "/x/rss.xml" \
     "/sitemap-index.xml" \
     "/a/ai-building-energy-management/"; do
     code=$(curl -skL -o /dev/null -w "%{http_code}" --resolve "ai.xinca.com:443:${VPS_IP}" --max-time 20 "https://ai.xinca.com${u}" || echo 000)
