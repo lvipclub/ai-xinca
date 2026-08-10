@@ -37,6 +37,11 @@ if [[ "$SKIP_BUILD" -eq 0 ]]; then
   npm run build
 fi
 
+# 2b/6 — Regenerate llms.txt from fresh build output (dead-link guard;
+#        /faq/q/ + /qa/ aliases deduped into /kb/q/). Aborts on failure.
+log "Regenerate llms.txt"
+node scripts/generate-llms.mjs dist dist/llms.txt
+
 # 3/6 — Verify dist
 log "Verify dist"
 for f in index.html sitemap-index.xml; do
