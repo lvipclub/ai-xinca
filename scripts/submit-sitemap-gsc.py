@@ -8,7 +8,7 @@ import sys
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
-SERVICE_ACCOUNT = '/home/hermerr/.hermes/skills/shopify-gmc-optimizer/credentials/gmc_service_account.json'
+SERVICE_ACCOUNT = '/Users/marcsir/.hermes/skills/shopify-gmc-optimizer/credentials/gmc_service_account.json'
 SITE_URL = 'sc-domain:xinca.com'
 SITEMAP_URL = 'https://ai.xinca.com/sitemap-index.xml'
 

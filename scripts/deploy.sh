@@ -104,10 +104,13 @@ if [[ "$DRY" -eq 0 ]]; then
 fi
 
 # GSC + IndexNow pings (always, unless dry-run)
+# Use the Hermes venv python (system python3 is 3.9 and breaks google-auth/cryptography)
+PY_BIN="${AI_XINCA_PY:-$HOME/.hermes/hermes-agent/venv/bin/python}"
+[[ -x "$PY_BIN" ]] || PY_BIN="python3"
 if [[ "$DRY" -eq 0 ]]; then
   log "Pinging search engines"
-  python3 scripts/submit-sitemap-gsc.py 2>/dev/null || log "gsc ping skipped/failed"
-  python3 scripts/submit-indexnow.py 2>/dev/null || log "indexnow ping skipped/failed"
+  "$PY_BIN" scripts/submit-sitemap-gsc.py 2>/dev/null || log "gsc ping skipped/failed"
+  "$PY_BIN" scripts/submit-indexnow.py 2>/dev/null || log "indexnow ping skipped/failed"
 fi
 
 log "Done: $MSG (stamp $STAMP)"
