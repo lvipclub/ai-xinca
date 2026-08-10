@@ -111,6 +111,8 @@ if [[ "$DRY" -eq 0 ]]; then
   log "Pinging search engines"
   "$PY_BIN" scripts/submit-sitemap-gsc.py 2>/dev/null || log "gsc ping skipped/failed"
   "$PY_BIN" scripts/submit-indexnow.py 2>/dev/null || log "indexnow ping skipped/failed"
+  # Warm-fetch key URLs with AI-crawler UAs (edge cache + AI Crawl Control signals)
+  bash "$HOME/.hermes/scripts/ping-ai-bots.sh" ai.xinca.com || log "warm-fetch warnings"
 fi
 
 log "Done: $MSG (stamp $STAMP)"
