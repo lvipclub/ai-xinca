@@ -81,6 +81,8 @@ if [[ "$DRY" -eq 0 ]]; then
 fi
 
 # 6/6 — Health checks (origin-resolved: DNS still points at GitHub Pages until Phase D)
+# Retry each URL up to 3x (transient VPS/network blips like 000000 must not fail a deploy;
+# 2026-08-13 incident: /kb/ returned 000000 once at 06:01 and marked the whole job red).
 if [[ "$DRY" -eq 0 ]]; then
   FAIL=0
   VPS_IP="${VPS_IP:-147.79.18.35}"
@@ -93,7 +95,12 @@ if [[ "$DRY" -eq 0 ]]; then
     "/x/rss.xml" \
     "/sitemap-index.xml" \
     "/a/ai-building-energy-management/"; do
-    code=$(curl -skL -o /dev/null -w "%{http_code}" --resolve "ai.xinca.com:443:${VPS_IP}" --max-time 20 "https://ai.xinca.com${u}" || echo 000)
+    code="000"
+    for attempt in 1 2 3; do
+      code=$(curl -skL -o /dev/null -w "%{http_code}" --resolve "ai.xinca.com:443:${VPS_IP}" --max-time 20 "https://ai.xinca.com${u}" || echo 000)
+      [[ "$code" == "200" ]] && break
+      [[ $attempt -lt 3 ]] && sleep 8
+    done
     echo "HEALTH $code ${u} (origin)"
     [[ "$code" == "200" ]] || FAIL=1
   done

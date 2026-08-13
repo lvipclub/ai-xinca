@@ -1,0 +1,129 @@
+---
+// a/air-handling-unit-coil-selection.astro — Auto-generated carousel article
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pageTitle = "Air Handling Unit Coil Selection: A Technical Guide for Optimal Performance";
+const pageDescription = "Explore the technical nuances of selecting heating and cooling coils for air handling units, covering load calculation, coil configuration, fluid dynamics, and material choices for Australian climates and compliance.";
+const canonicalUrl = "https://ai.xinca.com/a/air-handling-unit-coil-selection/";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": pageTitle,
+  "description": pageDescription,
+  "author": { "@type": "Organization", "name": "XINCA" },
+  "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://ai.xinca.com" },
+  "datePublished": "2026-08-13",
+  "mainEntityOfPage": canonicalUrl
+};
+
+---
+<BaseLayout title={pageTitle} description={pageDescription} ogImage="https://ai.xinca.com/articles/air-handling-unit-coil-selection-hero.png" ogType="article">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl md:text-5xl font-extrabold text-[#333] mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,sans-serif">{pageTitle}</h1>
+    <p class="text-lg text-[#666] mb-8">{pageDescription}</p>
+    <div class="prose prose-lg max-w-none">
+      Selecting the correct coil for an air handling unit (AHU) is a critical engineering decision that directly affects thermal comfort, energy efficiency, and the service life of the entire HVAC system. This technical article, presented by Lady Havi at ai.xinca.com, will walk you through the fundamental principles, calculation methodologies, and practical design considerations for air-side and water-side coil selection. As a trusted ecommerce partner of authorised equipment suppliers, we do not reference specific product names but focus on the engineering knowledge required to make informed decisions.
+
+## Understanding Coil Function in an AHU
+
+An AHU coil is a heat exchanger that transfers thermal energy between the air stream and a fluid—typically chilled water, hot water, or refrigerant. Cooling coils remove sensible and latent heat, while heating coils add sensible heat. In many Australian commercial and industrial installations, coils are also used for dehumidification, which means the surface temperature of the cooling coil must be below the air dew point. This creates a need to consider not just the total heat load, but also the sensible heat ratio (SHR).
+
+The thermodynamic performance of a coil is governed by three key variables: the air-side heat transfer coefficient, the fluid-side heat transfer coefficient, and the overall heat transfer coefficient (U-value). Increasing the surface area—through fin density or coil depth—can improve heat exchange, but only if the pressure drop remains within the fan or pump capabilities.
+
+## Step 1: Determine the Airside Load
+
+The first stage of coil selection is to calculate the required cooling or heating capacity using the mass flow rate of air and the enthalpy difference. For cooling coils:
+
+Q_total = m_air × (h_in – h_out)
+
+where m_air is the mass flow rate of air (kg/s) and h is the specific enthalpy (kJ/kg). In Australian engineering practice, we often use psychrometric charts to determine the entering and leaving air conditions. The entering condition is based on the outdoor design day for the site location—for example, in Sydney, typical summer design conditions are around 33°C dry-bulb and 24°C wet-bulb, while in Melbourne they are slightly milder. You must also account for the return air mixture if the AHU uses an economiser or partial recirculation.
+
+For sensible-only heating loads:
+
+Q_sensible = m_air × cp_air × (T_out – T_in)
+
+where cp_air is approximately 1.02 kJ/kg·K at standard conditions.
+
+Once the total load is known, the next step is to establish the coil contact factor, which is a measure of how closely the leaving air approaches the apparatus dew point. A high contact factor (0.9 or greater) means the coil is efficient at dehumidification, achieved by using a deeper coil or a higher fin density.
+
+## Step 2: Choose the Fluid Side Conditions
+
+For hydronic systems, the entering and leaving water temperatures (EWT and LWT) define the thermal potential available. Typical design conditions in Australia are 7°C EWT and 12°C LWT for chilled water, and 80°C EWT and 70°C LWT for hot water, but many modern systems operate with temperature differentials of 8°C or more to reduce pumping energy.
+
+A larger temperature differential (ΔT) means lower water flow rate for the same capacity, which can reduce pipe sizes and pump costs. However, it also increases the log mean temperature difference (LMTD) but reduces the heat transfer efficiency slightly because the water-side film resistance becomes more dominant at lower velocities. The water velocity inside the tubes should typically be between 0.6 m/s and 2.4 m/s. Below 0.6 m/s, turbulent flow may not be maintained, leading to film growth and reduced heat transfer. Above 2.4 m/s, erosion and noise become concerns.
+
+## Step 3: Selecting Coil Geometry
+
+The geometry of the coil includes the tube diameter, tube row depth, fin spacing (or fin per inch, FPI), and circuiting pattern.
+
+- **Tube diameter**: Smaller diameter tubes (e.g., 5/8 inch and 3/8 inch) are common in modern coils because they create higher turbulence and better heat transfer for the same face area. However, they also increase the water-side pressure drop. Larger tubes (1/2 inch) are still used for heavy-duty applications.
+- **Rows deep**: A cooling coil may use 4, 6, or 8 rows, depending on the cooling load and the required contact factor. More rows provide more surface area but also increase air friction and the potential for moisture carryover if the face velocity is too high.
+- **Fin material and coating**: For standard environments, aluminium fins with a hydrophilic coating are popular because they shed condensate easily and reduce the growth of mould. In coastal areas of Australia, where salt-laden air exists, copper fins or a specially applied epoxy coating may be necessary. For corrosive industrial atmospheres, stainless steel or copper fins should be considered.
+- **Fin spacing**: The FPI (fins per inch) can range from 8 to 14. Higher FPI gives more area per row but also narrows the air passages, increasing pressure drop and making it harder to clean. For AHUs where the filter is not perfectly sealed, a lower FPI (8–10) is often chosen to mitigate clogging.
+
+## Step 4: Face Velocity and Coil Dimensions
+
+The face area of the coil is simply the cross-sectional area perpendicular to the air flow. It is determined by the required air volume flow rate and the desired face velocity. For normal comfort air conditioning, a face velocity of 2.0 to 2.5 m/s is typical. Exceeding 2.5 m/s may cause moisture carryover in cooling coils, while velocities below 1.5 m/s may lead to uneven air distribution and underutilisation of the coil surface.
+
+For a given volumetric flow rate (CFM or m³/s), the face area is:
+
+A_face = V_dot / v_face
+
+Once the face area is set, you can choose a column and row arrangement. A deeper coil (more rows) requires a smaller face area, but the fan static pressure will increase.
+
+## Step 5: Water Pressure Drop and Pumping Energy
+
+When evaluating coil selections, you must always check the water-side pressure drop. This is influenced primarily by tube length, number of circuit passes, and water velocity. A lower pressure drop is beneficial for reducing pump power, but it often means a lower heat transfer coefficient. Therefore, the engineer must strike a balance between pump energy and coil surface area. A common strategy is to select a coil with a water pressure drop in the range of 15 to 60 kPa for chill water application. Anything above that will increase operational costs, and anything below may indicate too few passes to achieve the needed thermal output.
+
+## Step 6: Circuiting Arrangement
+
+The circuiting arrangement defines the path of water through the coil. In a counter-flow arrangement, the water enters at the opposite end of the coil from the air, providing the highest LMTD. However, because of the varying air temperature across the coil depth, a combination of parallel and counter-cross flow is used in practice.
+
+For cooling coils, it is also important to ensure proper drainage of condensate. If water does not fully drain from the coil, it can freeze in heating season or promote bacterial growth. The tube circuit should be arranged to avoid trapping air in the top rows; an air vent is usually required at the highest point.
+
+## Step 7: Compute the Coil Performance
+
+In actual design, we rely on coil selection software from manufacturers, which uses the NTU-effectiveness method or a finite element approach to accurately predict coil performance. These programs take as inputs the air flow, inlet air conditions, water flow, inlet water temperature, and coil geometry, and output the leaving air and water conditions, total capacity, and pressure drops.
+
+Manual calculations using the LMTD method are possible for simple sensible-only coils, but for a real cooling coil with moisture, the process is more complex. The coil performance is affected by the wet bulb temperature of the air, not just the dry bulb, because latent heat transfer occurs during condensation. Therefore, the selection software must be capable of handling fin efficiency variations on the wet surface.
+
+## Step 8: Consider Part-Load Operation
+
+Australian HVAC systems often operate at part-load conditions for much of the year. A coil that is perfectly sized at design conditions may still be inefficient at partial load if the water flow or air flow is throttled. Variable speed drives are now common on fans and pumps, but the coil itself has a fixed geometry. It is essential to check the coil's performance at, say, 50% and 75% loads to ensure that the leaving air temperature remains stable and that the coil is not flooding or starving.
+
+Some systems employ coil bypass or face-and-bypass dampers to control capacity. This approach allows the air to bypass a portion of the coil, which can be simple but may cause stratification. Another approach is to use multiple coils in series or parallel that can be deactivated individually.
+
+## Step 9: Physical Space and Maintenance Access
+
+The physical location of the coil within the AHU matters. There must be at least 400 mm clearance on the coil face to allow for cleaning or removal. Coils can be supplied with a removable access panel. In new installations, consider a unit with at least one coil section that can be withdrawn over a service aisle.
+
+Also, ensure that the coil fins are oriented correctly. In an AHU, fins are generally vertical so that gravity enables condensate drainage. If the fins are horizontal, water will bridge between fins and increase pressure drop.
+
+## Step 10: Material Selection for Australian Conditions
+
+Australia's climate varies from tropical in the north to temperate in the south. In Queensland and the Northern Territory, the high humidity places a heavy latent load on cooling coils. In coastal regions, salt in the air can corrode aluminium fins rapidly. For these locations, the following materials may be recommended:
+
+- **Copper tubes with copper fins** – the most corrosion-resistant combination, but copper fins are more expensive and can be prone to bending.
+- **Copper tubes with aluminium fins coated with a phenolic or melamine resin** – a good compromise for coastal areas.
+- **Stainless steel tubes with aluminium fins** – only for very aggressive industrial environments.
+
+Condensate pans must be made of stainless steel or plastic to prevent rust. The pan should be sloped to drain in both directions to avoid standing water.
+
+## Final Considerations: Compliance and Economic Optimisation
+
+When selecting a coil, ensure the equipment satisfies the requirements of the National Construction Code (NCC) Volume Three and specific state regulations, as well as the performance criteria of AS/NZS 5149 for refrigerating systems. Energy efficiency is often evaluated by considering the compressor or chiller input, so a coil that provides 0.1°C lower leaving water temperature may allow the chiller to run at a higher efficiency. A lifecycle cost analysis should include the coil initial cost, fan energy, pump energy, and maintenance.
+
+Coil selection is definitely a multidimensional optimisation problem. By following the steps outlined—load calculation, fluid conditions, geometry, face velocity, pressure drop, circuiting, and material selection—you can confidently specify an air handling unit coil that performs reliably in the harshest Australian conditions.
+
+For further guidance or to compare product options for air handling unit coils, contact our team at ai.xinca.com. As an ecommerce partner of authorised suppliers, we are committed to helping you make technically sound purchases that enhance system performance and reduce total ownership costs.
+    </div>
+    <div class="mt-8">
+      <a href="https://t.me/hvaccontrols" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm bg-[#2ea3f2] text-white px-5 py-2.5 rounded-lg hover:bg-[#2589d9] transition-colors">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.46-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.441-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.139.121.098.154.228.17.32.016.092.036.303.02.466z"/></svg>
+        Subscribe on Telegram — HVAC Controls 101
+      </a>
+    </div>
+  </main>
+</BaseLayout>
