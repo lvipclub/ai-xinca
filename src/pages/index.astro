@@ -2,16 +2,13 @@
 // index.astro — Landing page for ai.xinca.com
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCarousel from '../components/ProductCarousel.astro';
-import qaData from '../data/seed-qa.json';
+import ChatPanel from '../components/ChatPanel.astro';
 import articles from '../data/articles.json';
 
 // Leaderboard: Latest Articles (by date), Editor's Picks, Most Read
 const latestArticles = [...articles].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 const editorPicks = articles.filter(a => a.editorPick).slice(0, 3);
 const mostRead = [...articles].sort((a, b) => b.readCount - a.readCount).slice(0, 3);
-
-// Pick 6 demo Q&As for the "Popular Questions" section
-const demoQuestions = qaData.slice(0, 6);
 
 // Knowledge base references
 const kbTopics = [
@@ -123,16 +120,16 @@ const catNames: Record<string,string> = {
         </div>
       </div>
 
-      <!-- Havi AI Telegram Bot CTA -->
+      <!-- Havi AI Chat Panel CTA -->
       <div class="max-w-lg mx-auto">
-        <a href="https://t.me/hai5bot" target="_blank" rel="noopener" class="block bg-gradient-to-r from-[#2ea3f2] to-[#7EBEC5] rounded-lg p-6 text-white hover:shadow-lg transition-shadow group">
+        <button id="chat-panel-toggle" class="block w-full bg-gradient-to-r from-[#2ea3f2] to-[#7EBEC5] rounded-lg p-6 text-white hover:shadow-lg transition-shadow group text-left">
           <div class="flex items-center gap-4">
             <div class="shrink-0">
               <img src="/avatars/lady-havi.jpg" alt="Lady Havi" class="w-14 h-14 rounded-full object-cover object-top border-2 border-white/30" />
             </div>
             <div class="text-left">
-              <p class="font-semibold text-lg" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Ask Havi AI on Telegram</p>
-              <p class="text-white/80 text-sm leading-relaxed">HVAC controls knowledge base — damper sizing, valve Cv, BACnet, ASHRAE standards, and more. Free, citation-backed answers.</p>
+              <p class="font-semibold text-lg" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Ask Havi anything on HVAC/IAQ/IoT</p>
+              <p class="text-white/80 text-sm leading-relaxed">Search the HVAC controls knowledge base — free, citation-backed answers.</p>
             </div>
             <div class="shrink-0 ml-auto">
               <svg class="w-6 h-6 text-white/80 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -140,10 +137,7 @@ const catNames: Record<string,string> = {
               </svg>
             </div>
           </div>
-        </a>
-        <p class="text-center mt-3 text-xs text-[#999]">
-          <a href="https://t.me/hai5bot" target="_blank" rel="noopener" class="hover:text-[#2ea3f2] transition-colors">t.me/hai5bot</a> — subscribe to receive engineering Q&amp;A, product updates, and trade insights
-        </p>
+        </button>
       </div>
 
       <!-- Knowledge Base Coverage -->
@@ -168,82 +162,6 @@ const catNames: Record<string,string> = {
   <!-- Product Carousel -->
   <ProductCarousel />
 
-  <!-- 4 Value Cards -->
-  <section class="border-t border-[#e5e5e5] bg-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <a href="/kb" class="card text-left border-l-4 border-l-[#2ea3f2] no-underline group block">
-          <h3 class="text-lg font-semibold text-[#333] mb-2 group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Knowledge Base</h3>
-          <p class="text-[#666] text-sm leading-relaxed">
-            Searchable HVAC knowledge base — practices, guidance, compliance references, and engineering articles
-          </p>
-        </a>
-
-        <div class="card text-left border-l-4 border-l-[#7EBEC5] opacity-70">
-          <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Tools</h3>
-          <p class="text-[#666] text-sm leading-relaxed">
-            Cross-brand pairing matrix — in development
-          </p>
-        </div>
-
-        <div class="card text-left border-l-4 border-l-[#329f5b]">
-          <h3 class="text-lg font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Havi AI</h3>
-          <p class="text-[#666] text-sm leading-relaxed">
-            HVAC knowledge base on Telegram — citation-backed answers for professionals
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Popular Questions Section -->
-  <section class="border-t border-[#e5e5e5] bg-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-[#333] mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
-        Popular <span class="gradient-text">Questions</span>
-      </h2>
-      <p class="text-lg text-[#666] text-center max-w-2xl mx-auto mb-10">
-        Commonly referenced topics from the knowledge base
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="popular-questions">
-        {demoQuestions.map(q => (
-          <a href={`/kb/q/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
-            <h3 class="text-[#333] font-medium text-sm leading-snug mb-2 group-hover:text-[#2ea3f2] transition-colors">
-              {q.question}
-            </h3>
-            <p class="text-[#666] text-xs leading-relaxed line-clamp-2">
-              {q.answer.substring(0, 150)}...
-            </p>
-            <span class="badge-category mt-2">
-              {q.category}
-            </span>
-          </a>
-        ))}
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="/kb" class="btn-primary">
-          Explore Knowledge Base
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- GA4 Leaderboard Click Tracking -->
-  <script>
-    document.querySelectorAll('[data-ga-event="leaderboard_click"]').forEach(el => {
-      el.addEventListener('click', function() {
-        gtag('event', 'leaderboard_click', {
-          column: this.dataset.gaColumn,
-          position: this.dataset.gaPosition,
-          article_slug: this.dataset.gaArticle,
-          page_location: window.location.pathname
-        });
-      });
-    });
-  </script>
+  <!-- Chat Panel (hidden by default, opens via button) -->
+  <ChatPanel />
 </BaseLayout>

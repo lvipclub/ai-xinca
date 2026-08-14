@@ -77,11 +77,11 @@ const { title, description, ogImage, ogType = 'website' } = Astro.props;
         gtag('event', el.dataset.gaEvent, eventData);
       });
 
-      // Track outbound Telegram clicks
+      // Track chat panel opens
       document.addEventListener('click', function(e) {
-        var el = e.target.closest('a[href*="t.me/hai5bot"]');
+        var el = e.target.closest('#chat-panel-toggle');
         if (el) {
-          gtag('event', 'telegram_click', { page_location: window.location.pathname });
+          gtag('event', 'chat_panel_open', { page_location: window.location.pathname });
         }
       });
 
