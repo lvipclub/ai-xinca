@@ -1,25 +1,107 @@
 ---
-// ChatPanel.astro - Slide-out chat panel with HVAC knowledge base search
+// ChatPanel.astro - Gemini-style dark chat panel with AI chat + Fuse.js fallback
 import ChatWidget from './ChatWidget.astro';
 ---
 
 <!-- Backdrop overlay -->
-<div id="chat-panel-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300 opacity-0" aria-hidden="true"></div>
+<div id="chat-panel-backdrop" class="fixed inset-0 bg-black/60 z-40 hidden transition-opacity duration-300 opacity-0" aria-hidden="true"></div>
 
 <!-- Slide-out panel -->
-<div id="chat-panel" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white shadow-2xl z-50 transform transition-transform duration-300 translate-x-full flex flex-col" role="dialog" aria-modal="true" aria-label="Ask Havi">
+<div id="chat-panel" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-[#1e1e1e] shadow-2xl z-50 transform transition-transform duration-300 translate-x-full flex flex-col" role="dialog" aria-modal="true" aria-label="Ask Havi">
   <!-- Panel header -->
-  <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-white">
-    <h2 class="text-lg font-semibold text-[#333]" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Ask Havi</h2>
-    <button id="chat-panel-close" class="p-2 text-[#666] hover:text-[#333] transition-colors rounded hover:bg-gray-100" aria-label="Close panel">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
+  <div class="flex items-center justify-between px-5 py-4 border-b border-[#333] bg-[#1e1e1e]">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#2ea3f2] to-[#7EBEC5] flex items-center justify-center">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="text-sm font-semibold text-white" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Lady Havi</h2>
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse" id="havi-status-dot"></span>
+          <span class="text-[10px] text-gray-400" id="havi-status-text">Online</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <!-- Mode toggle -->
+      <button id="chat-mode-toggle" class="p-2 text-gray-400 hover:text-white transition-colors rounded hover:bg-[#333]" aria-label="Switch to search mode" title="Switch to KB search">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </button>
+      <button id="chat-panel-close" class="p-2 text-gray-400 hover:text-white transition-colors rounded hover:bg-[#333]" aria-label="Close panel">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
   </div>
 
-  <!-- Panel body -->
-  <div class="flex-1 overflow-y-auto p-5">
+  <!-- Mode indicator -->
+  <div class="px-5 py-2 bg-[#252525] border-b border-[#333]">
+    <div class="flex items-center gap-2 text-xs">
+      <button class="mode-tab px-3 py-1 rounded-full text-white bg-[#2ea3f2] transition-all" data-mode="chat" id="tab-chat">AI Chat</button>
+      <button class="mode-tab px-3 py-1 rounded-full text-gray-400 hover:text-white transition-all" data-mode="search" id="tab-search">KB Search</button>
+    </div>
+  </div>
+
+  <!-- Chat mode (default) -->
+  <div id="chat-mode-panel" class="flex-1 flex flex-col overflow-hidden">
+    <!-- Greeting -->
+    <div id="chat-greeting" class="px-5 py-8 flex-1 overflow-y-auto">
+      <div class="mb-6">
+        <h3 class="text-2xl font-bold text-[#2ea3f2] mb-1">Hello, LVIP</h3>
+        <p class="text-gray-400">How can I help you today?</p>
+      </div>
+      <!-- Suggested action pills -->
+      <div class="flex flex-wrap gap-2">
+        <button class="suggestion-pill text-xs px-4 py-2 rounded-full border border-[#444] text-gray-300 hover:border-[#2ea3f2] hover:text-[#2ea3f2] transition-all" data-query="How do I size a control valve Cv for a chilled water coil?">
+          Control valve Cv sizing
+        </button>
+        <button class="suggestion-pill text-xs px-4 py-2 rounded-full border border-[#444] text-gray-300 hover:border-[#2ea3f2] hover:text-[#2ea3f2] transition-all" data-query="BACnet vs Modbus — which protocol should I choose?">
+          BACnet vs Modbus
+        </button>
+        <button class="suggestion-pill text-xs px-4 py-2 rounded-full border border-[#444] text-gray-300 hover:border-[#2ea3f2] hover:text-[#2ea3f2] transition-all" data-query="What ventilation rates does ASHRAE 62.1 prescribe?">
+          ASHRAE 62.1 ventilation
+        </button>
+      </div>
+    </div>
+
+    <!-- Messages area -->
+    <div id="chat-messages" class="flex-1 overflow-y-auto px-5 py-4 space-y-4 hidden"></div>
+
+    <!-- Offline fallback notice -->
+    <div id="chat-offline-notice" class="px-5 py-3 bg-[#2a1f1f] border-t border-[#443] hidden">
+      <p class="text-xs text-orange-400">Havi is offline — try the <button class="text-[#2ea3f2] underline" id="offline-switch-search">Knowledge Base search</button></p>
+    </div>
+
+    <!-- Input area -->
+    <div class="p-4 border-t border-[#333] bg-[#1e1e1e]">
+      <div class="flex gap-2">
+        <input
+          id="chat-input"
+          type="text"
+          placeholder="Ask Havi anything..."
+          class="flex-1 bg-[#2a2a2a] border border-[#444] rounded-full px-5 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#2ea3f2] focus:ring-1 focus:ring-[#2ea3f2]/30 transition-all text-sm"
+          autocomplete="off"
+        />
+        <button
+          id="chat-send"
+          class="w-10 h-10 bg-[#2ea3f2] rounded-full flex items-center justify-center hover:bg-[#2ea3f2]/80 transition-all shrink-0"
+          aria-label="Send message"
+        >
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search mode (Fuse.js fallback) -->
+  <div id="search-mode-panel" class="flex-1 overflow-y-auto p-5 hidden">
     <ChatWidget />
   </div>
 </div>
@@ -30,10 +112,24 @@ import ChatWidget from './ChatWidget.astro';
     var backdrop = document.getElementById('chat-panel-backdrop');
     var toggleBtn = document.getElementById('chat-panel-toggle');
     var closeBtn = document.getElementById('chat-panel-close');
+    var chatInput = document.getElementById('chat-input');
+    var chatSend = document.getElementById('chat-send');
+    var chatMessages = document.getElementById('chat-messages');
+    var chatGreeting = document.getElementById('chat-greeting');
+    var offlineNotice = document.getElementById('chat-offline-notice');
+    var haviStatusDot = document.getElementById('havi-status-dot');
+    var haviStatusText = document.getElementById('havi-status-text');
+    var modeToggle = document.getElementById('chat-mode-toggle');
+    var chatModePanel = document.getElementById('chat-mode-panel');
+    var searchModePanel = document.getElementById('search-mode-panel');
+    var tabChat = document.getElementById('tab-chat');
+    var tabSearch = document.getElementById('tab-search');
+
+    var apiAvailable = true;
+    var conversationHistory = [];
 
     function openPanel() {
       backdrop.classList.remove('hidden');
-      // Force reflow so transition works
       void backdrop.offsetWidth;
       backdrop.classList.remove('opacity-0');
       panel.classList.remove('translate-x-full');
@@ -65,5 +161,172 @@ import ChatWidget from './ChatWidget.astro';
         closePanel();
       }
     });
+
+    // Mode switching
+    function switchMode(mode) {
+      if (mode === 'search') {
+        chatModePanel.classList.add('hidden');
+        searchModePanel.classList.remove('hidden');
+        tabChat.classList.remove('bg-[#2ea3f2]', 'text-white');
+        tabChat.classList.add('text-gray-400');
+        tabSearch.classList.add('bg-[#2ea3f2]', 'text-white');
+        tabSearch.classList.remove('text-gray-400');
+      } else {
+        chatModePanel.classList.remove('hidden');
+        searchModePanel.classList.add('hidden');
+        tabSearch.classList.remove('bg-[#2ea3f2]', 'text-white');
+        tabSearch.classList.add('text-gray-400');
+        tabChat.classList.add('bg-[#2ea3f2]', 'text-white');
+        tabChat.classList.remove('text-gray-400');
+      }
+    }
+
+    if (modeToggle) {
+      modeToggle.addEventListener('click', function() { switchMode('search'); });
+    }
+    if (tabChat) {
+      tabChat.addEventListener('click', function() { switchMode('chat'); });
+    }
+    if (tabSearch) {
+      tabSearch.addEventListener('click', function() { switchMode('search'); });
+    }
+
+    // Offline switch to search
+    var offlineSwitch = document.getElementById('offline-switch-search');
+    if (offlineSwitch) {
+      offlineSwitch.addEventListener('click', function() { switchMode('search'); });
+    }
+
+    // Suggestion pills
+    document.querySelectorAll('.suggestion-pill').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var query = btn.getAttribute('data-query');
+        if (query && chatInput) {
+          chatInput.value = query;
+          sendMessage();
+        }
+      });
+    });
+
+    // Chat functions
+    function showGreeting(show) {
+      if (show) {
+        chatGreeting.classList.remove('hidden');
+        chatMessages.classList.add('hidden');
+      } else {
+        chatGreeting.classList.add('hidden');
+        chatMessages.classList.remove('hidden');
+      }
+    }
+
+    function addMessage(role, content) {
+      showGreeting(false);
+      var div = document.createElement('div');
+      div.className = 'flex ' + (role === 'user' ? 'justify-end' : 'justify-start');
+      var bubble = document.createElement('div');
+      bubble.className = 'max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ' +
+        (role === 'user'
+          ? 'bg-[#2ea3f2] text-white rounded-br-md'
+          : 'bg-[#2a2a2a] text-gray-200 rounded-bl-md');
+      bubble.textContent = content;
+      div.appendChild(bubble);
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addTypingIndicator() {
+      showGreeting(false);
+      var div = document.createElement('div');
+      div.id = 'typing-indicator';
+      div.className = 'flex justify-start';
+      var bubble = document.createElement('div');
+      bubble.className = 'bg-[#2a2a2a] text-gray-400 rounded-2xl rounded-bl-md px-4 py-3';
+      bubble.innerHTML = '<span class="flex gap-1"><span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay:0ms"></span><span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay:150ms"></span><span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay:300ms"></span></span>';
+      div.appendChild(bubble);
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      var el = document.getElementById('typing-indicator');
+      if (el) el.remove();
+    }
+
+    async function sendMessage() {
+      var message = chatInput.value.trim();
+      if (!message) return;
+
+      chatInput.value = '';
+      addMessage('user', message);
+      conversationHistory.push({ role: 'user', content: message });
+
+      if (!apiAvailable) {
+        addMessage('assistant', 'Havi is offline right now. Please try the Knowledge Base search for answers.');
+        return;
+      }
+
+      addTypingIndicator();
+
+      try {
+        var resp = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: message,
+            history: conversationHistory.slice(-6)
+          })
+        });
+
+        if (!resp.ok) {
+          throw new Error('API error: ' + resp.status);
+        }
+
+        var data = await resp.json();
+        removeTypingIndicator();
+        addMessage('assistant', data.response || 'Sorry, I could not generate a response.');
+        conversationHistory.push({ role: 'assistant', content: data.response || '' });
+      } catch (err) {
+        removeTypingIndicator();
+        apiAvailable = false;
+        haviStatusDot.classList.remove('bg-green-500');
+        haviStatusDot.classList.add('bg-red-500');
+        haviStatusText.textContent = 'Offline';
+        offlineNotice.classList.remove('hidden');
+        addMessage('assistant', 'Havi is offline — try the Knowledge Base search');
+      }
+    }
+
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Check API health on panel open
+    async function checkHealth() {
+      try {
+        var resp = await fetch('/api/health', { method: 'GET' });
+        if (resp.ok) {
+          apiAvailable = true;
+          haviStatusDot.classList.add('bg-green-500');
+          haviStatusDot.classList.remove('bg-red-500');
+          haviStatusText.textContent = 'Online';
+          offlineNotice.classList.add('hidden');
+        } else {
+          throw new Error('unhealthy');
+        }
+      } catch (e) {
+        apiAvailable = false;
+        haviStatusDot.classList.remove('bg-green-500');
+        haviStatusDot.classList.add('bg-red-500');
+        haviStatusText.textContent = 'Offline';
+      }
+    }
+
+    // Re-check health when panel opens
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function() {
+        setTimeout(checkHealth, 500);
+      });
+    }
   })();
 </script>

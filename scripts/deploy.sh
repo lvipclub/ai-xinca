@@ -123,3 +123,40 @@ if [[ "$DRY" -eq 0 ]]; then
 fi
 
 log "Done: $MSG (stamp $STAMP)"
+
+# ============================================================
+# CHAT API DEPLOYMENT (optional — only if systemd/service file present)
+# ============================================================
+# Copies Python chat API to VPS, installs deps, and restarts the service.
+# The service is expected to be at /etc/systemd/system/chat-api.service on the VPS.
+# Skip this block if scripts/chat_api.py does not exist.
+if [[ -f "scripts/chat_api.py" && "$DRY" -eq 0 ]]; then
+  log "Deploying chat API to VPS"
+  # 1. Create remote directory
+  ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "sudo mkdir -p /var/www/ai-xinca-chat && sudo chown deploy:deploy /var/www/ai-xinca-chat"
+
+  # 2. Rsync chat_api.py and requirements
+  rsync -az --stats "scripts/chat_api.py" "scripts/requirements-chat.txt" "${VPS}:/var/www/ai-xinca-chat/"
+
+  # 3. Install deps and restart service
+  ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "
+    cd /var/www/ai-xinca-chat
+    python3 -m pip install -q -r requirements-chat.txt 2>/dev/null || pip3 install -q -r requirements-chat.txt 2>/dev/null || echo 'pip install skipped'
+    if [[ -f /etc/systemd/system/chat-api.service ]]; then
+      sudo systemctl daemon-reload
+      sudo systemctl restart chat-api || sudo systemctl start chat-api
+      systemctl is-active --quiet chat-api && echo 'chat-api: active' || echo 'chat-api: failed'
+    else
+      echo 'chat-api.service not installed — copy scripts/chat-api.service to /etc/systemd/system/'
+    fi
+  "
+
+  # 4. Health check on chat API
+  sleep 3
+  CHAT_HEALTH=$(ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/api/health || echo '000'")
+  if [[ "$CHAT_HEALTH" == "200" ]]; then
+    log "Chat API health OK"
+  else
+    log "WARN Chat API health check returned: $CHAT_HEALTH"
+  fi
+fi

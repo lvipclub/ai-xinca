@@ -1,0 +1,16 @@
+[Unit]
+Description=XINCA Havi Chat API
+After=network.target
+
+[Service]
+Type=simple
+User=deploy
+WorkingDirectory=/var/www/ai-xinca-chat
+Environment=OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+Environment=OPENROUTER_MODEL=deepseek/deepseek-chat
+ExecStart=/usr/bin/python3 -m uvicorn chat_api:app --host 127.0.0.1 --port 8080
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
