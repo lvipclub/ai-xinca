@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 XINCA Havi Chat API
-FastAPI service that provides AI chat for ai.xinca.com using FAQ knowledge base
+FastAPI service that provides AI chat for help.xinca.com using FAQ knowledge base
 and DeepSeek via OpenRouter.
 """
 import json
@@ -155,7 +155,7 @@ async def chat(request: ChatRequest):
                 headers={
                     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
                     "Content-Type": "application/json",
-                    "HTTP-Referer": "https://ai.xinca.com",
+                    "HTTP-Referer": "https://help.xinca.com",
                     "X-Title": "XINCA Havi Chat",
                 },
                 json={

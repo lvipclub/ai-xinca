@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ai.xinca.com',
+  site: 'https://help.xinca.com',
   output: 'static',
   build: {
     assets: 'assets'

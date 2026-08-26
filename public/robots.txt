@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://ai.xinca.com/sitemap-index.xml
+Sitemap: https://help.xinca.com/sitemap-index.xml

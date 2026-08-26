@@ -5,7 +5,7 @@ const xPosts = JSON.parse(
   readFileSync(new URL('./src/data/x-posts.json', `file://${process.cwd()}/`), 'utf-8')
 );
 
-const SITE = 'https://ai.xinca.com';
+const SITE = 'https://help.xinca.com';
 
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -29,9 +29,9 @@ export const GET = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>ai.xinca.com — X Posts</title>
+    <title>help.xinca.com — X Posts</title>
     <link>${SITE}/x/</link>
-    <description>Short-form X posts distilled from ai.xinca.com articles. Per-account category tag identifies the posting account.</description>
+    <description>Short-form X posts distilled from help.xinca.com articles. Per-account category tag identifies the posting account.</description>
     <language>en</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}

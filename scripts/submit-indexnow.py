@@ -6,7 +6,7 @@ Submits the sitemap URL so all pages get crawled at once.
 import sys, uuid, urllib.request, urllib.parse
 
 KEY = 'e8a7c3f9-2b4d-4a1e-9f6c-0d5b8a3e7f1c'
-SITEMAP_URL = 'https://ai.xinca.com/sitemap-index.xml'
+SITEMAP_URL = 'https://help.xinca.com/sitemap-index.xml'
 
 ENGINES = [
     ('Bing', 'https://www.bing.com/indexnow'),

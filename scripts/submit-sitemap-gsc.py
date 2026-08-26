@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Submit ai.xinca.com sitemap to Google Search Console.
+Submit help.xinca.com sitemap to Google Search Console.
 Uses GMC service account (already has access to sc-domain:xinca.com).
 Called after every ai-xinca deploy.
 """
@@ -10,7 +10,7 @@ from googleapiclient.discovery import build
 
 SERVICE_ACCOUNT = '/Users/marcsir/.hermes/skills/shopify-gmc-optimizer/credentials/gmc_service_account.json'
 SITE_URL = 'sc-domain:xinca.com'
-SITEMAP_URL = 'https://ai.xinca.com/sitemap-index.xml'
+SITEMAP_URL = 'https://help.xinca.com/sitemap-index.xml'
 
 def main():
     credentials = service_account.Credentials.from_service_account_file(

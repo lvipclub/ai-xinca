@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Daily Product Carousel Picker for ai.xinca.com
+Daily Product Carousel Picker for help.xinca.com
 
 Queries Shopify Admin API for products from 4 categories, uses deepseek-v4-flash
 to randomly select 3 per category (12 total) and generate SEO alt-text.

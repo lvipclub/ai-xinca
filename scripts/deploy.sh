@@ -11,7 +11,7 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
 
 VPS="${VPS:-deploy@147.79.18.35}"
-WEBROOT="${WEBROOT:-/var/www/ai.xinca.com}"
+WEBROOT="${WEBROOT:-/var/www/help.xinca.com}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 DRY=0
 SKIP_BUILD=0
@@ -71,7 +71,7 @@ if [[ "$DRY" -eq 0 ]]; then
   CF_ZONE="${CF_ZONE_XINCA:-a5111dd78fc21ff12d5f48bb982fd8b7}"
   if [[ -n "$CF_TOKEN" ]]; then
     log "CF purge zone ${CF_ZONE:0:8}… files:[]"
-    FILES='["https://ai.xinca.com/","https://ai.xinca.com/kb/","https://ai.xinca.com/faq/","https://ai.xinca.com/x/","https://ai.xinca.com/x/rss.xml","https://ai.xinca.com/sitemap-index.xml"]'
+    FILES='["https://help.xinca.com/","https://help.xinca.com/kb/","https://help.xinca.com/faq/","https://help.xinca.com/x/","https://help.xinca.com/x/rss.xml","https://help.xinca.com/sitemap-index.xml"]'
     curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE}/purge_cache" \
       -H "Authorization: Bearer ${CF_TOKEN}" -H "Content-Type: application/json" \
       --data "{\"files\":${FILES}}" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("purge_success", d.get("success"))'
@@ -97,7 +97,7 @@ if [[ "$DRY" -eq 0 ]]; then
     "/a/ai-building-energy-management/"; do
     code="000"
     for attempt in 1 2 3; do
-      code=$(curl -skL -o /dev/null -w "%{http_code}" --resolve "ai.xinca.com:443:${VPS_IP}" --max-time 20 "https://ai.xinca.com${u}" || echo 000)
+      code=$(curl -skL -o /dev/null -w "%{http_code}" --resolve "help.xinca.com:443:${VPS_IP}" --max-time 20 "https://help.xinca.com${u}" || echo 000)
       [[ "$code" == "200" ]] && break
       [[ $attempt -lt 3 ]] && sleep 8
     done
@@ -106,7 +106,7 @@ if [[ "$DRY" -eq 0 ]]; then
   done
   [[ "$FAIL" -eq 0 ]] || { echo "HEALTH_FAIL"; exit 1; }
   # GA tag present on landing (origin)
-  curl -skL --resolve "ai.xinca.com:443:${VPS_IP}" --max-time 20 "https://ai.xinca.com/" | grep -q "G-MLH9M91H5W" && echo "GA_OK" || { echo "GA_MISSING"; exit 1; }
+  curl -skL --resolve "help.xinca.com:443:${VPS_IP}" --max-time 20 "https://help.xinca.com/" | grep -q "G-MLH9M91H5W" && echo "GA_OK" || { echo "GA_MISSING"; exit 1; }
   log "Health checks OK (origin)"
 fi
 
@@ -119,7 +119,7 @@ if [[ "$DRY" -eq 0 ]]; then
   "$PY_BIN" scripts/submit-sitemap-gsc.py 2>/dev/null || log "gsc ping skipped/failed"
   "$PY_BIN" scripts/submit-indexnow.py 2>/dev/null || log "indexnow ping skipped/failed"
   # Warm-fetch key URLs with AI-crawler UAs (edge cache + AI Crawl Control signals)
-  bash "$HOME/.hermes/scripts/ping-ai-bots.sh" ai.xinca.com || log "warm-fetch warnings"
+  bash "$HOME/.hermes/scripts/ping-ai-bots.sh" help.xinca.com || log "warm-fetch warnings"
 fi
 
 log "Done: $MSG (stamp $STAMP)"

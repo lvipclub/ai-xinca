@@ -7,14 +7,14 @@ const accounts = [...new Set(xPosts.map((p) => p.account))];
 ---
 
 <BaseLayout
-  title="X Posts — ai.xinca.com"
-  description="Short-form X posts from ai.xinca.com — automated posting source feeds."
+  title="X Posts — help.xinca.com"
+  description="Short-form X posts from help.xinca.com — automated posting source feeds."
 >
   <main class="min-h-screen bg-white">
     <section class="mx-auto max-w-3xl px-6 py-16">
       <h1 class="text-4xl font-bold text-slate-900">X Posts</h1>
       <p class="mt-2 text-slate-600">
-        Short-form posts distilled from ai.xinca.com articles. Accounts:
+        Short-form posts distilled from help.xinca.com articles. Accounts:
         {accounts.map((a) => `@${a}`).join(' · ')}
       </p>
       <p class="mt-1 text-sm text-slate-500">
