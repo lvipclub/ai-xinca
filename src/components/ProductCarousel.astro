@@ -72,7 +72,7 @@ const hasProducts = categories.some(
                       </h3>
                       <div class="flex items-center justify-between">
                         <span class="text-[#2ea3f2] font-semibold text-sm">
-                          HK${parseFloat(product.price.split(' ')[0]).toLocaleString()}
+                          US${Math.round(parseFloat(product.price.split(' ')[0]) / 7.8).toLocaleString()}
                         </span>
                         {product.vendor && (
                           <span class="text-[10px] text-[#999] truncate max-w-[80px]">{product.vendor}</span>
