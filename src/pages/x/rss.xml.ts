@@ -21,6 +21,7 @@ export const GET = async () => {
       <guid isPermaLink="false">${p.slug}</guid>
       <pubDate>${fmtDate(p.date)}</pubDate>
       <category>${esc(p.account)}</category>
+      ${p.image ? `<enclosure url="${esc(p.image)}" type="image/png" length="0"/>` : ''}
       <description><![CDATA[${p.text}]]></description>
     </item>`
     )
