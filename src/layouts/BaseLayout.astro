@@ -29,6 +29,7 @@ const { title, description, ogImage, ogType = 'website' } = Astro.props;
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="alternate" type="application/rss+xml" title="help.xinca.com — HVAC Knowledge Base Articles" href="/rss.xml" />
     <title>{title} | help.xinca.com</title>
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MLH9M91H5W"></script>

@@ -71,7 +71,7 @@ if [[ "$DRY" -eq 0 ]]; then
   CF_ZONE="${CF_ZONE_XINCA:-a5111dd78fc21ff12d5f48bb982fd8b7}"
   if [[ -n "$CF_TOKEN" ]]; then
     log "CF purge zone ${CF_ZONE:0:8}… files:[]"
-    FILES='["https://help.xinca.com/","https://help.xinca.com/kb/","https://help.xinca.com/faq/","https://help.xinca.com/x/","https://help.xinca.com/x/rss.xml","https://help.xinca.com/sitemap-index.xml"]'
+    FILES='["https://help.xinca.com/","https://help.xinca.com/kb/","https://help.xinca.com/faq/","https://help.xinca.com/x/","https://help.xinca.com/x/rss.xml","https://help.xinca.com/rss.xml","https://help.xinca.com/sitemap-index.xml"]'
     curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE}/purge_cache" \
       -H "Authorization: Bearer ${CF_TOKEN}" -H "Content-Type: application/json" \
       --data "{\"files\":${FILES}}" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("purge_success", d.get("success"))'
@@ -93,6 +93,7 @@ if [[ "$DRY" -eq 0 ]]; then
     "/qa/" \
     "/x/" \
     "/x/rss.xml" \
+    "/rss.xml" \
     "/sitemap-index.xml" \
     "/a/ai-building-energy-management/"; do
     code="000"
