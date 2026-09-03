@@ -8,6 +8,11 @@ const canonicalUrl = "https://help.xinca.com/a/air-side-vav-damper-selection/inf
 const articleUrl = "https://help.xinca.com/a/air-side-vav-damper-selection/";
 const articleSlug = "air-side-vav-damper-selection";
 const infocardImage = "/articles/infocards/vav-damper-selection-infocard.png";
+// og:image MUST be landscape for X binding (2026-09-03): the 760x2561
+// infocard PNG is extreme portrait and X silently refuses it. Use the
+// article's landscape logbook card instead; the infocard itself is still
+// shown/loaded on the page.
+const infocardOgImage = "https://help.xinca.com/articles/air-side-vav-damper-selection-logbook.png";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -21,7 +26,7 @@ const jsonLd = {
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  ogImage={`https://help.xinca.com${infocardImage}`}
+  ogImage={infocardOgImage}
   ogType="article"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>

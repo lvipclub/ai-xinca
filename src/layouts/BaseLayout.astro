@@ -10,7 +10,11 @@ export interface Props {
   ogImage?: string;
   ogType?: string;
 }
-const { title, description, ogImage, ogType = 'website' } = Astro.props;
+// Default OG card so EVERY page emits summary_large_image with a hero —
+// X binds no image when og:image is absent (2026-09-03: kb/q, faq, home,
+// about, kb index all fell back to text-only "summary" cards).
+const DEFAULT_OG = 'https://help.xinca.com/articles/og-default.png';
+const { title, description, ogImage = DEFAULT_OG, ogType = 'website' } = Astro.props;
 ---
 <!doctype html>
 <html lang="en" class="scroll-smooth">
