@@ -2,7 +2,7 @@
 """
 Daily Product Carousel Picker for help.xinca.com
 
-Queries Shopify Admin API for products from 4 categories, uses deepseek-v4-flash
+Queries Shopify Admin API for products from 4 categories, uses deepseek-v4-flash-vision-exp
 to randomly select 3 per category (12 total) and generate SEO alt-text.
 Writes to src/data/featured-products.json.
 
@@ -170,7 +170,7 @@ def _normalize_product(node: dict) -> dict:
 # ---------- LLM SELECTION ----------
 def llm_pick_products(category_products: Dict[str, List[dict]]) -> Dict[str, List[dict]]:
     """
-    Feed candidate products to deepseek-v4-flash for random selection + alt-text writing.
+    Feed candidate products to deepseek-v4-flash-vision-exp for random selection + alt-text writing.
     
     Returns: {"iaq": [...3], "air_side": [...3], "water_side": [...3], "iot": [...3]}
     """
@@ -221,20 +221,29 @@ Output STRICT JSON (no markdown, no backticks):
 }}"""
 
     body = json.dumps({
-        "model": "deepseek-chat",
+        "model": "deepseek-v4-flash-vision-exp",
         "messages": [{"role": "user", "content": prompt}],
         "temperature": 0.7,
-        "max_tokens": 3000,
+        # NOTE 2026-09-04: deepseek models are REASONING models — a 3000-token budget
+        # left content empty (finish_reason=length; reasoning alone ~10-18K chars).
+        # 65536 covers reasoning + the JSON answer (verified: stop, valid JSON, ~48s).
+        "max_tokens": 65536,
     })
     req = Request(DEEPSEEK_API, data=body.encode(), method="POST")
     req.add_header("Authorization", f"Bearer {DEEPSEEK_KEY}")
     req.add_header("Content-Type", "application/json")
     
-    print(f"  Calling deepseek-v4-flash...")
-    with urlopen(req, timeout=60) as resp:
+    print(f"  Calling deepseek-v4-flash-vision-exp...")
+    with urlopen(req, timeout=180) as resp:
         result = json.loads(resp.read())
     
     raw = result["choices"][0]["message"]["content"]
+    # Reasoning model can still exhaust the budget → empty content; retry once.
+    if not raw or not raw.strip():
+        print("  Empty content — retrying once")
+        with urlopen(req, timeout=180) as resp:
+            result = json.loads(resp.read())
+        raw = result["choices"][0]["message"]["content"] or ""
     # Strip markdown code fences if present
     raw = raw.strip()
     if raw.startswith("```"):
@@ -270,7 +279,7 @@ def write_json(data: Dict[str, List[dict]]):
     """Write featured-products.json with category metadata."""
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "generated_by": "deepseek-v4-flash",
+        "generated_by": "deepseek-v4-flash-vision-exp",
         "categories": {},
     }
     for cat_key in ["iaq", "air_side", "water_side", "iot"]:
