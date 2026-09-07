@@ -9,12 +9,18 @@ export interface Props {
   description?: string;
   ogImage?: string;
   ogType?: string;
+  canonical?: string;
 }
 // Default OG card so EVERY page emits summary_large_image with a hero —
 // X binds no image when og:image is absent (2026-09-03: kb/q, faq, home,
 // about, kb index all fell back to text-only "summary" cards).
 const DEFAULT_OG = 'https://help.xinca.com/articles/og-default.png';
-const { title, description, ogImage = DEFAULT_OG, ogType = 'website' } = Astro.props;
+const { title, description, ogImage = DEFAULT_OG, ogType = 'website', canonical } = Astro.props;
+// Self-canonical on every page. Astro.url.pathname never carries a query
+// string in static builds, so ?slide=N-style variants (GSC bucket
+// "Duplicate without user-selected canonical", 2026-09-07) consolidate
+// onto the clean URL. Override with the `canonical` prop when needed.
+const canonicalHref = canonical || new URL(Astro.url.pathname, Astro.site ?? 'https://help.xinca.com').href;
 ---
 <!doctype html>
 <html lang="en" class="scroll-smooth">
@@ -22,6 +28,7 @@ const { title, description, ogImage = DEFAULT_OG, ogType = 'website' } = Astro.p
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description || 'HVAC controls engineering hub. Ask about damper sizing, valve Cv, VAV setup, actuator torque — get answers backed by engineering knowledge.'} />
+    <link rel="canonical" href={canonicalHref} />
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description || ''} />
