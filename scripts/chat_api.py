@@ -17,9 +17,15 @@ from pydantic import BaseModel
 
 # --- Configuration ---
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-chat")
+OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-v4-flash-vision-exp")
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-QA_DATA_PATH = Path(__file__).parent.parent / "src" / "data" / "seed-qa.json"
+# seed-qa.json lives FLAT next to this script on the VPS (/var/www/ai-xinca-chat/),
+# but in the repo it's at src/data/seed-qa.json (deploy.sh rsyncs it flat).
+# 2026-09-07: qa_count was 0 in production — the repo-only path missed the live file.
+QA_DATA_PATHS = [
+    Path(__file__).parent / "seed-qa.json",                          # live VPS layout (flat)
+    Path(__file__).parent.parent / "src" / "data" / "seed-qa.json",  # repo layout (local dev)
+]
 
 # --- App ---
 app = FastAPI(title="XINCA Havi Chat API", version="1.0.0")
@@ -50,13 +56,16 @@ qa_entries: list[dict] = []
 
 def load_qa():
     global qa_entries
-    try:
-        with open(QA_DATA_PATH, "r", encoding="utf-8") as f:
-            qa_entries = json.load(f)
-        print(f"Loaded {len(qa_entries)} QA entries")
-    except Exception as e:
-        print(f"Warning: Could not load QA data: {e}")
-        qa_entries = []
+    for candidate in QA_DATA_PATHS:
+        try:
+            with open(candidate, "r", encoding="utf-8") as f:
+                qa_entries = json.load(f)
+            print(f"Loaded {len(qa_entries)} QA entries from {candidate}")
+            return
+        except Exception:
+            continue
+    print(f"Warning: Could not load QA data from any of: {[str(p) for p in QA_DATA_PATHS]}")
+    qa_entries = []
 
 @app.on_event("startup")
 async def startup():
@@ -148,35 +157,45 @@ async def chat(request: ChatRequest):
     messages.append({"role": "user", "content": user_message})
     
     # Call OpenRouter
+    # 2026-09-07: deepseek-v4-flash-vision-exp is a REASONING model. A tight
+    # max_tokens budget can be fully consumed by reasoning
+    # (finish_reason=length, content=None -> pydantic 500). The carousel picker
+    # hit the same at 3000 and was fixed in 06da44e with 65536. Here 16384
+    # covers worst-case reasoning + a chat answer; reasoning is disabled for
+    # snappy interactive-chat latency (verified via OpenRouter reasoning param).
+    payload = {
+        "model": OPENROUTER_MODEL,
+        "messages": messages,
+        "temperature": 0.3,
+        "max_tokens": 16384,
+        "reasoning": {"enabled": False},
+    }
     try:
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            resp = await client.post(
-                OPENROUTER_URL,
-                headers={
-                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-                    "Content-Type": "application/json",
-                    "HTTP-Referer": "https://help.xinca.com",
-                    "X-Title": "XINCA Havi Chat",
-                },
-                json={
-                    "model": OPENROUTER_MODEL,
-                    "messages": messages,
-                    "temperature": 0.3,
-                    "max_tokens": 1024,
-                },
-            )
-            resp.raise_for_status()
-            data = resp.json()
-            
-            if "choices" not in data or not data["choices"]:
-                raise HTTPException(status_code=502, detail="Invalid response from LLM")
-            
-            response_text = data["choices"][0]["message"]["content"]
-            
+        async with httpx.AsyncClient(timeout=180.0) as client:
+            response_text = None
+            for attempt in range(2):  # one retry absorbs a reasoning-exhausted response
+                resp = await client.post(
+                    OPENROUTER_URL,
+                    headers={
+                        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": "https://help.xinca.com",
+                        "X-Title": "XINCA Havi Chat",
+                    },
+                    json=payload,
+                )
+                resp.raise_for_status()
+                data = resp.json()
+
+                if "choices" in data and data["choices"]:
+                    response_text = data["choices"][0]["message"].get("content")
+                    if response_text:
+                        break
     except httpx.HTTPError as e:
         raise HTTPException(status_code=502, detail=f"LLM API error: {str(e)}")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Internal error: {str(e)}")
+
+    if not response_text:
+        raise HTTPException(status_code=502, detail="LLM returned empty content after retry")
     
     # Build sources list
     sources = []

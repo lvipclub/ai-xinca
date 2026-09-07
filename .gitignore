@@ -26,3 +26,7 @@ src/data/featured-products.json
 
 # jetbrains setting folder
 .idea/
+
+# python
+__pycache__/
+*.pyc

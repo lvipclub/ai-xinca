@@ -6,9 +6,11 @@ After=network.target
 Type=simple
 User=deploy
 WorkingDirectory=/var/www/ai-xinca-chat
-Environment=OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
-Environment=OPENROUTER_MODEL=deepseek/deepseek-chat
-ExecStart=/usr/bin/python3 -m uvicorn chat_api:app --host 127.0.0.1 --port 8080
+# 2026-09-07: mirrors the LIVE unit havi-chat-api.service on k16-vps (port 8090).
+# Port 8080 is taken by docker-proxy; creds come from EnvironmentFile (deploy's
+# .hermes .env), NOT from a shell-inherited OPENROUTER_API_KEY.
+EnvironmentFile=/home/deploy/.hermes/.env
+ExecStart=/usr/bin/python3 -m uvicorn chat_api:app --host 127.0.0.1 --port 8090
 Restart=always
 RestartSec=5
 
