@@ -140,6 +140,15 @@ const jsonLd = {
 
       <p>None of these failures were fixed by replacing the "broken" equipment. All four were found by measurement — a pressure reading, a teardown, a setpoint audit, a velocity calculation. That is the casebook's whole argument: in a hydronic system that has flow but will not cool, the first tool is arithmetic, not a purchase order.</p>
 
+      <p>Once the measurement <em>has</em> named the fault, the fix usually reduces to one or two components:</p>
+
+      <ul>
+        <li><strong>Cases 1 and 3 — the valve that cannot modulate and the coil held at 3.6× its design differential:</strong> a pressure-independent valve holds its flow setpoint across the pressure swings that broke both systems. Specified by size and protocol, e.g. <a href="https://shop.xinca.com/products/belimo-energy-valve-2-way-piccv-15mm-24v-bacnet-mod-on-off-ev015r2-bac/">a DN15 pressure-independent control valve with BACnet/Modbus integration</a>.</li>
+        <li><strong>Case 2 — verify actual flow, not stickers:</strong> the TAB lesson is that flow must be measured where it happens. Field hardware for that check: <a href="https://shop.xinca.com/products/johnson-controls-f61tb-9100-flow-switch/">an insertion paddle flow switch (IP67)</a> or <a href="https://shop.xinca.com/products/honeywell-water-flow-switch-wfs-1001-h/">a compact inline water flow switch rated to 10 bar</a>.</li>
+      </ul>
+
+      <p>XINCA lists these online at <a href="https://shop.xinca.com/">shop.xinca.com</a> as an ecommerce partner of an authorised supplier — the catalogue carries the full range of air-side, water-side and fluid-control components referenced throughout this knowledge base.</p>
+
       <!-- Hashtags -->
       <p class="text-sm text-gray-500 mt-6 text-center">
         <a href="https://twitter.com/hashtag/ChilledWater" class="hover:text-[#2ea3f2]">#ChilledWater</a>
