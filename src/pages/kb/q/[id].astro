@@ -72,6 +72,18 @@ const canonicalUrl = `https://help.xinca.com/kb/q/${qa.id}/`;
       </p>
     </div>
 
+    <!-- Related Articles -->
+    {qa.relatedArticles && qa.relatedArticles.length > 0 && (
+      <div class="mb-8 pt-6 border-t border-[#e5e5e5]">
+        <h3 class="text-lg font-semibold text-[#333] mb-3" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Related Articles</h3>
+        <ul class="space-y-1">
+          {qa.relatedArticles.map((r: any) => (
+            <li><a href={`/a/${r.slug}/`} class="text-[#2ea3f2] hover:underline text-sm">{r.title}</a></li>
+          ))}
+        </ul>
+      </div>
+    )}
+
     <!-- Related Questions -->
     {qa.related && qa.related.length > 0 && (
       <div class="mb-8 pt-6 border-t border-[#e5e5e5]">

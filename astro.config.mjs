@@ -10,5 +10,11 @@ export default defineConfig({
   build: {
     assets: 'assets'
   },
-  integrations: [tailwind(), sitemap()],
+  integrations: [
+    tailwind(),
+    sitemap({
+      // /admin is a pipeline dashboard — keep it out of the public sitemap
+      filter: (page) => !page.includes('/admin'),
+    }),
+  ],
 });

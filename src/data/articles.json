@@ -1,10 +1,26 @@
 [
   {
+    "slug": "air-handling-unit-coil-selection",
+    "title": "Air Handling Unit Coil Selection Guide",
+    "description": "Selecting heating and cooling coils for air handling units: load calculation, coil configuration, fluid dynamics and materials for Australian climates.",
+    "date": "2026-08-13",
+    "categories": [
+      "air",
+      "water"
+    ],
+    "heroImage": "/articles/air-handling-unit-coil-selection-hero.png",
+    "editorPick": false,
+    "readCount": 0
+  },
+  {
     "slug": "building-controls-bms-integration",
     "title": "Modern BMS Integration: From Traditional DDC to IoT-Enabled Building Controls",
     "description": "How BACnet and Modbus protocols underpin modern building automation — sensor network architecture, IoT migration strategies, protocol integration patterns, and the practical steps for upgrading legacy DDC systems.",
     "date": "2026-07-24",
-    "categories": ["controls", "iot"],
+    "categories": [
+      "controls",
+      "iot"
+    ],
     "heroImage": "/articles/building-controls-bms-integration-logbook.png",
     "editorPick": true,
     "readCount": 0
@@ -14,7 +30,10 @@
     "title": "Control Valve Selection and Hydronic Balancing for Commercial HVAC",
     "description": "Globe valves vs PICV, valve authority fundamentals, Cv sizing methodology, common commissioning mistakes, and hydronic balancing strategies for chilled water and heating hot water systems.",
     "date": "2026-07-24",
-    "categories": ["water", "fluid"],
+    "categories": [
+      "water",
+      "fluid"
+    ],
     "heroImage": "/articles/water-side-control-valve-selection-logbook.png",
     "editorPick": true,
     "readCount": 0
@@ -24,7 +43,10 @@
     "title": "VAV Damper Selection for Commercial Buildings: Sizing, Types, and Specification Pitfalls",
     "description": "How to select the right damper for VAV terminal units — opposed-blade vs parallel-blade, sizing methods from ASHRAE applications, common specification mistakes, and BACnet/Modbus integration requirements.",
     "date": "2026-07-24",
-    "categories": ["air", "controls"],
+    "categories": [
+      "air",
+      "controls"
+    ],
     "heroImage": "/articles/air-side-vav-damper-selection-logbook.png",
     "editorPick": true,
     "readCount": 0
@@ -34,7 +56,10 @@
     "title": "Continuous IAQ Monitoring Is Now Table Stakes for Commercial Buildings",
     "description": "Why IAQ monitoring moved from 'nice-to-have' to tenant expectation — and what specifiers must require in performance briefs for CO₂, PM2.5, and TVOC sensing with DCV integration.",
     "date": "2026-07-24",
-    "categories": ["air", "controls"],
+    "categories": [
+      "air",
+      "controls"
+    ],
     "heroImage": "/articles/iaq-monitoring-strategies.png?v=2",
     "editorPick": true,
     "readCount": 0
@@ -44,39 +69,51 @@
     "title": "How Asian Building Codes Are Driving a Convergence in Energy Efficiency Specifications",
     "description": "Singapore's BCA Green Mark 2026, Hong Kong's BEAM Plus v2.0, and Dubai's Al Sa'fat now mandate submetering, continuous commissioning, and minimum 30% energy improvement — here is what it means for controls specifiers.",
     "date": "2026-07-24",
-    "categories": ["controls", "iot"],
+    "categories": [
+      "controls",
+      "iot"
+    ],
     "heroImage": "/articles/energy-efficiency-building-codes.png?v=2",
     "editorPick": true,
     "readCount": 0
-  },
-  {
-    "slug": "data-center-glycol-cooling",
-    "title": "The Coolant Trade-Off That Transforms Data Centre Economics",
-    "description": "Why data centres are switching from ethylene glycol to food-grade propylene glycol — and how this single choice drops cooling from ~40% of facility power to single digits.",
-    "date": "2026-06-30",
-    "categories": ["water", "fluid"],
-    "heroImage": "/articles/data-center-glycol-hero.jpg",
-    "editorPick": true,
-    "readCount": 342
-  },
-  {
-    "slug": "data-center-energy-efficiency",
-    "title": "Data Center Energy Efficiency: From Rack Cooling to Liquid Cooling",
-    "description": "A practical guide for facilities engineers on improving cooling efficiency — from PUE fundamentals and rack airflow optimization to liquid cooling adoption.",
-    "date": "2026-07-02",
-    "categories": ["water", "controls"],
-    "heroImage": "/articles/dc-cooling-logbook-hero.png",
-    "editorPick": true,
-    "readCount": 215
   },
   {
     "slug": "ai-building-energy-management",
     "title": "How AI Is Reshaping Building Energy Management",
     "description": "Machine learning and deep learning are transforming building energy systems — from predictive maintenance to occupancy-driven HVAC control.",
     "date": "2026-07-06",
-    "categories": ["controls", "iot"],
+    "categories": [
+      "controls",
+      "iot"
+    ],
     "heroImage": "/articles/ai-energy-logbook-hero.png",
     "editorPick": false,
     "readCount": 178
+  },
+  {
+    "slug": "data-center-energy-efficiency",
+    "title": "Data Center Energy Efficiency: From Rack Cooling to Liquid Cooling",
+    "description": "A practical guide for facilities engineers on improving cooling efficiency — from PUE fundamentals and rack airflow optimization to liquid cooling adoption.",
+    "date": "2026-07-02",
+    "categories": [
+      "water",
+      "controls"
+    ],
+    "heroImage": "/articles/dc-cooling-logbook-hero.png",
+    "editorPick": true,
+    "readCount": 215
+  },
+  {
+    "slug": "data-center-glycol-cooling",
+    "title": "The Coolant Trade-Off That Transforms Data Centre Economics",
+    "description": "Why data centres are switching from ethylene glycol to food-grade propylene glycol — and how this single choice drops cooling from ~40% of facility power to single digits.",
+    "date": "2026-06-30",
+    "categories": [
+      "water",
+      "fluid"
+    ],
+    "heroImage": "/articles/data-center-glycol-hero.jpg",
+    "editorPick": true,
+    "readCount": 342
   }
 ]
