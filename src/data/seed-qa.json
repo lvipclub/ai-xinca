@@ -53,6 +53,10 @@
       {
         "slug": "air-handling-unit-coil-selection",
         "title": "Air Handling Unit Coil Selection Guide"
+      },
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
       }
     ]
   },
@@ -70,6 +74,10 @@
       {
         "slug": "water-side-control-valve-selection",
         "title": "Control Valve & Hydronic Balancing Guide"
+      },
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
       }
     ]
   },
@@ -115,6 +123,10 @@
       {
         "slug": "water-side-control-valve-selection",
         "title": "Control Valve & Hydronic Balancing Guide"
+      },
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
       }
     ]
   },
@@ -132,6 +144,10 @@
       {
         "slug": "data-center-glycol-cooling",
         "title": "Glycol Coolant Trade-Offs in Data Centres"
+      },
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
       }
     ]
   },
@@ -344,6 +360,10 @@
       {
         "slug": "data-center-energy-efficiency",
         "title": "Data Center Energy Efficiency Guide"
+      },
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
       }
     ]
   },
@@ -362,6 +382,10 @@
       {
         "slug": "water-side-control-valve-selection",
         "title": "Control Valve & Hydronic Balancing Guide"
+      },
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
       }
     ]
   },
@@ -375,6 +399,12 @@
       "commissioning",
       "airflow",
       "sensor-calibration"
+    ],
+    "relatedArticles": [
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
+      }
     ]
   },
   {
@@ -658,6 +688,10 @@
       {
         "slug": "data-center-energy-efficiency",
         "title": "Data Center Energy Efficiency Guide"
+      },
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
       }
     ]
   },
@@ -706,6 +740,10 @@
       {
         "slug": "water-side-control-valve-selection",
         "title": "Control Valve & Hydronic Balancing Guide"
+      },
+      {
+        "slug": "hydronic-failure-casebook",
+        "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks"
       }
     ]
   },

@@ -1,0 +1,224 @@
+---
+// a/hydronic-failure-casebook.astro — Casebook: four verified chilled-water failures, worked numbers, first checks
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pageTitle = "Chilled-Water Failure Casebook: Four Patterns, First Checks";
+const pageDescription = "Four verified chilled-water failures — hunting valves, backward flow limiters, bad setpoints, coil carryover — with worked numbers and the first check for each.";
+const canonicalUrl = "https://help.xinca.com/a/hydronic-failure-casebook/";
+const heroImage = "/articles/hydronic-failure-casebook-hero.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": pageTitle,
+  "description": pageDescription,
+  "image": "https://help.xinca.com/articles/hydronic-failure-casebook-hero.png",
+  "author": { "@type": "Organization", "name": "XINCA" },
+  "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://help.xinca.com" },
+  "datePublished": "2026-09-14",
+  "mainEntityOfPage": canonicalUrl
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage="https://help.xinca.com/articles/hydronic-failure-casebook-hero.png"
+  ogType="article"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-[#0a1628] to-[#1a2942] text-white">
+    <div class="absolute inset-0 opacity-20">
+      <img
+        src={heroImage}
+        alt="Single-ink technical illustration of a chilled-water plant: cooling coil, modulating control valve with actuator, circulation pump and pressure gauge"
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0a1628]/80 to-transparent"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <a href="/kb" class="hover:text-white transition-colors">Knowledge Base</a>
+        <span>/</span>
+        <span class="text-[#7EBEC5]">Water-side</span>
+      </nav>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+        {pageTitle}
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed mb-8">
+        {pageDescription}
+      </p>
+      <div class="flex items-center gap-4">
+        <span class="text-sm text-gray-400">Share:</span>
+        <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(pageTitle)}&url=${encodeURIComponent(canonicalUrl)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </a>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`}
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-[#2ea3f2] transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.554V9h3.565v11.452z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div class="prose prose-lg max-w-none
+      prose-headings:font-heading prose-headings:text-[#333]
+      prose-p:text-[#666] prose-a:text-[#2ea3f2] prose-strong:text-[#333]
+      prose-table:border prose-table:border-[#e5e5e5]
+      prose-th:bg-[#f8f9fa] prose-th:text-[#333] prose-td:text-[#666]">
+
+      <p>The pattern is familiar to anyone who has been handed the keys to a running building: the pumps are turning, the valves are modulating, the BMS shows no alarms — and the building still will not cool properly. In the four real cases below, all documented by the engineers who diagnosed them, the equipment turned out to be fine. What failed was balancing, setpoints, or installation. Each case yields a first check you can run before anyone orders replacement parts.</p>
+
+      <h2>1. The valve that forgot how to modulate — Field Museum, Chicago</h2>
+
+      <p>As the Field Museum consolidated more air handling units onto its central chilled water plant over twenty years, the system drifted out of balance. During a later investigation, engineers found the two-way modulating valves on the coils hydraulically closest to the distribution pumps behaving as on/off devices: they cracked open, the near-pump pressure immediately overflowed the coils, and the valves ran pinned at 100 percent, unable to hold discharge air temperature.</p>
+
+      <p><strong>The worked number.</strong> A modulating valve only controls flow when it is the dominant resistance in its branch — that is valve authority, <strong>N = ΔP_valve ÷ (ΔP_valve + ΔP_circuit)</strong>. Take a valve with 1.5 psi at full open in a branch whose circuit (excluding the valve) drops 13.5 psi: N = 1.5/15 = 0.10. At that authority, moving the valve from 50 to 100 percent open barely changes the flow — so the controller, seeing its setpoint unmet, drives the valve fully open. The valve looks broken. It is installed in a branch where no valve could modulate.</p>
+
+      <p><strong>First check:</strong> when a valve hunts or pins at 100 percent, ask whether it is the branch closest to the pump. The fix in Chicago was rebalancing — which immediately restored modulation and flow to the remote coils — with pressure-independent control valves planned as the durable answer: a PICV holds its flow setpoint across the pressure swings that defeat a conventionally piped valve.</p>
+
+      <h2>2. The valves installed backward — a 302-room hotel</h2>
+
+      <p>A new hotel building with 350 fan-coil units and six air handling units could not be balanced: chilled water pumps ran near maximum while many distal rooms were starved of flow. The commissioning team's forensic step was to disassemble one of the automatic flow-limiting valves. Inside, two installation defects: a manufacturer batch with the flow-direction sticker printed the wrong way — valves installed backward — and rubber diaphragms that are position-sensitive; installed backward or missing, the valve opens with the flow and stops limiting at all.</p>
+
+      <p><strong>The worked number.</strong> A flow limiter only limits once the pressure across it is inside its operating range — the project's TAB target was a minimum 2.0 ΔP at the worst-case unit's FLV. Below that floor, the "flow limiter" is just a fixed orifice: it neither limits nor protects, and the loop short-circuits through whichever valves fail open. That is exactly what the pumps were compensating for at nameplate amperage.</p>
+
+      <p><strong>First check:</strong> before blaming the pump or the pipe sizing, pull one valve from the suspect batch and open it up — against the manufacturer's IOM, not the sticker. A batch defect is invisible from outside; it costs one valve teardown to find.</p>
+
+      <h2>3. The setpoints nobody audited — a telecom facility in Illinois</h2>
+
+      <p>A 350,000 sq ft telecom building called its design team back one year after a chiller plant upgrade. The symptom list: the chiller tripped on low flow several times a week; the plant saw a 3°F delta-T (low delta-T syndrome); space humidity sat at 62–65 percent; and pump VFDs put in bypass overheated and tripped. The audit found three wrong numbers doing all that damage:</p>
+
+      <ul>
+        <li>The chiller's flow-protection DP switch was set to full design flow, <strong>189 gpm</strong>, when the manufacturer's specified minimum was <strong>100 gpm</strong> — every flow condition between the two looked like a fault.</li>
+        <li>The bypass flowmeter was uncalibrated and held its valve 100 percent open, pressurising the system and depressing the delta-T.</li>
+        <li>Pumps were controlled to hold <strong>18 psi</strong> across the most remote AHU coil's pressure-independent valve — against a design requirement of <strong>5 psi</strong> — unnecessarily pressurising the loop and wasting pump energy.</li>
+      </ul>
+
+      <p><strong>The worked number.</strong> 18 psi where 5 psi is required is 3.6 times the differential the coil actually needs — pump head spent pressing water through valves for no heat-transfer benefit, with the bypass dumping it back to the chiller at 3°F. The verified fixes: DP switch reset to the manufacturer minimum (100 gpm), pumps reset to 5 psi at the remote coil, flowmeter calibrated and bypass held at 100 gpm. With those three changes the plant ran on one pump, and the VFD in bypass never rode low enough on its curve to trip.</p>
+
+      <p><strong>First check:</strong> audit every protection and control setpoint against the manufacturer's minimum — not the design nominal. Design flow is a sizing number; the manufacturer's minimum flow is the number the chiller's protection actually needs.</p>
+
+      <h2>4. The coil that rained — moisture carryover</h2>
+
+      <p>The mechanism is simple hydraulics: air moving across a wet cooling coil shears condensate off the fin edges, and above a velocity threshold it carries droplets downstream — wet ducts, damp ceiling tiles, elevated supply humidity. The reference calculation: 10,000 CFM through a 20 ft² coil face equals 500 fpm. Standard coil-selection practice keeps cooling-coil face velocity below published carryover limits — under about 550 fpm, with 500 fpm a common specification ceiling.</p>
+
+      <p><strong>The worked number.</strong> <strong>Face velocity = airflow ÷ coil face area.</strong> The formula runs in both directions: given the airflow you can check the coil you have; given a velocity ceiling you can size the coil face you need (10,000 CFM ÷ 500 fpm = 20 ft² of face area). A coil that carries over is telling you one of those two numbers is wrong.</p>
+
+      <p><strong>First check:</strong> calculate face velocity from the fan's actual CFM and the coil's published face dimensions before condemning the drain pan or the trap.</p>
+
+      <h2>The pattern</h2>
+
+      <div class="not-prose my-8 overflow-x-auto">
+        <table class="w-full border-collapse border border-[#e5e5e5] text-sm">
+          <thead>
+            <tr class="bg-[#f8f9fa]">
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Symptom</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">First check</th>
+              <th class="border border-[#e5e5e5] px-4 py-3 text-left text-[#333] font-semibold">Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3">Valve pins at 100%, hunts like on/off</td><td class="border border-[#e5e5e5] px-4 py-3">Valve authority / proximity to pump</td><td class="border border-[#e5e5e5] px-4 py-3">Field Museum</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3">Pumps at max, distal zones starved</td><td class="border border-[#e5e5e5] px-4 py-3">Teardown of one flow limiter from the batch</td><td class="border border-[#e5e5e5] px-4 py-3">Hotel TAB</td></tr>
+            <tr><td class="border border-[#e5e5e5] px-4 py-3">Trips, high RH, hot VFD bypass motors</td><td class="border border-[#e5e5e5] px-4 py-3">Setpoint audit vs manufacturer minimums</td><td class="border border-[#e5e5e5] px-4 py-3">Telecom Cx</td></tr>
+            <tr class="bg-[#fafbfc]"><td class="border border-[#e5e5e5] px-4 py-3">Wet ducts, pooling downstream</td><td class="border border-[#e5e5e5] px-4 py-3">Face velocity from actual CFM ÷ face area</td><td class="border border-[#e5e5e5] px-4 py-3">Coil carryover</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>None of these failures were fixed by replacing the "broken" equipment. All four were found by measurement — a pressure reading, a teardown, a setpoint audit, a velocity calculation. That is the casebook's whole argument: in a hydronic system that has flow but will not cool, the first tool is arithmetic, not a purchase order.</p>
+
+      <!-- Hashtags -->
+      <p class="text-sm text-gray-500 mt-6 text-center">
+        <a href="https://twitter.com/hashtag/ChilledWater" class="hover:text-[#2ea3f2]">#ChilledWater</a>
+        &nbsp;·&nbsp;<a href="https://twitter.com/hashtag/Hydronics" class="hover:text-[#2ea3f2]">#Hydronics</a>
+        &nbsp;·&nbsp;<a href="https://twitter.com/hashtag/PICV" class="hover:text-[#2ea3f2]">#PICV</a>
+        &nbsp;·&nbsp;<a href="https://twitter.com/hashtag/Commissioning" class="hover:text-[#2ea3f2]">#Commissioning</a>
+        &nbsp;·&nbsp;<a href="https://twitter.com/hashtag/HVAC" class="hover:text-[#2ea3f2]">#HVAC</a>
+        &nbsp;·&nbsp;<a href="https://twitter.com/hashtag/BuildingServices" class="hover:text-[#2ea3f2]">#BuildingServices</a>
+      </p>
+
+      <!-- CTA Section -->
+      <div class="not-prose my-10 p-8 rounded-lg border-2 border-[#7EBEC5] bg-gradient-to-r from-[#f8f9fa] to-white">
+        <div class="flex flex-col md:flex-row items-start gap-6">
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-[#333] mb-3" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
+              Have a chilled-water diagnosis question?
+            </h3>
+            <p class="text-[#666] mb-4 leading-relaxed">
+              Search the HVAC controls knowledge base — valve authority, PICV selection, low delta-T, coil face velocity. Ask Havi for answers backed by engineering standards.
+            </p>
+            <a href="https://t.me/hai5bot" target="_blank" rel="noopener" class="btn-accent text-sm">
+              Ask Havi
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+          </div>
+          <div class="shrink-0">
+            <img src="/avatars/lady-havi-square.jpg" alt="Lady Havi — AI host at help.xinca.com" class="w-20 h-20 rounded-full object-cover" />
+          </div>
+        </div>
+      </div>
+
+      <h2>Related Questions</h2>
+      <ul>
+        <li><a href="/kb/q/3">How do I size a control valve Cv for a chilled water coil?</a></li>
+        <li><a href="/kb/q/4">What is valve authority and why does it matter?</a></li>
+        <li><a href="/kb/q/7">What is the difference between pressure-independent and pressure-dependent valves?</a></li>
+        <li><a href="/kb/q/8">What flow sensor types are used in HVAC hydronic systems?</a></li>
+        <li><a href="/kb/q/22">How do I design a low-ΔT syndrome solution for chilled water plants?</a></li>
+        <li><a href="/kb/q/23">When should I use a 2-way vs 3-way control valve?</a></li>
+        <li><a href="/kb/q/24">How do I commission a VAV airflow sensor?</a></li>
+        <li><a href="/kb/q/43">What is the optimal placement for a chilled water differential pressure sensor?</a></li>
+        <li><a href="/kb/q/46">How do I troubleshoot a hunting control valve?</a></li>
+      </ul>
+
+      <h2>Sources</h2>
+      <ul class="text-sm text-[#888]">
+        <li>Consulting Specifying Engineer. <em>Case study: Pressure-independent control valves will update HVAC system</em> (Field Museum, Chicago). <a href="https://www.csemag.com/case-study-pressure-independent-control-valves-will-update-hvac-system/">csemag.com</a></li>
+        <li>Consulting Specifying Engineer. <em>Case study: Testing, adjusting and balancing solves issues in chilled water systems</em>. <a href="https://www.csemag.com/case-study-testing-adjusting-and-balancing-solves-issues-in-chilled-water-systems/">csemag.com</a></li>
+        <li>Consulting Specifying Engineer. <em>Commissioning solves operational issues, saves energy</em> (telecom facility, Illinois). <a href="https://www.csemag.com/commissioning-solves-operational-issues-saves-energy/">csemag.com</a></li>
+        <li>MEP Academy. <em>Water Coils Explained</em>. <a href="https://mepacademy.com/water-coils-explained/">mepacademy.com</a></li>
+        <li>ASHRAE-based coil selection guidance — <em>Advanced Coil Selection</em> (carryover-limited face velocity, &lt;550 fpm). <a href="https://ashraemadison.org/images/meeting/111218/advanced_coil_selection_ashrae_v2.pdf">ashraemadison.org</a></li>
+        <li>Campbell-Sevey. <em>What Causes Condensate Carryover on Cooling Coils?</em> (≤500 fpm practice rule). <a href="https://www.campbell-sevey.com/what-causes-condensate-carryover-on-cooling-coils/">campbell-sevey.com</a></li>
+      </ul>
+
+      <h2>Related Articles</h2>
+      <ul>
+        <li><a href="/a/air-handling-unit-coil-selection/">Air Handling Unit Coil Selection Guide</a></li>
+        <li><a href="/a/water-side-control-valve-selection/">Control Valve &amp; Hydronic Balancing Guide</a></li>
+        <li><a href="/a/building-controls-bms-integration/">Modern BMS Integration: From Traditional DDC to IoT-Enabled Building Controls</a></li>
+      </ul>
+
+      <p class="text-sm text-gray-400 mt-10">
+        Published September 2026. This article is part of the XINCA HVAC controls engineering knowledge base. For consulting engineers, commissioning agents, and facility engineers diagnosing chilled-water systems in commercial buildings. Search the knowledge base at <a href="/">help.xinca.com</a>.
+      </p>
+      <!-- TG Subscribe CTA -->
+      <div class="not-prose my-6">
+        <div class="text-center">
+          <a href="https://t.me/hvaccontrols" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 bg-[#2ea3f2] text-white px-5 py-2.5 rounded-lg hover:bg-[#2589d9] transition-colors text-sm"
+             data-ga-event="telegram_subscribe" data-ga-location="article-footer">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.46-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.441-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.139.121.098.154.228.17.32.016.092.036.303.02.466z"/></svg>
+            Subscribe to HVAC Controls 101
+          </a>
+          <p class="text-xs text-gray-400 mt-2">Get latest published articles from Havi pushed to you on Telegram.</p>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</BaseLayout>

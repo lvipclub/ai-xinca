@@ -1,5 +1,18 @@
 [
   {
+    "slug": "hydronic-failure-casebook",
+    "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks",
+    "description": "Four verified chilled-water failures — hunting valves, backward flow limiters, bad setpoints, coil carryover — with worked numbers and the first check for each.",
+    "date": "2026-09-14",
+    "categories": [
+      "water",
+      "controls"
+    ],
+    "heroImage": "/articles/hydronic-failure-casebook-hero.png",
+    "editorPick": true,
+    "readCount": 0
+  },
+  {
     "slug": "air-handling-unit-coil-selection",
     "title": "Air Handling Unit Coil Selection Guide",
     "description": "Selecting heating and cooling coils for air handling units: load calculation, coil configuration, fluid dynamics and materials for Australian climates.",
