@@ -1,5 +1,15 @@
 [
   {
+    "slug": "hvac-industry-statistics-2026",
+    "title": "HVAC Industry Statistics 2026",
+    "description": "Verified HVAC and air-conditioning statistics with every figure traced to its producing source: IEA, EIA, BLS, AHRI, EHPA, JRAIA, EPA, EMSD Hong Kong and more. Market demand, energy use, workforce and refrigerant transition data.",
+    "date": "2026-09-14",
+    "categories": [
+      "controls"
+    ],
+    "heroImage": "/articles/commercial-hvac-energy-code-compliance-hero.png"
+  },
+  {
     "slug": "hydronic-failure-casebook",
     "title": "Chilled-Water Failure Casebook: Four Patterns, First Checks",
     "description": "Four verified chilled-water failures — hunting valves, backward flow limiters, bad setpoints, coil carryover — with worked numbers and the first check for each.",
