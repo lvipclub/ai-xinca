@@ -26,9 +26,33 @@ done
 
 log() { echo "[deploy $STAMP] $*"; }
 
+# Transient-network guard: SSH to the VPS is occasionally RST mid-connect by a
+# network-path blip before sshd ever sees it (2026-09-23 carousel cron died at
+# step 1 with "Connection reset by 147.79.18.35 port 22"; same blip hit the
+# weekly watchdog + KB-graph jobs). A single RST must not fail the whole
+# deploy — same policy as the health checks below (2026-08-13 incident).
+# usage: retry <cmd...>   → 3 attempts (5s, 15s backoff); output preserved;
+# returns the last attempt's status so `set -e` still fails after exhaustion.
+retry() {
+  local attempt=1 max=3 delay=5 out
+  while :; do
+    if out="$("$@" 2>&1)"; then
+      if [[ -n "$out" ]]; then printf '%s\n' "$out"; fi
+      return 0
+    fi
+    if (( attempt >= max )); then
+      if [[ -n "$out" ]]; then printf '%s\n' "$out"; fi
+      return 1
+    fi
+    log "transient failure (attempt $attempt/$max): ${*:0:120} — retrying in ${delay}s" >&2
+    sleep "$delay"
+    attempt=$((attempt + 1)); delay=$((delay * 3))
+  done
+}
+
 # 1/6 — VPS backup (rollback safety)
 log "VPS backup ${WEBROOT} → /tmp/ai-xinca-www-backup-${STAMP}.tgz"
-ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "sudo tar czf /tmp/ai-xinca-www-backup-${STAMP}.tgz -C ${WEBROOT%/*} ${WEBROOT##*/} && sudo ls -la /tmp/ai-xinca-www-backup-${STAMP}.tgz"
+retry ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "sudo tar czf /tmp/ai-xinca-www-backup-${STAMP}.tgz -C ${WEBROOT%/*} ${WEBROOT##*/} && sudo ls -la /tmp/ai-xinca-www-backup-${STAMP}.tgz"
 log "Rollback: ssh $VPS \"sudo tar xzf /tmp/ai-xinca-www-backup-${STAMP}.tgz -C ${WEBROOT%/*}\""
 
 # 2/6 — Build
@@ -58,9 +82,9 @@ if [[ "$DRY" -eq 1 ]]; then
   ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "rm -rf /tmp/ai-xinca-dry-${STAMP}" 2>/dev/null || true
 else
   log "Stage ai-xinca → ${VPS}:/tmp/ai-xinca-dist-${STAMP}"
-  ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "rm -rf /tmp/ai-xinca-dist-${STAMP} && mkdir -p /tmp/ai-xinca-dist-${STAMP}"
-  rsync -az --stats "dist/" "${VPS}:/tmp/ai-xinca-dist-${STAMP}/"
-  ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "sudo rsync -az --delete ${RSYNC_EXCLUDES[*]} /tmp/ai-xinca-dist-${STAMP}/ ${WEBROOT}/ && sudo chown -R www-data:www-data ${WEBROOT} && sudo rm -rf /tmp/ai-xinca-dist-${STAMP}"
+  retry ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "rm -rf /tmp/ai-xinca-dist-${STAMP} && mkdir -p /tmp/ai-xinca-dist-${STAMP}"
+  retry rsync -az --stats "dist/" "${VPS}:/tmp/ai-xinca-dist-${STAMP}/"
+  retry ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "sudo rsync -az --delete ${RSYNC_EXCLUDES[*]} /tmp/ai-xinca-dist-${STAMP}/ ${WEBROOT}/ && sudo chown -R www-data:www-data ${WEBROOT} && sudo rm -rf /tmp/ai-xinca-dist-${STAMP}"
   log "rsync complete → ${WEBROOT}"
 fi
 
@@ -72,7 +96,7 @@ if [[ "$DRY" -eq 0 ]]; then
   if [[ -n "$CF_TOKEN" ]]; then
     log "CF purge zone ${CF_ZONE:0:8}… files:[]"
     FILES='["https://help.xinca.com/","https://help.xinca.com/kb/","https://help.xinca.com/faq/","https://help.xinca.com/x/","https://help.xinca.com/x/rss.xml","https://help.xinca.com/rss.xml","https://help.xinca.com/sitemap-index.xml"]'
-    curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE}/purge_cache" \
+    curl -sS --retry 3 --retry-delay 3 --retry-all-errors -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE}/purge_cache" \
       -H "Authorization: Bearer ${CF_TOKEN}" -H "Content-Type: application/json" \
       --data "{\"files\":${FILES}}" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("purge_success", d.get("success"))'
   else
@@ -134,17 +158,17 @@ log "Done: $MSG (stamp $STAMP)"
 if [[ -f "scripts/chat_api.py" && "$DRY" -eq 0 ]]; then
   log "Deploying chat API to VPS"
   # 1. Create remote directory
-  ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "sudo mkdir -p /var/www/ai-xinca-chat && sudo chown deploy:deploy /var/www/ai-xinca-chat"
+  retry ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "sudo mkdir -p /var/www/ai-xinca-chat && sudo chown deploy:deploy /var/www/ai-xinca-chat"
 
   # 2. Rsync chat_api.py, requirements, and the FAQ dataset (flat layout on VPS)
-  rsync -az --stats "scripts/chat_api.py" "scripts/requirements-chat.txt" "${VPS}:/var/www/ai-xinca-chat/"
-  rsync -az --stats "src/data/seed-qa.json" "${VPS}:/var/www/ai-xinca-chat/seed-qa.json"
+  retry rsync -az --stats "scripts/chat_api.py" "scripts/requirements-chat.txt" "${VPS}:/var/www/ai-xinca-chat/"
+  retry rsync -az --stats "src/data/seed-qa.json" "${VPS}:/var/www/ai-xinca-chat/seed-qa.json"
 
   # 3. Install deps and restart service
   # 2026-09-07: live unit is havi-chat-api (port 8090, EnvironmentFile=/home/deploy/.hermes/.env).
   # The repo chat-api.service (port 8080) is a stale pre-rename unit name — port 8080 is
   # taken by docker-proxy on k16-vps; do NOT install it.
-  ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "
+  retry ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "
     cd /var/www/ai-xinca-chat
     python3 -m pip install -q -r requirements-chat.txt 2>/dev/null || pip3 install -q -r requirements-chat.txt 2>/dev/null || echo 'pip install skipped'
     if systemctl list-unit-files | grep -q '^havi-chat-api.service'; then
@@ -158,7 +182,7 @@ if [[ -f "scripts/chat_api.py" && "$DRY" -eq 0 ]]; then
 
   # 4. Health check on chat API
   sleep 3
-  CHAT_HEALTH=$(ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8090/api/health || echo '000'")
+  CHAT_HEALTH=$(retry ssh -o BatchMode=yes -o ConnectTimeout=20 "$VPS" "curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8090/api/health || echo '000'")
   if [[ "$CHAT_HEALTH" == "200" ]]; then
     log "Chat API health OK"
   else
