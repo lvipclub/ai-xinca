@@ -86,11 +86,11 @@ const hasProducts = categories.some(
               {/* Click to cycle indicator */}
               {productCount > 1 && (
                 <div class="flex justify-center gap-1.5 mt-3 carousel-dots">
-                  {products.map((_, idx) => (
+                  {products.map((product, idx) => (
                     <button
                       class={`w-1.5 h-1.5 rounded-full transition-all ${idx === 0 ? 'bg-[#2ea3f2] w-4' : 'bg-[#d5d5d5]'}`}
                       data-dot={idx}
-                      aria-label={`Product ${idx + 1}`}
+                      aria-label={product.title}
                     ></button>
                   ))}
                 </div>

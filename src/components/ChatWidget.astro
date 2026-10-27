@@ -16,15 +16,17 @@ const { compact = false } = Astro.props;
   <div class="relative">
     <div class="flex gap-2">
       <input
-        id="chat-input"
+        id="chat-search-input"
         type="text"
         placeholder="e.g., How do I select the right damper actuator torque?"
         class="w-full bg-[#f8f9fa] border border-[#e5e5e5] rounded px-4 py-3.5 text-[#333] placeholder-gray-400 focus:outline-none focus:border-[#2ea3f2] focus:ring-1 focus:ring-[#2ea3f2]/30 transition-all text-base"
         autocomplete="off"
+        aria-label="Search the knowledge base"
       />
       <button
-        id="chat-send"
+        id="chat-search-send"
         class="px-5 py-3.5 bg-[#2ea3f2] border border-[#2ea3f2] text-white rounded hover:opacity-90 transition-all flex items-center gap-1.5 font-medium shrink-0"
+        aria-label="Search the knowledge base"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -89,8 +91,8 @@ const { compact = false } = Astro.props;
     minMatchCharLength: 2,
   });
 
-  var input = document.getElementById('chat-input');
-  var sendBtn = document.getElementById('chat-send');
+  var input = document.getElementById('chat-search-input');
+  var sendBtn = document.getElementById('chat-search-send');
   var resultsDiv = document.getElementById('chat-results');
   var suggestionsDiv = document.getElementById('chat-suggestions');
 
