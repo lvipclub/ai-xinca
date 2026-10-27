@@ -90,18 +90,27 @@ fi
 
 # 5/6 — CF purge (files:[] — zone xinca.com)
 if [[ "$DRY" -eq 0 ]]; then
-  # xinca-scoped token first (Cache Purge on xinca.com), fallback to shared token
-  CF_TOKEN="${CF_API_TOKEN_XINCA:-${CF_API_TOKEN:-}}"
+  # xinca-scoped token first (Cache Purge on xinca.com); on failure fall back to
+  # the shared token (xinca token observed dead 2026-10-27, err 10000 "Authentication error")
   CF_ZONE="${CF_ZONE_XINCA:-a5111dd78fc21ff12d5f48bb982fd8b7}"
-  if [[ -n "$CF_TOKEN" ]]; then
-    log "CF purge zone ${CF_ZONE:0:8}… files:[]"
-    FILES='["https://help.xinca.com/","https://help.xinca.com/kb/","https://help.xinca.com/faq/","https://help.xinca.com/x/","https://help.xinca.com/x/rss.xml","https://help.xinca.com/rss.xml","https://help.xinca.com/sitemap-index.xml","https://help.xinca.com/sitemap-0.xml","https://help.xinca.com/robots.txt","https://help.xinca.com/llms.txt"]'
+  FILES='["https://help.xinca.com/","https://help.xinca.com/kb/","https://help.xinca.com/faq/","https://help.xinca.com/x/","https://help.xinca.com/x/rss.xml","https://help.xinca.com/rss.xml","https://help.xinca.com/sitemap-index.xml","https://help.xinca.com/sitemap-0.xml","https://help.xinca.com/robots.txt","https://help.xinca.com/llms.txt"]'
+  do_purge() {
     curl -sS --retry 3 --retry-delay 3 --retry-all-errors -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE}/purge_cache" \
-      -H "Authorization: Bearer ${CF_TOKEN}" -H "Content-Type: application/json" \
-      --data "{\"files\":${FILES}}" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("purge_success", d.get("success"))'
-  else
-    log "WARN no CF_API_TOKEN — purge skipped"
+      -H "Authorization: Bearer $1" -H "Content-Type: application/json" \
+      --data "{\"files\":${FILES}}"
+  }
+  PURGE_RESP=""
+  if [[ -n "${CF_API_TOKEN_XINCA:-}" ]]; then
+    PURGE_RESP="$(do_purge "$CF_API_TOKEN_XINCA" || true)"
   fi
+  if ! echo "$PURGE_RESP" | grep -q '"success":true'; then
+    [[ -n "$PURGE_RESP" ]] && log "xinca token purge failed — falling back to shared token"
+    PURGE_RESP="$(do_purge "${CF_API_TOKEN:-}" || true)"
+  fi
+  echo "$PURGE_RESP" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("purge_success", d.get("success"))' || log "WARN purge response unparsable"
+  echo "$PURGE_RESP" | grep -q '"success":true' || log "WARN purge FAILED — edge may serve stale files"
+else
+  log "DRY: purge skipped"
 fi
 
 # 6/6 — Health checks (origin-resolved: DNS still points at GitHub Pages until Phase D)
