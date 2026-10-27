@@ -47,7 +47,7 @@ const catNames: Record<string,string> = {
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
       {Object.entries(categories.categories).map(([slug, cat]) => (
-        <a href={`/kb/${slug}`} class="card card-hover group no-underline">
+        <a href={`/kb/${slug}/`} class="card card-hover group no-underline">
           <div class="flex items-start justify-between mb-3">
             <h3 class="text-lg font-semibold text-[#333] group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
               {cat.name}
@@ -69,7 +69,7 @@ const catNames: Record<string,string> = {
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
       {articles.map(a => (
-        <a href={`/a/${a.slug}`} class="card card-hover group no-underline flex flex-col">
+        <a href={`/a/${a.slug}/`} class="card card-hover group no-underline flex flex-col">
           <div class="h-36 overflow-hidden rounded-t-md -mx-4 -mt-4 mb-4">
             <img src={a.heroImage} alt={a.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
           </div>
@@ -96,7 +96,7 @@ const catNames: Record<string,string> = {
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10">
       {popularQa.map(q => (
-        <a href={`/kb/q/${q.id}`} class="card card-hover cursor-pointer group block no-underline">
+        <a href={`/kb/q/${q.id}/`} class="card card-hover cursor-pointer group block no-underline">
           <h3 class="text-[#333] font-medium text-sm leading-snug mb-1.5 group-hover:text-[#2ea3f2] transition-colors">
             {q.question}
           </h3>

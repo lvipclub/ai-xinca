@@ -58,7 +58,7 @@ const jsonLd = {
     <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8">
       <a href="/" class="hover:text-[#2ea3f2] transition-colors">Home</a>
       <span>/</span>
-      <a href="/kb" class="hover:text-[#2ea3f2] transition-colors">Knowledge Base</a>
+      <a href="/kb/" class="hover:text-[#2ea3f2] transition-colors">Knowledge Base</a>
       <span>/</span>
       <span class="text-[#2ea3f2]">{cat.name}</span>
     </nav>
@@ -76,7 +76,7 @@ const jsonLd = {
     {catArticles.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {catArticles.map(a => (
-          <a href={`/a/${a.slug}`} class="card card-hover group block no-underline">
+          <a href={`/a/${a.slug}/`} class="card card-hover group block no-underline">
             <h3 class="text-lg font-semibold text-[#333] mb-2 group-hover:text-[#2ea3f2] transition-colors" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">
               {a.title}
             </h3>
@@ -95,14 +95,14 @@ const jsonLd = {
         <div class="text-4xl mb-4">📝</div>
         <h3 class="text-xl font-semibold text-[#333] mb-2" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,Lucida,sans-serif">Articles Coming Soon</h3>
         <p class="text-[#666]">
-          No articles published under {cat.name} yet. Check back soon or <a href="/kb" class="text-[#2ea3f2] hover:underline">browse all categories</a>.
+          No articles published under {cat.name} yet. Check back soon or <a href="/kb/" class="text-[#2ea3f2] hover:underline">browse all categories</a>.
         </p>
       </div>
     )}
 
     <!-- Back to all categories -->
     <div class="text-center">
-      <a href="/kb" class="btn-outline">
+      <a href="/kb/" class="btn-outline">
         ← Back to All Categories
       </a>
     </div>

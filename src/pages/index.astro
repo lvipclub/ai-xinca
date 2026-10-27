@@ -68,7 +68,7 @@ const catNames: Record<string,string> = {
             </div>
             <div class="p-4 space-y-3">
               {latestArticles.map((a, i) => (
-                <a href={`/a/${a.slug}`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="latest" data-ga-position={String(i+1)} data-ga-article={a.slug}>
+                <a href={`/a/${a.slug}/`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="latest" data-ga-position={String(i+1)} data-ga-article={a.slug}>
                   <p class="text-[#333] text-xs font-medium leading-snug group-hover:text-[#2ea3f2] transition-colors">{a.title}</p>
                   <div class="flex flex-wrap gap-1 mt-1">
                     {a.categories.map((c: string) => (
@@ -87,7 +87,7 @@ const catNames: Record<string,string> = {
             </div>
             <div class="p-4 space-y-3">
               {editorPicks.map((a, i) => (
-                <a href={`/a/${a.slug}`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="editors_picks" data-ga-position={String(i+1)} data-ga-article={a.slug}>
+                <a href={`/a/${a.slug}/`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="editors_picks" data-ga-position={String(i+1)} data-ga-article={a.slug}>
                   <p class="text-[#333] text-xs font-medium leading-snug group-hover:text-[#2ea3f2] transition-colors">{a.title}</p>
                   <div class="flex flex-wrap gap-1 mt-1">
                     {a.categories.map((c: string) => (
@@ -106,7 +106,7 @@ const catNames: Record<string,string> = {
             </div>
             <div class="p-4 space-y-3">
               {mostRead.map((a, i) => (
-                <a href={`/a/${a.slug}`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="most_read" data-ga-position={String(i+1)} data-ga-article={a.slug}>
+                <a href={`/a/${a.slug}/`} class="block group no-underline" data-ga-event="leaderboard_click" data-ga-column="most_read" data-ga-position={String(i+1)} data-ga-article={a.slug}>
                   <p class="text-[#333] text-xs font-medium leading-snug group-hover:text-[#2ea3f2] transition-colors">{a.title}</p>
                   <div class="flex flex-wrap gap-1 mt-1">
                     {a.categories.map((c: string) => (
