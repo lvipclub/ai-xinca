@@ -6,14 +6,24 @@ const pageTitle = "Chilled-Water Pump Differential-Pressure Reset: The Complete 
 const pageDescription = "Lady Havi explains how differential-pressure reset slashes chilled-water pump energy, with sensor placement, reset strategies and commissioning tips for VPF plants.";
 const canonicalUrl = "https://help.xinca.com/a/chilled-water-pump-differential-pressure-reset/";
 
+// Content metadata (going-forward convention — see AGENTS.md "Content metadata").
+// When pageDatePublished/pageDateModified/pageAuthor are absent, nothing extra
+// renders in the JSON-LD or on the page (no fabricated dates or authors).
+const pageDatePublished = "2026-10-27";
+const pageDateModified = "2026-10-27";
+const pageAuthor = "KFChow";
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": pageTitle,
   "description": pageDescription,
-  "author": { "@type": "Organization", "name": "XINCA" },
+  "author": pageAuthor
+    ? { "@type": "Organization", "name": pageAuthor, "url": "https://www.kfchow.com" }
+    : { "@type": "Organization", "name": "XINCA" },
   "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://help.xinca.com" },
-  "datePublished": "2026-10-27",
+  ...(pageDatePublished ? { "datePublished": pageDatePublished } : {}),
+  ...(pageDateModified ? { "dateModified": pageDateModified } : {}),
   "mainEntityOfPage": canonicalUrl
 };
 
@@ -22,6 +32,9 @@ const jsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h1 class="text-3xl md:text-5xl font-extrabold text-[#333] mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,sans-serif">{pageTitle}</h1>
+    {pageDateModified && (
+      <p class="text-sm text-[#999] mb-3">Last updated {pageDateModified}</p>
+    )}
     <p class="text-lg text-[#666] mb-8">{pageDescription}</p>
     <div class="prose prose-lg max-w-none">
       Chilled-water pumping can quietly account for a sizeable slice of a building's total HVAC energy, particularly in variable primary flow (VPF) plants where pumps modulate continuously. Of all the control refinements available, differential-pressure (DP) reset is consistently the highest-value, lowest-cost upgrade — yet it remains one of the most commonly botched strategies I see in the field. Here is how to get it right.
