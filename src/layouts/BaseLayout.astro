@@ -117,6 +117,8 @@ const canonicalHref = canonical || new URL(Astro.url.pathname, Astro.site ?? 'ht
         }
       }
     </script>
+    <!-- Optional page-specific JSON-LD slot (used by the homepage; article pages emit their own) -->
+    <slot name="head-extra" />
   </head>
   <body class="min-h-screen flex flex-col bg-white text-[#666]">
     <Header />

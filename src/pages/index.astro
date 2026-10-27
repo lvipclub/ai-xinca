@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCarousel from '../components/ProductCarousel.astro';
 import ChatPanel from '../components/ChatPanel.astro';
 import articles from '../data/articles.json';
+import featuredProducts from '../data/featured-products.json';
 
 // Leaderboard: Latest Articles (by date), Editor's Picks, Most Read
 const latestArticles = [...articles].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
@@ -40,12 +41,85 @@ const catNames: Record<string,string> = {
   air: 'Air-side', water: 'Water-side', fluid: 'Fluid Handling',
   controls: 'Building Controls', iot: 'IoT for FM', products: 'Products',
 };
+
+// --- Homepage structured data (head-extra slot; article pages keep their own Article JSON-LD) ---
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'XINCA',
+  'alternateName': 'XINCA — HVAC Guidance & Compliance',
+  'url': 'https://help.xinca.com/',
+};
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  'name': 'XINCA',
+  'url': 'https://help.xinca.com/',
+  'logo': 'https://help.xinca.com/logo.png',
+  'sameAs': [
+    'https://www.xinca.com',
+    'https://shop.xinca.com',
+    'https://linkedin.com/company/xinca-hvac',
+    'https://t.me/hvaccontrols',
+  ],
+};
+// Article ItemList: every article card actually rendered on this page, in DOM order, deduped.
+const renderedOrder = [...latestArticles, ...editorPicks, ...mostRead];
+const seenSlugs = new Set<string>();
+const renderedArticles = renderedOrder.filter(a => {
+  if (seenSlugs.has(a.slug)) return false;
+  seenSlugs.add(a.slug);
+  return true;
+});
+const articlesJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  'name': 'Latest HVAC articles on XINCA',
+  'itemListElement': renderedArticles.map((a, i) => ({
+    '@type': 'ListItem',
+    'position': i + 1,
+    'url': `https://help.xinca.com/a/${a.slug}/`,
+    'name': a.title,
+  })),
+};
+// Sponsor Product ItemList: mirrors ProductCarousel's displayed cards exactly.
+// Displayed price = US$ round(HKD / 7.8); schema price is that same numeric value, USD.
+const sponsorCategoryOrder = ['iaq', 'air_side', 'water_side', 'iot'];
+const displayedProducts = sponsorCategoryOrder
+  .flatMap(key => (featuredProducts?.categories?.[key] || []))
+  .filter(p => p && p.url);
+const productsJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  'name': 'XINCA sponsor products',
+  'itemListElement': displayedProducts.map((p, i) => ({
+    '@type': 'ListItem',
+    'position': i + 1,
+    'item': {
+      '@type': 'Product',
+      'name': p.title,
+      'image': p.image_url,
+      'url': p.url,
+      'offers': {
+        '@type': 'Offer',
+        'price': Math.round(parseFloat(p.price.split(' ')[0]) / 7.8),
+        'priceCurrency': 'USD',
+      },
+    },
+  })),
+};
 ---
 
 <BaseLayout 
   title="XINCA — HVAC Guidance & Compliance"
   description="Technical knowledge base for specifiers, engineers and building services professionals: damper sizing, valve Cv, VAV setup, BACnet and ASHRAE standards."
 >
+  <!-- Structured data (homepage only) -->
+  <script type="application/ld+json" slot="head-extra" set:html={JSON.stringify(siteJsonLd)}></script>
+  <script type="application/ld+json" slot="head-extra" set:html={JSON.stringify(orgJsonLd)}></script>
+  <script type="application/ld+json" slot="head-extra" set:html={JSON.stringify(articlesJsonLd)}></script>
+  <script type="application/ld+json" slot="head-extra" set:html={JSON.stringify(productsJsonLd)}></script>
+
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
