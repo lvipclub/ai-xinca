@@ -1,0 +1,100 @@
+---
+// a/chilled-water-pump-differential-pressure-reset.astro — Auto-generated carousel article
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pageTitle = "Chilled-Water Pump Differential-Pressure Reset: The Complete Guide";
+const pageDescription = "Lady Havi explains how differential-pressure reset slashes chilled-water pump energy, with sensor placement, reset strategies and commissioning tips for VPF plants.";
+const canonicalUrl = "https://help.xinca.com/a/chilled-water-pump-differential-pressure-reset/";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": pageTitle,
+  "description": pageDescription,
+  "author": { "@type": "Organization", "name": "XINCA" },
+  "publisher": { "@type": "Organization", "name": "XINCA", "url": "https://help.xinca.com" },
+  "datePublished": "2026-10-27",
+  "mainEntityOfPage": canonicalUrl
+};
+
+---
+<BaseLayout title={pageTitle} description={pageDescription} ogImage="https://help.xinca.com/articles/chilled-water-pump-differential-pressure-reset-hero.png" ogType="article">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl md:text-5xl font-extrabold text-[#333] mb-4" style="font-family:'Trebuchet MS',Trebuchet,Helvetica,Arial,sans-serif">{pageTitle}</h1>
+    <p class="text-lg text-[#666] mb-8">{pageDescription}</p>
+    <div class="prose prose-lg max-w-none">
+      Chilled-water pumping can quietly account for a sizeable slice of a building's total HVAC energy, particularly in variable primary flow (VPF) plants where pumps modulate continuously. Of all the control refinements available, differential-pressure (DP) reset is consistently the highest-value, lowest-cost upgrade — yet it remains one of the most commonly botched strategies I see in the field. Here is how to get it right.
+
+## Why a Fixed Differential-Pressure Setpoint Wastes Energy
+
+Pumps are sized for design load: full flow through every coil at design temperatures, which occurs only a handful of hours per year, if at all. With a fixed DP setpoint, once cooling loads drop and the two-way control valves throttle back, the pump keeps hammering against partly closed valves. That wastes energy directly and, worse, drives low delta-T syndrome by pushing more flow than the coils need.
+
+The affinity laws do the heavy lifting here. Pump power scales roughly with the cube of shaft speed, so trimming speed by 20% cuts power by nearly half, and a pump at 60% speed draws about 22% of design power. A well-tuned DP reset routinely cuts pumping energy by 30–60% compared with constant-speed or fixed-setpoint operation.
+
+## How Differential-Pressure Reset Actually Works
+
+In a VPF circuit, two-way modulating valves at each cooling coil throttle to match coil flow to the load. As valves close, system resistance rises and the differential pressure across the distribution circuit climbs. The DP controller reads this pressure and trims pump speed via the variable frequency drive (VFD) to maintain just enough pressure at the hydraulically most demanding circuit — the index run — for its valve to deliver design flow when essentially fully open.
+
+In short: the pump delivers only the pressure the coils are actually asking for, and no more.
+
+## Sensor Placement: Where Most Projects Get It Wrong
+
+The single most common and costly mistake is locating the DP sensor pair across the pump discharge and suction in the plant room. That measures pump differential head, not the pressure actually available at the coils. As valves close, plant-room differential rises — so a controller holding that reading will speed the pump up as load falls. Exactly backwards.
+
+Correct placement is across the supply and return pipes as close as practical to the hydraulically most remote (index) coil, or on the branch serving the most critical load. Where several branches contend, use the one with the greatest calculated resistance. Keep impulse lines short, sloped and free of air pockets, and use a matched, calibrated pair of transmitters. If running a remote sensor pair is impractical on a retrofit, alternatives exist — but a remote DP pair remains the most direct and stable measurement available.
+
+## The Main Reset Strategies
+
+**Fixed remote DP.** Hold a constant setpoint at the index circuit — typically 60–100 kPa depending on coil and valve selection. Simple and robust, provided the setpoint is high enough that the critical valve can satisfy its coil at design flow without driving fully open.
+
+**Valve-position reset (Trim & Respond).** The BMS polls all cooling valve positions. If any valve exceeds a threshold (say 90% open) for a sustained period, the DP setpoint or pump speed limit is raised; if all valves sit below a lower threshold, the setpoint trims down slowly. This self-tuning approach, popularised by ASHRAE Guideline 36, needs no remote sensor and adapts as the system changes over time. Keep the trim rate slow relative to the respond rate, or you will chase your own tail.
+
+**Delta-T based reset.** Uses the chilled-water supply/return temperature difference as an indirect load indicator. Useful as a supervisory trim layered on top of the pressure loop, but too slow and too easily corrupted by low delta-T syndrome to serve as the primary loop.
+
+**Plant-room two-point reset.** A pragmatic compromise: measure DP between the supply and return mains near the plant room and reset that setpoint downward with load. It captures real savings but leaves pressure "stored" in the distribution network at part load, so it underperforms true remote sensing.
+
+## Commissioning and Tuning
+
+- **Establish the initial setpoint** by calculating or measuring the DP required at the index coil for design flow with the valve mostly open, plus a sensible margin.
+- **Verify at representative load:** force the critical valve to around 90% open and confirm the controller stabilises with headroom to spare.
+- **Tune the PI loop conservatively.** Pump loops are slow. Start with long integral times — aggressive gains cause hunting, VFD trips and premature valve wear.
+- **Respect minimum speeds.** Coordinate the reset with chiller minimum evaporator flow requirements and any bypass or minimum-flow valve settings. Never let the reset slow the pumps below stable chiller flow.
+- **Stage parallel pumps sensibly.** Avoid running two pumps at low speed where one at higher speed does the job more efficiently, and watch the flat region of the pump curve for instability.
+- **Calibrate annually.** A drifted transmitter silently erodes every one of those cube-law savings.
+
+## Common Pitfalls
+
+Beyond the plant-room sensor error, watch for: a setpoint set by rule of thumb and left too high, clipping savings; a "remote" sensor installed a few metres down a healthy branch rather than on the true index run; a trim-and-respond deadband so narrow the loop hunts continuously; and forgetting that as the setpoint drops, control valve authority changes — poorly selected valves with low authority start behaving like on/off switches.
+
+## Savings, Compliance and Comfort
+
+The benefits compound beyond the cube-law arithmetic. Proper DP reset lifts return-water temperature and reduces low delta-T syndrome, which improves chiller efficiency and recovers plant capacity. For Australian buildings, the pumping savings flow straight into NABERS ratings and support NCC Section J compliance and Green Star outcomes. Savings of 2–5% of total plant HVAC energy from a control retune alone are entirely realistic.
+
+## Specifying the Right Hardware
+
+You need three things: an accurate, stable DP transmitter with a range matched to the duty (don't hang a 0–1000 kPa transmitter on a 0–100 kPa loop), a quality VFD with onboard PID or a competent BMS loop, and control valves with reliable position feedback. At ai.xinca.com, as an ecommerce partner of an authorised supplier, we stock differential-pressure transmitters, drives and controls rated for plant-room duty — reach out and we will help you match the instrument to your loop and setpoint range.
+
+## Wrap-Up
+
+Differential-pressure reset is not exotic technology. It is a sensor pair in the right place, a slow and well-tuned loop, and a reset schedule that responds to what the coils actually need. Do it properly and your chilled-water pumps will quietly deliver the biggest control-side energywin available in your plant.
+
+## Sources
+- Trane Chilled-Water Systems 2001
+- Trane_HVAC_System_Control_2002
+
+
+## Related Articles
+- [Chilled-Water Failure Casebook: Four Patterns, First Checks](https://help.xinca.com/a/hydronic-failure-casebook/)
+- [HVAC Industry Statistics 2026](https://help.xinca.com/a/hvac-industry-statistics-2026/)
+- [Air Handling Unit Coil Selection Guide](https://help.xinca.com/a/air-handling-unit-coil-selection/)
+
+    </div>
+    <div class="mt-8">
+      <a href="https://t.me/hvaccontrols" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm bg-[#2ea3f2] text-white px-5 py-2.5 rounded-lg hover:bg-[#2589d9] transition-colors">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.46-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.441-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.139.121.098.154.228.17.32.016.092.036.303.02.466z"/></svg>
+        Subscribe on Telegram — HVAC Controls 101
+      </a>
+    </div>
+  </main>
+</BaseLayout>
