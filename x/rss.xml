@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>help.xinca.com — X Posts</title>
+    <link>https://help.xinca.com/x/</link>
+    <description>Short-form X posts distilled from help.xinca.com articles. Per-account category tag identifies the posting account.</description>
+    <language>en</language>
+    <lastBuildDate>Tue, 27 Oct 2026 08:00:45 GMT</lastBuildDate>
+    <item>
+      <title>IAQ Sensor Networks &amp; BMS Integration</title>
+      <link>https://help.xinca.com/x/iaq-sensor-networks-bms-integration/</link>
+      <guid isPermaLink="false">iaq-sensor-networks-bms-integration</guid>
+      <pubDate>Wed, 29 Jul 2026 16:00:00 GMT</pubDate>
+      <category>woofaasocial</category>
+      
+      <description><![CDATA[The gap between IAQ sensor specs and real BMS integration is where healthy-building projects fail. BACnet MS/TP or Modbus RTU on every breathing-zone sensor, sub-60s CO₂ polling for DCV, calibration logging.
+
+https://help.xinca.com/a/building-controls-bms-integration/?utm_source=x&utm_medium=social&utm_campaign=woofaasocial
+
+#IAQ #HealthyBuildings #BACnet]]></description>
+    </item>
+    <item>
+      <title>Hydronic Balancing &amp; Valve Authority</title>
+      <link>https://help.xinca.com/x/hydronic-balancing-valve-authority/</link>
+      <guid isPermaLink="false">hydronic-balancing-valve-authority</guid>
+      <pubDate>Wed, 05 Aug 2026 16:00:00 GMT</pubDate>
+      <category>woofaasocial</category>
+      
+      <description><![CDATA[Unbalanced chilled-water loops overfeed coils near the plant while the far end runs warm — and the pump burns extra kW. Valve authority ≥0.3, a balancing record, pump kW/L/s from BAS data.
+
+https://help.xinca.com/a/water-side-control-valve-selection/?utm_source=x&utm_medium=social&utm_campaign=woofaasocial
+
+#HydronicBalancing #ThermalComfort #EnergyEfficiency]]></description>
+    </item>
+    <item>
+      <title>Air Handling Unit Coil Selection</title>
+      <link>https://help.xinca.com/x/air-handling-unit-coil-selection/</link>
+      <guid isPermaLink="false">air-handling-unit-coil-selection</guid>
+      <pubDate>Mon, 31 Aug 2026 16:00:00 GMT</pubDate>
+      <category>woofaasocial</category>
+      <enclosure url="https://help.xinca.com/articles/air-handling-unit-coil-selection-mono-og.png" type="image/png" length="0"/>
+      <description><![CDATA[An undersized AHU heating coil leaves the plant doing the work at part load; an oversized cooling coil wrecks valve authority and humidity control. Face velocity, rows and fin spacing decide it.
+
+https://help.xinca.com/a/air-handling-unit-coil-selection/?utm_source=x&utm_medium=social&utm_campaign=woofaasocial
+
+#HVAC #AirHandlingUnits #BuildingServices]]></description>
+    </item>
+  </channel>
+</rss>

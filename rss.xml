@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>help.xinca.com — HVAC Knowledge Base Articles</title>
+    <link>https://help.xinca.com/</link>
+    <description>Technical articles for specifiers, engineers, and building services professionals — building controls, air-side, water-side, IAQ, and energy compliance.</description>
+    <language>en-au</language>
+    <lastBuildDate>Tue, 27 Oct 2026 08:00:45 GMT</lastBuildDate>
+    <item>
+      <title>Chilled-Water Pump Differential-Pressure Reset: The Complete Guide</title>
+      <link>https://help.xinca.com/a/chilled-water-pump-differential-pressure-reset/</link>
+      <guid isPermaLink="false">chilled-water-pump-differential-pressure-reset</guid>
+      <pubDate>Tue, 27 Oct 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Lady Havi explains how differential-pressure reset slashes chilled-water pump energy, with sensor placement, reset strategies and commissioning tips for VPF plants.]]></description>
+    </item>
+    <item>
+      <title>HVAC Industry Statistics 2026</title>
+      <link>https://help.xinca.com/a/hvac-industry-statistics-2026/</link>
+      <guid isPermaLink="false">hvac-industry-statistics-2026</guid>
+      <pubDate>Mon, 14 Sep 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Verified HVAC and air-conditioning statistics with every figure traced to its producing source: IEA, EIA, BLS, AHRI, EHPA, JRAIA, EPA, EMSD Hong Kong and more. Market demand, energy use, workforce and refrigerant transition data.]]></description>
+    </item>
+    <item>
+      <title>Chilled-Water Failure Casebook: Four Patterns, First Checks</title>
+      <link>https://help.xinca.com/a/hydronic-failure-casebook/</link>
+      <guid isPermaLink="false">hydronic-failure-casebook</guid>
+      <pubDate>Mon, 14 Sep 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Four verified chilled-water failures — hunting valves, backward flow limiters, bad setpoints, coil carryover — with worked numbers and the first check for each.]]></description>
+    </item>
+    <item>
+      <title>Air Handling Unit Coil Selection Guide</title>
+      <link>https://help.xinca.com/a/air-handling-unit-coil-selection/</link>
+      <guid isPermaLink="false">air-handling-unit-coil-selection</guid>
+      <pubDate>Thu, 13 Aug 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Selecting heating and cooling coils for air handling units: load calculation, coil configuration, fluid dynamics and materials for Australian climates.]]></description>
+    </item>
+    <item>
+      <title>VAV Damper Selection for Commercial Buildings</title>
+      <link>https://help.xinca.com/a/air-side-vav-damper-selection/</link>
+      <guid isPermaLink="false">air-side-vav-damper-selection</guid>
+      <pubDate>Fri, 24 Jul 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Selecting dampers for VAV terminal units: opposed-blade vs parallel-blade, ASHRAE sizing methods, specification pitfalls and BACnet/Modbus integration.]]></description>
+    </item>
+    <item>
+      <title>BMS &amp; Building Controls: DDC to IoT</title>
+      <link>https://help.xinca.com/a/building-controls-bms-integration/</link>
+      <guid isPermaLink="false">building-controls-bms-integration</guid>
+      <pubDate>Fri, 24 Jul 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[How BACnet and Modbus underpin building automation: sensor network architecture, IoT migration strategies and practical steps for upgrading legacy DDC.]]></description>
+    </item>
+    <item>
+      <title>Energy Efficiency in Asian Building Codes</title>
+      <link>https://help.xinca.com/a/energy-efficiency-building-codes-asia/</link>
+      <guid isPermaLink="false">energy-efficiency-building-codes-asia</guid>
+      <pubDate>Fri, 24 Jul 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Singapore's Green Mark 2026, Hong Kong's BEAM Plus v2.0 and Dubai's Al Sa'fat mandate submetering, continuous commissioning and 30% energy improvement.]]></description>
+    </item>
+    <item>
+      <title>IAQ Monitoring for Commercial Buildings</title>
+      <link>https://help.xinca.com/a/iaq-monitoring-commercial-buildings/</link>
+      <guid isPermaLink="false">iaq-monitoring-commercial-buildings</guid>
+      <pubDate>Fri, 24 Jul 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Indoor air quality monitoring has moved from nice-to-have to tenant expectation. Specifiers must require CO₂, PM2.5 and TVOC sensing with DCV integration.]]></description>
+    </item>
+    <item>
+      <title>Control Valve &amp; Hydronic Balancing Guide</title>
+      <link>https://help.xinca.com/a/water-side-control-valve-selection/</link>
+      <guid isPermaLink="false">water-side-control-valve-selection</guid>
+      <pubDate>Fri, 24 Jul 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Globe valves vs PICV: valve authority, Cv sizing methodology, commissioning mistakes and hydronic balancing for chilled water and heating hot water.]]></description>
+    </item>
+    <item>
+      <title>How AI Reshapes Building Energy Management</title>
+      <link>https://help.xinca.com/a/ai-building-energy-management/</link>
+      <guid isPermaLink="false">ai-building-energy-management</guid>
+      <pubDate>Mon, 06 Jul 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Machine learning is transforming building energy systems: predictive maintenance, anomaly detection, demand response optimisation and HVAC control.]]></description>
+    </item>
+    <item>
+      <title>Data Center Energy Efficiency Guide</title>
+      <link>https://help.xinca.com/a/data-center-energy-efficiency/</link>
+      <guid isPermaLink="false">data-center-energy-efficiency</guid>
+      <pubDate>Mon, 06 Jul 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Practical guide to data center cooling efficiency: PUE fundamentals, rack airflow optimisation and liquid cooling adoption, backed by ASHRAE TC09.09.]]></description>
+    </item>
+    <item>
+      <title>Glycol Coolant Trade-Offs in Data Centres</title>
+      <link>https://help.xinca.com/a/data-center-glycol-cooling/</link>
+      <guid isPermaLink="false">data-center-glycol-cooling</guid>
+      <pubDate>Tue, 30 Jun 2026 01:00:00 GMT</pubDate>
+      <description><![CDATA[Why data centres are now switching from ethylene glycol to food-grade propylene glycol — and how this cuts cooling from ~40% of facility power.]]></description>
+    </item>
+  </channel>
+</rss>
