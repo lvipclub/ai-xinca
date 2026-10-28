@@ -232,17 +232,38 @@ Output STRICT JSON (no markdown, no backticks):
     req = Request(DEEPSEEK_API, data=body.encode(), method="POST")
     req.add_header("Authorization", f"Bearer {DEEPSEEK_KEY}")
     req.add_header("Content-Type", "application/json")
-    
+
+    def _ds_post(req: Request, attempts: int = 3):
+        """POST with bounded retries for transient READ stalls.
+
+        2026-10-28 (Helen): the plain read died 2 days running on
+        TimeoutError mid-chunked-body (slow-drip streaming from a DeepSeek
+        degradation window). Retry non-HTTP failures with backoff; limb HTTP
+        errors straight away (auth/quota/4xx are not transient)."""
+        last = None  # last transient-read error seen across attempts
+        for attempt in range(1, attempts + 1):
+            try:
+                with urlopen(req, timeout=300) as resp:
+                    return json.loads(resp.read())
+            except HTTPError as exc:
+                print(f"  DeepSeek HTTP {exc.code} attempt {attempt}/{attempts}")
+                raise  # auth/quota/4xx — not a transient read stall
+            except (TimeoutError, URLError) as exc:
+                last = exc
+                print(f"  DeepSeek read stall, attempt {attempt}/{attempts}: {exc}")
+                if attempt < attempts:
+                    time.sleep(30 * attempt)
+        if last is not None:
+            raise last  # all read-stall attempts exhausted
+        raise RuntimeError("DeepSeek retry loop ended with no captured error")
     print(f"  Calling deepseek-v4-flash-vision-exp...")
-    with urlopen(req, timeout=180) as resp:
-        result = json.loads(resp.read())
-    
+    result = _ds_post(req)
+
     raw = result["choices"][0]["message"]["content"]
     # Reasoning model can still exhaust the budget → empty content; retry once.
     if not raw or not raw.strip():
         print("  Empty content — retrying once")
-        with urlopen(req, timeout=180) as resp:
-            result = json.loads(resp.read())
+        result = _ds_post(req)
         raw = result["choices"][0]["message"]["content"] or ""
     # Strip markdown code fences if present
     raw = raw.strip()
