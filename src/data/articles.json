@@ -1,5 +1,18 @@
 [
   {
+    "slug": "chilled-water-pump-differential-pressure-reset",
+    "title": "Chilled-Water Pump Differential-Pressure Reset: The Complete Guide",
+    "description": "Differential-pressure reset for variable primary flow chilled-water plants: sensor placement, reset strategies and commissioning checks that cut pump energy.",
+    "date": "2026-10-27",
+    "categories": [
+      "water",
+      "controls"
+    ],
+    "heroImage": "/articles/og-default.png",
+    "editorPick": false,
+    "readCount": 0
+  },
+  {
     "slug": "hvac-industry-statistics-2026",
     "title": "HVAC Industry Statistics 2026",
     "description": "Verified HVAC and air-conditioning statistics with every figure traced to its producing source: IEA, EIA, BLS, AHRI, EHPA, JRAIA, EPA, EMSD Hong Kong and more. Market demand, energy use, workforce and refrigerant transition data.",
